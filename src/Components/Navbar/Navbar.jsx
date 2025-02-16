@@ -53,7 +53,7 @@ export default function Navbar() {
                 <NavLink
                   className="nav-link"
                   activeclassname="active"
-                  to="/quiz"
+                  to="/students-options"
                 >
                   اختبارات المنصة
                 </NavLink>

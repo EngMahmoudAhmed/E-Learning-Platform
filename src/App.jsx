@@ -7,6 +7,9 @@ import Home from "./Components/Home/Home";
 import About from "./Components/About/About";
 import Quiz from "./Components/Quiz/Quiz";
 import Summaries from "./Components/Summaries/Summaries";
+import StudentsOptions from "./Components/Quiz/StudentsOptions";
+import ExamLogin from "./Components/Quiz/ExamLogin";
+import GradesLogin from "./Components/Quiz/GradesLogin";
 
 // Admin
 import AdminLogin from "./Components/Admin/login";
@@ -32,6 +35,9 @@ export default function App() {
         { path: "/about", element: <About /> },
         { path: "/quiz", element: <Quiz /> },
         { path: "/summaries", element: <Summaries /> },
+        { path: "/students-options", element: <StudentsOptions /> },
+        { path: "/exam-login", element: <ExamLogin /> },
+        { path: "/grades-login", element: <GradesLogin /> },
 
         // Admin
         { path: "/admin-login", element: <AdminLogin /> },

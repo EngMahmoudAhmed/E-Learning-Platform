@@ -1,11 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Dashboard() {
-  const { adminRole } = useContext(AuthContext);
+  const { adminRole, setAdminRole } = useContext(AuthContext);
+  const [role, setRole] = useState(adminRole); 
+
+  useEffect(() => {
+    const storedRole = sessionStorage.getItem("AdminRole");
+    if (storedRole !== role) {
+      setRole(storedRole);
+      setAdminRole(storedRole); 
+    }
+  }, [adminRole]); 
 
   return (
     <>
