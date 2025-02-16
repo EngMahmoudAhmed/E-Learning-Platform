@@ -5,11 +5,12 @@ import Layout from "./Components/Layout/Layout";
 // User
 import Home from "./Components/Home/Home";
 import About from "./Components/About/About";
-import Quiz from "./Components/Quiz/Quiz";
+import Exam from "./Components/Quiz/Exam";
 import Summaries from "./Components/Summaries/Summaries";
 import StudentsOptions from "./Components/Quiz/StudentsOptions";
 import ExamLogin from "./Components/Quiz/ExamLogin";
 import GradesLogin from "./Components/Quiz/GradesLogin";
+import Grades from "./Components/Quiz/Grades";
 
 // Admin
 import AdminLogin from "./Components/Admin/login";
@@ -33,11 +34,12 @@ export default function App() {
         // User
         { index: true, element: <Home /> },
         { path: "/about", element: <About /> },
-        { path: "/quiz", element: <Quiz /> },
+        { path: "/exam", element: <Exam /> },
         { path: "/summaries", element: <Summaries /> },
         { path: "/students-options", element: <StudentsOptions /> },
         { path: "/exam-login", element: <ExamLogin /> },
         { path: "/grades-login", element: <GradesLogin /> },
+        { path: "/grades", element: <Grades /> },
 
         // Admin
         { path: "/admin-login", element: <AdminLogin /> },

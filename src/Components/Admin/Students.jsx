@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { FaUserGraduate, FaPhone, FaEdit, FaTrashAlt } from "react-icons/fa";
+import {
+  FaUserGraduate,
+  FaPhone,
+  FaEdit,
+  FaTrashAlt,
+  FaSearch,
+} from "react-icons/fa";
 import api from "../../config/api";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
@@ -11,11 +17,12 @@ export default function Students() {
 
   // Stored Data
   const [students, setStudents] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedGrade, setSelectedGrade] = useState("");
 
   // Student Data for Update
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [newName, setNewName] = useState("");
-  const [newGrade, setNewGrade] = useState("");
   const [newStudentMobile, setNewStudentMobile] = useState("");
   const [newParentMobile, setNewParentMobile] = useState("");
 
@@ -52,7 +59,6 @@ export default function Students() {
   function openUpdateModal(student) {
     setSelectedStudent(student);
     setNewName(student.name);
-    setNewGrade(student.grade);
     setNewStudentMobile(student.studentMobile);
     setNewParentMobile(student.parentMobile);
   }
@@ -64,7 +70,6 @@ export default function Students() {
     try {
       await api.put(`/api/user/update-student/${selectedStudent._id}`, {
         name: newName,
-        grade: newGrade,
         studentMobile: newStudentMobile,
         parentMobile: newParentMobile,
       });
@@ -75,7 +80,6 @@ export default function Students() {
             ? {
                 ...student,
                 name: newName,
-                grade: newGrade,
                 studentMobile: newStudentMobile,
                 parentMobile: newParentMobile,
               }
@@ -84,7 +88,7 @@ export default function Students() {
       );
 
       toast.success("تم تعديل بيانات الطالب بنجاح.");
-      setSelectedStudent(null); // Close modal after saving
+      setSelectedStudent(null);
     } catch (error) {
       console.error("Error updating student:", error);
       toast.error("حدثت مشكلة أثناء محاولة التعديل!");
@@ -99,6 +103,13 @@ export default function Students() {
     return <Loading />;
   }
 
+  // Filter students by selected grade and search term
+  const filteredStudents = students.filter(
+    (student) =>
+      (selectedGrade === "" || student.grade === selectedGrade) &&
+      student.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       {/* Helmet */}
@@ -107,11 +118,43 @@ export default function Students() {
       </Helmet>
 
       <section className="students my-5 py-3">
-        <h4 className="m-3 fw-bold">جميع الطلاب :</h4>
+        <h5 className="m-4 fw-bold">جميع الطلاب :</h5>
         <div className="container mt-4">
+          <div className="d-flex gap-3 my-4">
+            {/* Search Input */}
+            <div className="input-group w-50">
+              <span className="input-group-text bg-white search-icons">
+                <FaSearch className="text-muted" />
+              </span>
+              <input
+                type="text"
+                className="form-control rounded-0"
+                placeholder="ابحث عن طالب بالاسم..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+
+            {/* Select Input */}
+            <select
+              className="form-select w-50"
+              value={selectedGrade}
+              onChange={(e) => setSelectedGrade(e.target.value)}
+            >
+              <option value="">اختر الصف</option>
+              {[...new Set(students.map((student) => student.grade))].map(
+                (grade) => (
+                  <option key={grade} value={grade}>
+                    {grade}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+
           <div className="row">
-            {students.length > 0 ? (
-              students.map((student, index) => (
+            {filteredStudents.length > 0 ? (
+              filteredStudents.map((student, index) => (
                 <div className="col-md-4 mb-4" key={student._id}>
                   <div className="card p-4 shadow-md">
                     <span>{index + 1}</span>
@@ -127,10 +170,22 @@ export default function Students() {
                     {/* Student Details */}
                     <div className="card-details">
                       <p className="h6 fw-bold my-4">
-                        الاسم: <strong className="me-1 fw-medium">{student.name}</strong>
+                        كود الطالب:
+                        <strong className="me-1 fw-medium">
+                          {student.studentCode}
+                        </strong>
+                      </p>
+                      <p className="h6 fw-bold my-4">
+                        الاسم:
+                        <strong className="me-1 fw-medium">
+                          {student.name}
+                        </strong>
                       </p>
                       <p className="h6 fw-bold">
-                        الصف: <strong className="me-1 fw-medium">{student.grade}</strong>
+                        الصف:
+                        <strong className="me-1 fw-medium">
+                          {student.grade}
+                        </strong>
                       </p>
                       <p className="h6 fw-bold my-4">
                         <FaPhone className="main-color" /> رقم الطالب:
@@ -140,7 +195,9 @@ export default function Students() {
                       </p>
                       <p className="h6 fw-bold mb-3">
                         <FaPhone className="main-color" /> رقم ولي الأمر:
-                        <strong className="me-1 fw-medium">{student.parentMobile}</strong>
+                        <strong className="me-1 fw-medium">
+                          {student.parentMobile}
+                        </strong>
                       </p>
                     </div>
 
@@ -167,7 +224,7 @@ export default function Students() {
                 </div>
               ))
             ) : (
-              <div className="col-12 text-center main-color fw-bold">
+              <div className="col-12 text-center primary-color fw-bold">
                 <p>لا يوجد بيانات لعرضها</p>
               </div>
             )}
@@ -202,14 +259,6 @@ export default function Students() {
                 onChange={(e) => setNewName(e.target.value)}
               />
 
-              <label className="form-label mt-3">الصف</label>
-              <input
-                type="text"
-                className="form-control"
-                value={newGrade}
-                onChange={(e) => setNewGrade(e.target.value)}
-              />
-
               <label className="form-label mt-3">رقم الطالب</label>
               <input
                 type="text"
@@ -228,11 +277,7 @@ export default function Students() {
             </div>
 
             <div className="modal-footer">
-              <button
-                type="button"
-                className="btn"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" className="btn" data-bs-dismiss="modal">
                 إغلاق
               </button>
               <button

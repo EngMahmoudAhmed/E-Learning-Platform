@@ -322,6 +322,9 @@ footer .logo {
 .add-admin .col-md-6 select,
 .add-student .col-md-6 input,
 .add-student .col-md-6 select,
+.students input,
+.students select,
+.students .search-icons,
 .admins .card,
 .students .card {
   border-radius: 0;
@@ -374,8 +377,13 @@ footer .logo {
   border-radius: 0;
   border: 2px solid var(--accent-color);
 }
-
-
+.students input {
+  border-right: none;
+}
+.students input:focus {
+  border-color: var(--main-color) !important;
+  box-shadow: 0 0 0 0 !important;
+}
 /* Quiz */
 /* .quiz input {
   border-radius: 0;
