@@ -86,7 +86,6 @@ nav {
 .nav-link.active {
   background-color: var(--main-color) !important;
   color: var(--third-color) !important;
-  border-radius: 3px;
 }
 .navbar-toggler {
   border: 1px solid var(--main-color) !important;
@@ -325,6 +324,8 @@ footer .logo {
 .students input,
 .students select,
 .students .search-icons,
+.add-exam input,
+.add-exam select,
 .admins .card,
 .students .card {
   border-radius: 0;
@@ -384,142 +385,23 @@ footer .logo {
   border-color: var(--main-color) !important;
   box-shadow: 0 0 0 0 !important;
 }
-
 table th {
   background-color: var(--accent-color) !important;
   color: var(--third-color) !important;
 }
-table
-td {
+table td {
   border: 2px solid var(--main-color) !important;
   font-weight: 600;
 }
-table
-th {
+table th {
   border: 2px solid var(--accent-color) !important;
 }
+
 /* Quiz */
-/* .quiz input {
+.exam input {
   border-radius: 0;
   border-top: 0;
   border-right: 0;
   border-left: 0;
   border-bottom: 2px solid var(--main-color);
 }
-.quiz .QuestionOne label {
-  width: 15%;
-}
-.quiz .QuestionOne input {
-  width: 85%;
-}
-.qone-title {
-  width: 52%;
-}
-@media screen and (max-width: 768px) {
-  .quiz .QuestionOne label {
-    width: 25%;
-  }
-  .quiz .QuestionOne input {
-    width: 75%;
-  }
-  .qone-title {
-    width: 100%;
-  }
-}
-.quiz .QuestionTwo label {
-  width: 50%;
-}
-.quiz .QuestionTwo input {
-  width: 50%;
-}
-.qtwo-title p {
-  width: 25% !important;
-}
-@media screen and (max-width: 768px) {
-  .quiz .QuestionTwo label {
-    width: 75%;
-  }
-  .quiz .QuestionTwo input {
-    width: 25%;
-  }
-  .qtwo-title p {
-    width: 80% !important;
-  }
-}
-.quiz .QuestionThree label {
-  width: 50%;
-}
-.quiz .QuestionThree input {
-  width: 20%;
-}
-.qthree-title p {
-  width: 60% !important;
-}
-@media screen and (max-width: 768px) {
-  .quiz .QuestionThree label {
-    width: 75%;
-  }
-  .quiz .QuestionThree input {
-    width: 25%;
-  }
-  .qthree-title p {
-    width: 80% !important;
-  }
-}
-.qfourA-title p {
-  width: 30% !important;
-}
-@media screen and (max-width: 768px) {
-  .qfourA-title p {
-    width: 90% !important;
-  }
-}
-.qfourA-title p {
-  width: 30% !important;
-}
-@media screen and (max-width: 768px) {
-  .qfourA-title p {
-    width: 90% !important;
-  }
-}
-.qfourB-title p {
-  width: 55% !important;
-}
-@media screen and (max-width: 768px) {
-  .qfourB-title p {
-    width: 90% !important;
-  }
-}
-.quiz .QuestionFourB label {
-  width: 60%;
-}
-.quiz .QuestionFourB input {
-  width: 55%;
-}
-.qthree-title p {
-  width: 60% !important;
-}
-@media screen and (max-width: 768px) {
-  .quiz .QuestionFourB label {
-    width: 100%;
-  }
-  .quiz .QuestionFourB input {
-    width: 100%;
-  }
-}
-.qsix-title p {
-  width: 30% !important;
-}
-@media screen and (max-width: 768px) {
-  .qsix-title p {
-    width: 85% !important;
-  }
-}
-.qseven-title p {
-  width: 38% !important;
-}
-@media screen and (max-width: 768px) {
-  .qseven-title p {
-    width: 95% !important;
-  }
-} */

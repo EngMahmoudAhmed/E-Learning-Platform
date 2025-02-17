@@ -8,13 +8,13 @@ export default function Quiz() {
       <Helmet>
         <title>اختبارات المنصة</title>
       </Helmet>
-      <section className="my-5 py-3">
+      <section className="my-5 py-3 exam">
         <h6 className="primary-color fw-bold text-center my-4">
           " اختبار على الوحده الاولى "
         </h6>
         <div className="container">
           <div className="row">
-            <div className="qseven-title mt-4">
+            <div className="exam-title mt-4">
               <p className="bg-light main-color p-2">
                 <span className="text-dark">السؤال السابع</span> : اختر الاجابة
                 الصحيحه مما بين القوسين
