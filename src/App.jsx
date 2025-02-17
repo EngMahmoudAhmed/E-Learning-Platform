@@ -24,6 +24,8 @@ import StudentsGrades from "./Components/Admin/StudentGrades";
 
 // Protected Route
 import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRoute";
+import ExamProtectedRoute from "./Components/ProtectedRoutes/ExamProtectedRoute";
+import GradesProtectedRoute from "./Components/ProtectedRoutes/GradesProtectedRoute";
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -34,12 +36,26 @@ export default function App() {
         // User
         { index: true, element: <Home /> },
         { path: "/about", element: <About /> },
-        { path: "/exam", element: <Exam /> },
         { path: "/summaries", element: <Summaries /> },
         { path: "/students-options", element: <StudentsOptions /> },
         { path: "/exam-login", element: <ExamLogin /> },
         { path: "/grades-login", element: <GradesLogin /> },
-        { path: "/grades", element: <Grades /> },
+        {
+          path: "/exam",
+          element: (
+            <ExamProtectedRoute>
+              <Exam />
+            </ExamProtectedRoute>
+          ),
+        },
+        {
+          path: "/grades",
+          element: (
+            <GradesProtectedRoute>
+              <Grades />
+            </GradesProtectedRoute>
+          ),
+        },
 
         // Admin
         { path: "/admin-login", element: <AdminLogin /> },

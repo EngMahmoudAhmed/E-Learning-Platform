@@ -21,10 +21,10 @@ export default function ExamLogin() {
       setisLoading(true);
       let { data } = await Api.post(`/api/exam/login-to-exam`, values);
       toast.success(`تم تسجيل الدخول بنجاح`);
-      sessionStorage.setItem("StudentCode", data.studentCode);
-      sessionStorage.setItem("ExamCode", data.examCode);
+      sessionStorage.setItem("StudentCode", data.data.studentCode);
+      sessionStorage.setItem("ExamCode", data.data.examCode);
       setisLoading(false);
-      navigate("/quiz");
+      navigate("/exam");
     } catch (error) {
       toast.error(`حدث خطأ أثناء تسجيل الدخول!`);
       setisLoading(false);

@@ -13,7 +13,7 @@ export default function Grades() {
 
   // Fetch API Data
   async function fetchStudentScores() {
-    const studentCode = sessionStorage.getItem("StudentCode");
+    const studentCode = sessionStorage.getItem("GradesCode");
     try {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/student-scores/${studentCode}`);
@@ -30,7 +30,7 @@ export default function Grades() {
   useEffect(() => {
     fetchStudentScores();
   }, []);
-  
+
   // Check if is loading
   if (isLoading) {
     return <Loading />;
@@ -49,7 +49,7 @@ export default function Grades() {
           <div className="row">
             <div className="col-md-12">
               <table className="table table-bordered text-center">
-                <thead className="table-dark">
+                <thead>
                   <tr>
                     <th>#</th>
                     <th>كود الطالب</th>

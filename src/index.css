@@ -373,7 +373,7 @@ footer .logo {
 }
 .modal input,
 .modal button,
-.modal button:hover  {
+.modal button:hover {
   border-radius: 0;
   border: 2px solid var(--accent-color);
 }
@@ -383,6 +383,20 @@ footer .logo {
 .students input:focus {
   border-color: var(--main-color) !important;
   box-shadow: 0 0 0 0 !important;
+}
+
+table th {
+  background-color: var(--accent-color) !important;
+  color: var(--third-color) !important;
+}
+table
+td {
+  border: 2px solid var(--main-color) !important;
+  font-weight: 600;
+}
+table
+th {
+  border: 2px solid var(--accent-color) !important;
 }
 /* Quiz */
 /* .quiz input {
