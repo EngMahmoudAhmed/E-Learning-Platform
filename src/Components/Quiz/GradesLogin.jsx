@@ -19,9 +19,9 @@ export default function GradesLogin() {
   async function submitLogin(values) {
     try {
       setisLoading(true);
-      let { data } = await Api.post(`/api/exam/student-scores`, values);
+      let { data } = await Api.post(`/api/exam/login-to-degrees`, values);
       toast.success(`تم تسجيل الدخول بنجاح`);
-      sessionStorage.setItem("StudentCode", data.studentCode);
+      sessionStorage.setItem("StudentCode", data.data.studentCode);
       setisLoading(false);
       navigate("/grades");
     } catch (error) {
