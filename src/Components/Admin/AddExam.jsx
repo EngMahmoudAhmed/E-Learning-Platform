@@ -25,7 +25,7 @@ export default function AddExam() {
     },
   ]);
 
-  // Function to handle adding a new sub-question
+  // Handle adding a new sub-question
   const handleAddSubQuestion = (index) => {
     const newQuestions = [...questions];
     newQuestions[index].subQuestions.push({
@@ -318,20 +318,30 @@ export default function AddExam() {
                           <label htmlFor="q-title" className="fw-bold">
                             الاختيارات :
                           </label>
-                          <input
-                            type="text"
-                            className="form-control my-2"
-                            placeholder="الاختيارات"
-                            value={subQuestion.options.join(", ")}
-                            onChange={(e) =>
-                              handleSubQuestionChange(
-                                index,
-                                subIndex,
-                                "options",
-                                e.target.value.split(",")
-                              )
-                            }
-                          />
+                          <div className="row">
+                            {subQuestion.options.map((option, i) => (
+                              <div className="col-4" key={i}>
+                                <input
+                                  type="text"
+                                  className="form-control my-2"
+                                  placeholder={`اختيار ${i + 1}`}
+                                  value={option}
+                                  onChange={(e) =>
+                                    handleSubQuestionChange(
+                                      index,
+                                      subIndex,
+                                      "options",
+                                      [
+                                        ...subQuestion.options.slice(0, i),
+                                        e.target.value,
+                                        ...subQuestion.options.slice(i + 1),
+                                      ]
+                                    )
+                                  }
+                                />
+                              </div>
+                            ))}
+                          </div>
                         </div>
 
                         <div className="my-3">

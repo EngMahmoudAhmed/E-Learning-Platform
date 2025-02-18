@@ -62,17 +62,23 @@ export default function Grades() {
                 </thead>
                 <tbody>
                   {scores.length > 0 ? (
-                    scores.map((score, index) => (
-                      <tr key={score.examCode}>
-                        <td>{index + 1}</td>
-                        <td>{score.studentCode}</td>
-                        <td>{score.examCode}</td>
-                        <td>{score.examTitle}</td>
-                        <td>{score.date}</td>
-                        <td>{score.time}</td>
-                        <td>{score.score}</td>
-                      </tr>
-                    ))
+                    scores.map((score, index) =>
+                      score ? (
+                        <tr key={score.examCode}>
+                          <td>{index + 1}</td>
+                          <td>{score.studentCode}</td>
+                          <td>{score.examCode}</td>
+                          <td>{score.examTitle}</td>
+                          <td>{score.date}</td>
+                          <td>{score.time}</td>
+                          <td>{score.score}</td>
+                        </tr>
+                      ) : (
+                        <tr key={index}>
+                          <td colSpan="7">بيانات الطالب غير صالحه.</td>
+                        </tr>
+                      )
+                    )
                   ) : (
                     <tr>
                       <td colSpan="7">لا توجد درجات متاحة.</td>

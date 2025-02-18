@@ -96,7 +96,7 @@ export default function Admins() {
       </Helmet>
 
       <section className="admins my-5 py-3">
-        <h4 className="m-3 fw-bold">جميع المسؤولين :</h4>
+      <h5 className="m-3 fw-bold">📌 جميع المسؤولين :</h5>
         <div className="container mt-4">
           <div className="row">
             {admins.length > 0 ? (
@@ -128,7 +128,7 @@ export default function Admins() {
                     </div>
 
                     {/* Buttons */}
-                    <div className="card-buttons mt-3 d-flex justify-content-center gap-3">
+                    <div className="card-buttons mt-3 d-flex justify-content-between gap-3 card-details pt-4">
                       {/* Edit Button */}
                       <button
                         className="btn d-flex align-items-center gap-1 rounded-0"

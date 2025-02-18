@@ -20,6 +20,7 @@ import Students from "./Components/Admin/Students";
 import AddAdmin from "./Components/Admin/AddAdmin";
 import Admins from "./Components/Admin/Admins";
 import AddExam from "./Components/Admin/AddExam";
+import AllExams from "./Components/Admin/AllExams";
 import StudentsGrades from "./Components/Admin/StudentGrades";
 
 // Protected Route
@@ -103,7 +104,15 @@ export default function App() {
           path: "/add-exam",
           element: (
             <AdminProtectedRoute>
-              <AddExam />{" "}
+              <AddExam />
+            </AdminProtectedRoute>
+          ),
+        },
+        {
+          path: "/all-exams",
+          element: (
+            <AdminProtectedRoute>
+              <AllExams />
             </AdminProtectedRoute>
           ),
         },

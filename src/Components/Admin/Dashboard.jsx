@@ -6,15 +6,15 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Dashboard() {
   const { adminRole, setAdminRole } = useContext(AuthContext);
-  const [role, setRole] = useState(adminRole); 
+  const [role, setRole] = useState(adminRole);
 
   useEffect(() => {
     const storedRole = sessionStorage.getItem("AdminRole");
     if (storedRole !== role) {
       setRole(storedRole);
-      setAdminRole(storedRole); 
+      setAdminRole(storedRole);
     }
-  }, [adminRole]); 
+  }, [adminRole]);
 
   return (
     <>
@@ -90,6 +90,14 @@ export default function Dashboard() {
                   </div>
                   <div className="col-md-4">
                     <div className="card p-3 text-center">
+                      <h5 className="mb-3">جميع الامتحانات</h5>
+                      <Link to="/all-exams" className="btn rounded-0 w-100">
+                        انتقل الى <FaArrowLeft className="ms-2" />
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="card p-3 text-center">
                       <h5 className="mb-3">درجات الطلاب</h5>
                       <Link
                         to="/student-grades"
@@ -142,6 +150,14 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="col-md-4">
+                  <div className="col-md-4">
+                    <div className="card p-3 text-center">
+                      <h5 className="mb-3">جميع الامتحانات</h5>
+                      <Link to="/all-exams" className="btn rounded-0 w-100">
+                        انتقل الى <FaArrowLeft className="ms-2" />
+                      </Link>
+                    </div>
+                  </div>
                   <div className="card p-3 text-center">
                     <h5 className="mb-3">درجات الطلاب</h5>
                     <Link to="/student-grades" className="btn rounded-0 w-100">

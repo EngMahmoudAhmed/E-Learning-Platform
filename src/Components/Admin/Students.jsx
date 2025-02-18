@@ -118,7 +118,7 @@ export default function Students() {
       </Helmet>
 
       <section className="students my-5 py-3">
-        <h5 className="m-4 fw-bold">جميع الطلاب :</h5>
+        <h5 className="m-4 fw-bold">🎓 جميع الطلاب :</h5>
         <div className="container mt-4">
           <div className="d-flex gap-3 my-4">
             {/* Search Input */}
@@ -202,7 +202,7 @@ export default function Students() {
                     </div>
 
                     {/* Buttons */}
-                    <div className="card-buttons mt-3 d-flex justify-content-center gap-3">
+                    <div className="card-buttons mt-3 d-flex justify-content-between gap-3 pt-4 card-details">
                       {/* Edit Button */}
                       <button
                         className="btn d-flex align-items-center gap-1 rounded-0"
