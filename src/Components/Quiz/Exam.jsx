@@ -1,147 +1,121 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import Loading from "../Loading/Loading";
+import { toast } from "react-toastify";
+import api from "../../config/api";
 
 export default function Quiz() {
+  // loading State
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Exam State
+  const [examData, setExamData] = useState(null);
+
+  // Timer State
+  const [timeLeft, setTimeLeft] = useState({ minutes: 0, seconds: 0 });
+
+  // Fetch Api Data
+  async function fetchExam() {
+    try {
+      setIsLoading(true);
+      let { data } = await api.get(`/api/exam/take-exam`);
+      setExamData(data.data);
+
+      // Timer
+      setTimeLeft({
+        minutes: data.data.remainingTime.minutes || 0,
+        seconds: data.data.remainingTime.seconds || 0,
+      });
+
+      toast.success("تم تحميل الامتحان بنجاح.");
+    } catch (error) {
+      toast.error("حدثت مشكلة أثناء تحميل الامتحان!");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchExam();
+  }, []);
+
+  // Play Timer Every Second
+  useEffect(() => {
+    if (timeLeft.minutes === 0 && timeLeft.seconds === 0) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime.seconds > 0) {
+          return { ...prevTime, seconds: prevTime.seconds - 1 };
+        } else if (prevTime.minutes > 0) {
+          return { minutes: prevTime.minutes - 1, seconds: 59 };
+        } else {
+          clearInterval(timer);
+          return { minutes: 0, seconds: 0 };
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  // Check if is loading
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       {/* Helmet */}
       <Helmet>
-        <title>اختبارات المنصة</title>
+        <title>{examData?.exam?.title || "اختبار"}</title>
       </Helmet>
-      <section className="my-5 py-3 exam">
-        <h6 className="primary-color fw-bold text-center my-4">
-          " اختبار على الوحده الاولى "
-        </h6>
-        <div className="container">
-          <div className="row">
-            <div className="exam-title mt-4">
-              <p className="bg-light main-color p-2">
-                <span className="text-dark">السؤال السابع</span> : اختر الاجابة
-                الصحيحه مما بين القوسين
-              </p>
-            </div>
-            <div className="col-md-12">
-              <div className="container QuestionSeven">
-                <form>
-                  <div className="my-3 d-flex flex-column align-items-start">
-                    <label htmlFor="qseven-1">
-                      1- تنمو أشجار الأرز فى اقليم مناخ ......
-                    </label>
-                    <div className="d-flex flex-wrap my-3">
-                      <span className="me-2">(</span>
-                      <div className="form-check me-3">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="qseven-1"
-                          id="option1"
-                          value="option1"
-                        />
-                        <label className="form-check-label" htmlFor="option1">
-                          البحر المتوسط
-                        </label>
-                      </div>
-                      <div className="form-check me-3">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="qseven-1"
-                          id="option2"
-                          value="option2"
-                        />
-                        <label className="form-check-label" htmlFor="option2">
-                          الاستوائى
-                        </label>
-                      </div>
-                      <div className="form-check me-3">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="qseven-1"
-                          id="option3"
-                          value="option3"
-                        />
-                        <label className="form-check-label" htmlFor="option3">
-                          الصحراوى
-                        </label>
-                      </div>
-                      <div className="form-check me-3">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="qseven-1"
-                          id="option4"
-                          value="option4"
-                        />
-                        <label className="form-check-label" htmlFor="option4">
-                          المدارى
-                        </label>
-                      </div>
-                      <span className="me-2">)</span>
-                    </div>
-                  </div>
 
-                  <div className="my-3 d-flex flex-column align-items-start">
-                    <label htmlFor="qseven-2">
-                      2- تقع محمية ضانا فى دولة .......
-                    </label>
-                    <div className="d-flex flex-wrap my-3">
-                      <span className="me-2">(</span>
-                      <div className="form-check me-3">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="qseven-2"
-                          id="option5"
-                          value="option5"
-                        />
-                        <label className="form-check-label" htmlFor="option5">
-                          الجزائر
-                        </label>
-                      </div>
-                      <div className="form-check me-3">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="qseven-2"
-                          id="option6"
-                          value="option6"
-                        />
-                        <label className="form-check-label" htmlFor="option6">
-                          الكويت
-                        </label>
-                      </div>
-                      <div className="form-check me-3">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="qseven-2"
-                          id="option7"
-                          value="option7"
-                        />
-                        <label className="form-check-label" htmlFor="option7">
-                          السودان
-                        </label>
-                      </div>
-                      <div className="form-check me-3">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="qseven-2"
-                          id="option8"
-                          value="option8"
-                        />
-                        <label className="form-check-label" htmlFor="option8">
-                          لبنان
-                        </label>
-                      </div>{" "}
-                      <span className="me-2">)</span>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+      <section className="my-5 py-4 exam">
+        <div className="container">
+          <h5 className="text-center primary-color fw-bold">
+            {examData?.exam?.title}
+          </h5>
+          <div className="d-flex justify-content-between align-items-center mt-5">
+            <p className="text-center">{examData?.exam?.description}</p>
+            <p className="text-center text-muted">
+              الوقت المتبقي: {timeLeft.minutes} دقيقة و {timeLeft.seconds} ثانية
+            </p>
           </div>
+
+          {examData?.exam?.questions?.map((q) => (
+            <div key={q._id} className="exam-question mt-4">
+              <h5 className="bg-light main-color p-2">
+                <span className="text-dark">{q.question_title}</span>
+              </h5>
+
+              {q.subQuestions.map((subQ) => (
+                <div key={subQ._id} className="my-3">
+                  <p>{subQ.questionText}</p>
+                  <div className="d-flex flex-wrap my-2">
+                    {subQ.options.map((option, idx) => (
+                      <div className="form-check me-3" key={idx}>
+                        <input
+                          className="form-check-input"
+                          type="radio"
+                          name={subQ._id}
+                          id={`option-${subQ._id}-${idx}`}
+                          value={option}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`option-${subQ._id}-${idx}`}
+                        >
+                          {option}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
     </>
