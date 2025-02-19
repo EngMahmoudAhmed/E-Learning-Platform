@@ -52,11 +52,6 @@ export default function ExamDetails() {
     submitExam();
   }, [examId]);
 
-  // Check if is loading
-  if (isLoading) {
-    return <Loading />;
-  }
-
   // Open Update Modal
   function openUpdateModal() {
     setNewExamTitle(exam.title);
@@ -97,6 +92,11 @@ export default function ExamDetails() {
       console.error("Error updating exam:", error);
       toast.error("حدثت مشكلة أثناء محاولة التعديل!");
     }
+  }
+  
+  // Check if is loading
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
