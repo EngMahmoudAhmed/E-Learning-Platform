@@ -31,7 +31,8 @@ footer {
 }
 .form-control:focus,
 .form-check-input:checked,
-.form-select:focus {
+.form-select:focus,
+.accordion-button:focus {
   border-color: rgba(41, 37, 36, 0.4) !important;
   box-shadow: 0 0 0 0.25rem rgba(168, 135, 89, 0.6) !important;
 }
@@ -400,16 +401,26 @@ table th {
 /* Quiz */
 .exam input {
   border-radius: 0;
-  border-top: 0;
-  border-right: 0;
-  border-left: 0;
-  border-bottom: 2px solid var(--main-color);
+  border: 2px solid var(--main-color);
 }
 .accordion-button::after {
-  position: absolute; 
+  position: absolute;
   margin-right: auto;
   margin-left: unset;
   right: unset;
-  left: 1rem; 
+  left: 1rem;
   filter: invert(1);
+}
+.exam-sub-question:not(:last-child) {
+  border-bottom: 2px solid var(--main-color);
+}
+.accordion-body {
+  border-right: 2px solid var(--main-color);
+  border-left: 2px solid var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+}
+@media screen and (max-width:768px) {
+  .exam-header p {
+    font-size: 13px;
+  }
 }

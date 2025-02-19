@@ -75,13 +75,15 @@ export default function Quiz() {
 
       <section className="my-5 py-4 exam">
         <div className="container">
-          <h5 className="text-center primary-color fw-bold">
+          <h5 className="text-center primary-color fw-bold mt-1">
             {examData?.exam?.title}
           </h5>
-          <div className="d-flex justify-content-between align-items-center mt-5">
-            <p className="text-center">{examData?.exam?.description}</p>
+          <div className="d-flex justify-content-between align-items-center mt-5 exam-header">
+            <p className="text-center">
+              وصف الامتحان : {examData?.exam?.description}
+            </p>
             <div className="w-50">
-              <p className="text-center text-muted">
+              <p className="text-center main-bg text-white py-3">
                 ⏳ الوقت المتبقي: {timeLeft.minutes} دقيقة و {timeLeft.seconds}
                 ثانية
               </p>
@@ -111,12 +113,12 @@ export default function Quiz() {
                 >
                   <div className="accordion-body">
                     {q.subQuestions.map((subQ, subIndex) => (
-                      <div key={subQ._id} className="my-3">
-                        <p>
-                          <strong className="text-danger">
+                      <div key={subQ._id} className="py-3 exam-sub-question">
+                        <p className="fw-bold mb-4">
+                          <strong>
                             {index + 1}.{subIndex + 1} -
                           </strong>{" "}
-                          {subQ.questionText}
+                          {subQ.questionText} ..........
                         </p>
                         <div className="d-flex flex-wrap my-2">
                           {subQ.options.map((option, idx) => (
