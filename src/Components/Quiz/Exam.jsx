@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import api from "../../config/api";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Quiz() {
   // loading State
@@ -79,43 +80,70 @@ export default function Quiz() {
           </h5>
           <div className="d-flex justify-content-between align-items-center mt-5">
             <p className="text-center">{examData?.exam?.description}</p>
-            <p className="text-center text-muted">
-              الوقت المتبقي: {timeLeft.minutes} دقيقة و {timeLeft.seconds} ثانية
-            </p>
+            <div className="w-50">
+              <p className="text-center text-muted">
+                ⏳ الوقت المتبقي: {timeLeft.minutes} دقيقة و {timeLeft.seconds}
+                ثانية
+              </p>
+            </div>
           </div>
 
-          {examData?.exam?.questions?.map((q) => (
-            <div key={q._id} className="exam-question mt-4">
-              <h5 className="bg-light main-color p-2">
-                <span className="text-dark">{q.question_title}</span>
-              </h5>
-
-              {q.subQuestions.map((subQ) => (
-                <div key={subQ._id} className="my-3">
-                  <p>{subQ.questionText}</p>
-                  <div className="d-flex flex-wrap my-2">
-                    {subQ.options.map((option, idx) => (
-                      <div className="form-check me-3" key={idx}>
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name={subQ._id}
-                          id={`option-${subQ._id}-${idx}`}
-                          value={option}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`option-${subQ._id}-${idx}`}
-                        >
-                          {option}
-                        </label>
+          <div className="accordion mt-4" id="examAccordion">
+            {examData?.exam?.questions?.map((q, index) => (
+              <div key={q._id} className="accordion-item">
+                <h2 className="accordion-header" id={`heading${index}`}>
+                  <button
+                    className="accordion-button main-bg text-white"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#collapse${index}`}
+                    aria-expanded="true"
+                    aria-controls={`collapse${index}`}
+                  >
+                    {index + 1}. {q.question_title}
+                  </button>
+                </h2>
+                <div
+                  id={`collapse${index}`}
+                  className="accordion-collapse collapse show"
+                  aria-labelledby={`heading${index}`}
+                  data-bs-parent="#examAccordion"
+                >
+                  <div className="accordion-body">
+                    {q.subQuestions.map((subQ, subIndex) => (
+                      <div key={subQ._id} className="my-3">
+                        <p>
+                          <strong className="text-danger">
+                            {index + 1}.{subIndex + 1} -
+                          </strong>{" "}
+                          {subQ.questionText}
+                        </p>
+                        <div className="d-flex flex-wrap my-2">
+                          {subQ.options.map((option, idx) => (
+                            <div className="form-check me-3" key={idx}>
+                              <input
+                                className="form-check-input"
+                                type="radio"
+                                name={subQ._id}
+                                id={`option-${subQ._id}-${idx}`}
+                                value={option}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor={`option-${subQ._id}-${idx}`}
+                              >
+                                {option}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>

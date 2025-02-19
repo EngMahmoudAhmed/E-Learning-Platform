@@ -405,3 +405,11 @@ table th {
   border-left: 0;
   border-bottom: 2px solid var(--main-color);
 }
+.accordion-button::after {
+  position: absolute; 
+  margin-right: auto;
+  margin-left: unset;
+  right: unset;
+  left: 1rem; 
+  filter: invert(1);
+}
