@@ -4,9 +4,13 @@ import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import api from "../../config/api";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Quiz() {
-  // loading State
+  // Navigate to Grades
+  const navigate = useNavigate();
+
+  // Loading State
   const [isLoading, setIsLoading] = useState(false);
 
   // Exam State
@@ -15,7 +19,10 @@ export default function Quiz() {
   // Timer State
   const [timeLeft, setTimeLeft] = useState({ minutes: 0, seconds: 0 });
 
-  // Fetch Api Data
+  // Selected Answers State
+  const [answers, setAnswers] = useState([]);
+
+  // Fetch Exam Data
   async function fetchExam() {
     try {
       setIsLoading(true);
@@ -41,7 +48,7 @@ export default function Quiz() {
     fetchExam();
   }, []);
 
-  // Play Timer Every Second
+  // Timer Logic
   useEffect(() => {
     if (timeLeft.minutes === 0 && timeLeft.seconds === 0) return;
 
@@ -60,6 +67,41 @@ export default function Quiz() {
 
     return () => clearInterval(timer);
   }, [timeLeft]);
+
+  // Handle Answer Selection
+  const handleAnswerChange = (questionId, answer) => {
+    setAnswers((prevAnswers) => {
+      const updatedAnswers = prevAnswers.filter(
+        (ans) => ans.questionId !== questionId
+      );
+      return [...updatedAnswers, { questionId, answer }];
+    });
+  };
+
+  // Submit Exam
+  async function handleSubmitExam() {
+    // Check If Student Don't Sent Any Answer
+    if (answers.length === 0) {
+      toast.error("يرجى اختيار إجابات قبل الإرسال.");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const response = await api.post(
+        `/api/exam/submit-exam/?studentCode=${examData.studentCode}&examCode=${examData.examCode}`,
+        { answers }
+      );
+      toast.success("تم إرسال الإجابات بنجاح!");
+      navigate("/grades-login");
+      console.log("Exam submitted successfully:", response.data);
+    } catch (error) {
+      toast.error("حدث خطأ أثناء إرسال الإجابات!");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   // Check if is loading
   if (isLoading) {
@@ -84,7 +126,7 @@ export default function Quiz() {
             </p>
             <div className="w-50">
               <p className="text-center main-bg text-white py-3">
-                ⏳ الوقت المتبقي: {timeLeft.minutes} دقيقة و {timeLeft.seconds}
+                ⏳ الوقت المتبقي: {timeLeft.minutes} دقيقة و {timeLeft.seconds}{" "}
                 ثانية
               </p>
             </div>
@@ -129,6 +171,9 @@ export default function Quiz() {
                                 name={subQ._id}
                                 id={`option-${subQ._id}-${idx}`}
                                 value={option}
+                                onChange={() =>
+                                  handleAnswerChange(subQ._id, option)
+                                }
                               />
                               <label
                                 className="form-check-label"
@@ -145,6 +190,16 @@ export default function Quiz() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Submit Button */}
+          <div className="text-center mt-5">
+            <button
+              className="btn rounded-0 px-5 py-2 fw-bold"
+              onClick={handleSubmitExam}
+            >
+              إرسال الإجابات
+            </button>
           </div>
         </div>
       </section>

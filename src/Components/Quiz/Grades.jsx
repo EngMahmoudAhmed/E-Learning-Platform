@@ -14,6 +14,11 @@ export default function Grades() {
   // Fetch API Data
   async function fetchStudentScores() {
     const studentCode = sessionStorage.getItem("GradesCode");
+    if (!studentCode) {
+      toast.error("كود الطالب غير موجود، يرجى تسجيل الدخول مرة أخرى.");
+      return;
+    }
+
     try {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/student-scores/${studentCode}`);

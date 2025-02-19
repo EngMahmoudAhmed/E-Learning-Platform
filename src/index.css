@@ -424,3 +424,10 @@ table th {
     font-size: 13px;
   }
 }
+.exam-details .list-questions:not(:last-child) {
+  border-bottom: 2px solid var(--main-color); 
+}
+.exam-details .card ,
+.exam-details .exam-details-questions{
+  border: 2px solid var(--main-color); 
+}

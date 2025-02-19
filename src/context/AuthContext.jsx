@@ -5,6 +5,8 @@ export const AuthContext = createContext();
 export default function AuthProvider({ children }) {
   const [isAdminId, setisAdminId] = useState(sessionStorage.getItem("OneAdmin"));
   const [adminRole, setAdminRole] = useState(sessionStorage.getItem("AdminRole"));
+
+  const [examId, setExamId] = useState(null)
   
   // Get Role and Id after login directly 
   useEffect(() => {
@@ -16,7 +18,7 @@ export default function AuthProvider({ children }) {
   }, []); 
 
   return (
-    <AuthContext.Provider value={{ isAdminId, setisAdminId, adminRole, setAdminRole }}>
+    <AuthContext.Provider value={{ isAdminId, setisAdminId, adminRole, setAdminRole ,examId, setExamId }}>
       {children}
     </AuthContext.Provider>
   );

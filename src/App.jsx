@@ -22,6 +22,7 @@ import Admins from "./Components/Admin/Admins";
 import AddExam from "./Components/Admin/AddExam";
 import AllExams from "./Components/Admin/AllExams";
 import StudentsGrades from "./Components/Admin/StudentGrades";
+import ExamDetails from "./Components/Admin/ExamDetails";
 
 // Protected Route
 import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRoute";
@@ -113,6 +114,14 @@ export default function App() {
           element: (
             <AdminProtectedRoute>
               <AllExams />
+            </AdminProtectedRoute>
+          ),
+        },
+        {
+          path: "/exam-details",
+          element: (
+            <AdminProtectedRoute>
+              <ExamDetails />
             </AdminProtectedRoute>
           ),
         },

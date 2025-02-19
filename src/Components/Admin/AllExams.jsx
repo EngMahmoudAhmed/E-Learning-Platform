@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import api from "../../config/api";
 import Loading from "../Loading/Loading";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function AllExams() {
+  // Store Exam ID For Each Exam
+  const { setExamId } = useContext(AuthContext);
+
   // Loading state
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,6 +30,12 @@ export default function AllExams() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  // Handle Exam Id
+  function handleExamId(ExamId) {
+    setExamId(ExamId);
+    sessionStorage.setItem("ExamId", ExamId);
   }
 
   // Delete Exam
@@ -61,7 +72,10 @@ export default function AllExams() {
             {exams.length > 0 ? (
               exams.map((exam, index) => (
                 <div className="col-lg-4 col-md-6" key={exam._id}>
-                  <div className="card p-2 shadow-sm rounded-3">
+                  <div
+                    className="card p-2 shadow-sm rounded-3"
+                    onClick={() => handleExamId(exam._id)}
+                  >
                     <div className="card-header text-white fw-bold">
                       امتحان #{index + 1}
                     </div>
@@ -97,12 +111,23 @@ export default function AllExams() {
                     </ul>
 
                     {/* Delete Button */}
-                    <button
-                      className="btn btn-sm btn-danger d-flex align-items-center justify-content-center gap-1 mt-2"
-                      onClick={() => deleteExam(exam._id)}
-                    >
-                      <FaTrashAlt /> حذف
-                    </button>
+                    <div className="d-flex justify-content-between">
+                      <Link
+                        to={"/exam-details"}
+                        className="text-decoration-none"
+                      >
+                        <button className="btn btn-sm d-flex align-items-center justify-content-center gap-1 mt-2">
+                          تفاصيل وتعديل الامتحان
+                          <FaEdit />
+                        </button>
+                      </Link>
+                      <button
+                        className="btn btn-sm d-flex align-items-center justify-content-center gap-1 mt-2"
+                        onClick={() => deleteExam(exam._id)}
+                      >
+                        حذف <FaTrashAlt />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))

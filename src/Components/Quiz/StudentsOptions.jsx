@@ -11,10 +11,10 @@ export default function StudentsOptions() {
       </Helmet>
 
       <section className="my-5 py-4 summaries">
-        <h5 className="fw-bold m-3 text-center">
+        <h5 className="fw-bold mt-2 text-center">
           داخل تمتحن ولا هتشوف درجات الامتحان !
         </h5>
-        <div className="container mt-5">
+        <div className="container mt-4">
           <div className="row justify-content-center">
             <div className="col-md-4">
               <div className="card p-3 text-center">
