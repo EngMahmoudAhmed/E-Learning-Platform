@@ -23,6 +23,7 @@ import AddExam from "./Components/Admin/AddExam";
 import AllExams from "./Components/Admin/AllExams";
 import StudentsGrades from "./Components/Admin/StudentGrades";
 import ExamDetails from "./Components/Admin/ExamDetails";
+// import EditExam from "./Components/Admin/EditExam";
 
 // Protected Route
 import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRoute";
@@ -125,6 +126,14 @@ export default function App() {
             </AdminProtectedRoute>
           ),
         },
+        // {
+        //   path: "/edit-exam",
+        //   element: (
+        //     <AdminProtectedRoute>
+        //       <EditExam />
+        //     </AdminProtectedRoute>
+        //   ),
+        // },
         {
           path: "/student-grades",
           element: (

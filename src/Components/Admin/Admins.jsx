@@ -84,6 +84,7 @@ export default function Admins() {
     displayAdmins();
   }, []);
 
+  // Check if is loading
   if (isLoading) {
     return <Loading />;
   }
@@ -96,7 +97,7 @@ export default function Admins() {
       </Helmet>
 
       <section className="admins my-5 py-3">
-      <h5 className="m-3 fw-bold">📌 جميع المسؤولين :</h5>
+        <h5 className="m-3 fw-bold">📌 جميع المسؤولين :</h5>
         <div className="container mt-4">
           <div className="row">
             {admins.length > 0 ? (

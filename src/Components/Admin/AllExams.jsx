@@ -117,7 +117,7 @@ export default function AllExams() {
                         className="text-decoration-none"
                       >
                         <button className="btn btn-sm d-flex align-items-center justify-content-center gap-1 mt-2">
-                          تفاصيل وتعديل الامتحان
+                          تعديل الامتحان
                           <FaEdit />
                         </button>
                       </Link>

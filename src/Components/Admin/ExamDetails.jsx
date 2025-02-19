@@ -4,18 +4,27 @@ import { toast } from "react-toastify";
 import api from "../../config/api";
 import Loading from "../Loading/Loading";
 import { AuthContext } from "../../context/AuthContext";
+import { FaEdit } from "react-icons/fa";
 
 export default function ExamDetails() {
-  // Get Exam ID from Context
+  // Store Exam ID in context
   const { examId, setExamId } = useContext(AuthContext);
 
-  // Loading state
+  // Loading State
   const [isLoading, setIsLoading] = useState(false);
 
-  // Exam state
+  // Exam State
   const [exam, setExam] = useState(null);
 
-  // Get and check Exam Id
+  // For Update Modal
+  const [newExamTitle, setNewExamTitle] = useState("");
+  const [newExamDescription, setNewExamDescription] = useState("");
+  const [newExamDate, setNewExamDate] = useState("");
+  const [newExamTime, setNewExamTime] = useState("");
+  const [newExamDuration, setNewExamDuration] = useState("");
+  const [newExamTotalQuestions, setNewExamTotalQuestions] = useState("");
+
+  // Get and check id
   useEffect(() => {
     const storedExamId = sessionStorage.getItem("ExamId");
     if (!examId && storedExamId) {
@@ -23,8 +32,8 @@ export default function ExamDetails() {
     }
   }, [examId, setExamId]);
 
-  // Fetch API Data
-  async function fetchExamDetails() {
+  // Fetch Api Data
+  async function submitExam() {
     if (!examId) return;
     try {
       setIsLoading(true);
@@ -40,7 +49,7 @@ export default function ExamDetails() {
   }
 
   useEffect(() => {
-    fetchExamDetails();
+    submitExam();
   }, [examId]);
 
   // Check if is loading
@@ -48,14 +57,68 @@ export default function ExamDetails() {
     return <Loading />;
   }
 
+  // Open Update Modal
+  function openUpdateModal() {
+    setNewExamTitle(exam.title);
+    setNewExamDescription(exam.description);
+    setNewExamDate(exam.date);
+    setNewExamTime(exam.time);
+    setNewExamDuration(exam.duration);
+    setNewExamTotalQuestions(exam.totalQuestions);
+  }
+
+  // Update Exam
+  async function updateExam() {
+    if (!examId) return;
+
+    try {
+      await api.put(`/api/exam/update-exam/${examId}`, {
+        title: newExamTitle,
+        description: newExamDescription,
+        date: newExamDate,
+        time: newExamTime,
+        duration: newExamDuration,
+        totalQuestions: newExamTotalQuestions,
+      });
+
+      // Update the state with the new exam data
+      setExam((prevExam) => ({
+        ...prevExam,
+        title: newExamTitle,
+        description: newExamDescription,
+        date: newExamDate,
+        time: newExamTime,
+        duration: newExamDuration,
+        totalQuestions: newExamTotalQuestions,
+      }));
+
+      toast.success("تم تعديل الامتحان بنجاح.");
+    } catch (error) {
+      console.error("Error updating exam:", error);
+      toast.error("حدثت مشكلة أثناء محاولة التعديل!");
+    }
+  }
+
   return (
     <>
+      {/* Helmet */}
       <Helmet>
         <title>تفاصيل الامتحان</title>
       </Helmet>
 
       <section className="exam-details my-5 py-4">
-        <h5 className="fw-bold m-3">📚 تفاصيل الامتحان :</h5>
+        <div className="d-flex justify-content-between">
+          <h5 className="fw-bold m-2 pe-3">📚 تفاصيل الامتحان :</h5>
+          <button
+            className="btn d-flex align-items-center justify-content-center gap-1 mt-2 ms-5 rounded-0"
+            data-bs-toggle="modal"
+            data-bs-target="#updateExamModal"
+            onClick={openUpdateModal}
+          >
+            تعديل الامتحان
+            <FaEdit />
+          </button>
+        </div>
         <div className="container">
           {exam ? (
             <div className="card p-3 shadow-sm rounded-3 mt-4">
@@ -91,7 +154,6 @@ export default function ExamDetails() {
                 </li>
               </ul>
 
-              {/* Display Questions */}
               <div className="mt-4">
                 <h5 className="fw-bold">📌 الأسئلة:</h5>
                 {exam.questions.map((question, qIndex) => (
@@ -139,6 +201,167 @@ export default function ExamDetails() {
           )}
         </div>
       </section>
+
+      {/* Update Exam Modal */}
+      <div
+        className="modal fade"
+        id="updateExamModal"
+        tabIndex="-1"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header d-flex justify-content-between">
+              <button
+                type="button"
+                className="btn-close ms-auto"
+                data-bs-dismiss="modal"
+              ></button>
+              <h5 className="modal-title">تعديل بيانات الامتحان</h5>
+            </div>
+
+            <div className="modal-body">
+              {/* Edit Exam Details */}
+              <label className="form-label">عنوان الامتحان:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={newExamTitle}
+                onChange={(e) => setNewExamTitle(e.target.value)}
+              />
+
+              <label className="form-label mt-3">وصف الامتحان:</label>
+              <textarea
+                className="form-control"
+                value={newExamDescription}
+                onChange={(e) => setNewExamDescription(e.target.value)}
+              />
+
+              <label className="form-label mt-3">تاريخ الامتحان:</label>
+              <input
+                type="date"
+                className="form-control"
+                value={newExamDate}
+                onChange={(e) => setNewExamDate(e.target.value)}
+              />
+
+              <label className="form-label mt-3">وقت الامتحان:</label>
+              <input
+                type="time"
+                className="form-control"
+                value={newExamTime}
+                onChange={(e) => setNewExamTime(e.target.value)}
+              />
+
+              <label className="form-label mt-3">مدة الامتحان:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={newExamDuration}
+                onChange={(e) => setNewExamDuration(e.target.value)}
+              />
+
+              <label className="form-label mt-3">عدد الأسئلة:</label>
+              <input
+                type="number"
+                className="form-control"
+                value={newExamTotalQuestions}
+                onChange={(e) => setNewExamTotalQuestions(e.target.value)}
+              />
+
+              {/* Edit Exam Questions */}
+              <div className="mt-4">
+                <h5 className="fw-bold">تعديل الأسئلة:</h5>
+                {exam?.questions?.map((question, qIndex) => (
+                  <div
+                    key={question._id}
+                    className="mt-3 p-3 exam-details-questions rounded"
+                  >
+                    <h6 className="fw-bold main-bg p-2 text-white">
+                      {qIndex + 1}. {question.question_title}
+                    </h6>
+
+                    <label className="form-label mt-2">عنوان السؤال:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={question.question_title}
+                      onChange={(e) => {
+                        const updatedQuestions = [...exam.questions];
+                        updatedQuestions[qIndex].question_title =
+                          e.target.value;
+                        setExam({ ...exam, questions: updatedQuestions });
+                      }}
+                    />
+
+                    <label className="form-label mt-2">الاختيارات:</label>
+                    {question.subQuestions.map((subQ, sIndex) => (
+                      <div key={subQ._id} className="mt-2">
+                        <label className="form-label">
+                          اختيار {sIndex + 1}:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={subQ.questionText}
+                          onChange={(e) => {
+                            const updatedSubQuestions = [
+                              ...question.subQuestions,
+                            ];
+                            updatedSubQuestions[sIndex].questionText =
+                              e.target.value;
+                            const updatedQuestions = [...exam.questions];
+                            updatedQuestions[qIndex].subQuestions =
+                              updatedSubQuestions;
+                            setExam({ ...exam, questions: updatedQuestions });
+                          }}
+                        />
+                        <label className="form-label mt-2">
+                          الإجابة الصحيحة:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={subQ.correctAnswer}
+                          onChange={(e) => {
+                            const updatedSubQuestions = [
+                              ...question.subQuestions,
+                            ];
+                            updatedSubQuestions[sIndex].correctAnswer =
+                              e.target.value;
+                            const updatedQuestions = [...exam.questions];
+                            updatedQuestions[qIndex].subQuestions =
+                              updatedSubQuestions;
+                            setExam({ ...exam, questions: updatedQuestions });
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn rounded-0"
+                data-bs-dismiss="modal"
+              >
+                إغلاق
+              </button>
+              <button
+                type="button"
+                className="btn rounded-0"
+                onClick={updateExam}
+                data-bs-dismiss="modal"
+              >
+                حفظ التعديلات
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
