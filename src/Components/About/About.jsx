@@ -10,15 +10,14 @@ export default function About() {
         <title>نبذة عن المدرس</title>
       </Helmet>
 
-      <section className="mt-5 pt-5 about">
+      <section className="mt-5 py-4 about">
+        <h4 className="text-center mb-5 mt-2 fw-bold main-color">
+          " عن الاستاذ محمود ابراهيم العزوني "
+        </h4>
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="title">
-                <h3 className="text-center mb-5 fw-bold main-color">
-                  " عن الاستاذ محمود ابراهيم العزوني "
-                </h3>
-              </div>
+              <div className="title"></div>
               <div className="d-flex justify-content-center align-items-center">
                 <img
                   src={Hero}

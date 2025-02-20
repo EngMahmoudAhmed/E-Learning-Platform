@@ -73,7 +73,7 @@ export default function Navbar() {
           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
             <li className="nav-item">
               <NavLink
-                className="nav-link"
+                className="nav-link ms-2"
                 activeclassname="active"
                 to="/summaries"
               >
@@ -85,7 +85,7 @@ export default function Navbar() {
             {isAdminLoggedIn && (
               <li className="nav-item">
                 <button
-                  className="nav-link main-bg text-white"
+                  className="nav-link main-bg text-white ms-2"
                   onClick={handleAdminLogout}
                 >
                   تسجيل الخروج <TbLogout2 size={25} />

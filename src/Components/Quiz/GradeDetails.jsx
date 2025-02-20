@@ -4,7 +4,7 @@ import Loading from "../Loading/Loading";
 import api from "../../config/api";
 import { toast } from "react-toastify";
 
-export default function ExamDegreesDetails() {
+export default function GradeDetails() {
   // Loading State
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,7 +14,7 @@ export default function ExamDegreesDetails() {
   // Fetch Api Data
   async function fetchExamDetails() {
     const studentCode = sessionStorage.getItem("StudentDegreesCode");
-    const examCode = sessionStorage.getItem("StudentExamCode");
+    const examCode = sessionStorage.getItem("StudentDegreesExamCode");
 
     // Check if codes
     if (!studentCode || !examCode) {
@@ -48,7 +48,6 @@ export default function ExamDegreesDetails() {
 
   return (
     <>
-      {/* Helmet */}
       <Helmet>
         <title>تفاصيل الامتحان</title>
       </Helmet>
@@ -63,36 +62,28 @@ export default function ExamDegreesDetails() {
               </div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <strong className="text-muted">📜 الوصف:</strong>{" "}
-                  {examDetails.exam.description}
+                  📜 الوصف: {examDetails.exam.description}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">📚 الصف:</strong>{" "}
-                  {examDetails.exam.grade}
+                  📚 الصف: {examDetails.exam.grade}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">📅 التاريخ:</strong>{" "}
-                  {examDetails.exam.date}
+                  📅 التاريخ: {examDetails.exam.date}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">⏰ الوقت:</strong>{" "}
-                  {examDetails.exam.time}
+                  ⏰ الوقت: {examDetails.exam.time}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">⌛ المدة:</strong>{" "}
-                  {examDetails.exam.duration}
+                  ⌛ المدة: {examDetails.exam.duration}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">❓ عدد الأسئلة:</strong>{" "}
-                  {examDetails.exam.totalQuestions}
+                  ❓ عدد الأسئلة: {examDetails.exam.totalQuestions}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">🔢 كود الامتحان:</strong>{" "}
-                  {examDetails.exam.examCode}
+                  🔢 كود الامتحان: {examDetails.exam.examCode}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">🏆 الدرجة:</strong>{" "}
-                  {examDetails.score}
+                  🏆 الدرجة: {examDetails.score}
                 </li>
               </ul>
 

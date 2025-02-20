@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import api from "../../config/api";
+import { Link } from "react-router-dom";
 
 export default function Grades() {
   // loading State
@@ -10,6 +11,8 @@ export default function Grades() {
 
   // Data State
   const [scores, setScores] = useState([]);
+  const [studentCode, setStudentCode] = useState("");
+  const [examCode, setExamCode] = useState("");
 
   // Fetch API Data
   async function fetchStudentScores() {
@@ -23,6 +26,8 @@ export default function Grades() {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/student-scores/${studentCode}`);
       toast.success("تم جلب درجات الامتحانات بنجاح.");
+      console.log(data);
+
       setScores(data.data.scores);
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب درجات الامتحانات!");
@@ -30,6 +35,14 @@ export default function Grades() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  // Handle Exams Id's
+  function handleExamDetails(ExamCode, StudentCode) {
+    sessionStorage.setItem("StudentDegreesExamCode", ExamCode);
+    sessionStorage.setItem("StudentDegreesDegreesCode", StudentCode);
+    setExamCode(ExamCode);
+    setStudentCode(StudentCode);
   }
 
   useEffect(() => {
@@ -49,7 +62,7 @@ export default function Grades() {
       </Helmet>
 
       <section className="my-5 py-3">
-        <h5 className="fw-bold m-3">درجات الامتحانات</h5>
+        <h5 className="fw-bold m-3">درجات الامتحانات :</h5>
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -57,12 +70,11 @@ export default function Grades() {
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>كود الطالب</th>
-                    <th>كود الامتحان</th>
                     <th>عنوان الامتحان</th>
                     <th>التاريخ</th>
                     <th>الوقت</th>
                     <th>الدرجة</th>
+                    <th>تفاصيل الامتحان</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -71,12 +83,25 @@ export default function Grades() {
                       score ? (
                         <tr key={score.examCode}>
                           <td>{index + 1}</td>
-                          <td>{score.studentCode}</td>
-                          <td>{score.examCode}</td>
                           <td>{score.examTitle}</td>
                           <td>{score.date}</td>
                           <td>{score.time}</td>
                           <td>{score.score}</td>
+                          <td>
+                            <Link to={"/grades-details"}>
+                              <button
+                                className="btn btn-sm rounded-0"
+                                onClick={() =>
+                                  handleExamDetails(
+                                    score.examCode,
+                                    score.studentCode
+                                  )
+                                }
+                              >
+                                التفاصيل
+                              </button>
+                            </Link>
+                          </td>
                         </tr>
                       ) : (
                         <tr key={index}>

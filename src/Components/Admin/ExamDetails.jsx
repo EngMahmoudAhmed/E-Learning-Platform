@@ -231,7 +231,7 @@ export default function ExamDetails() {
               />
 
               <label className="form-label mt-3">وصف الامتحان:</label>
-              <textarea
+              <input
                 className="form-control"
                 value={newExamDescription}
                 onChange={(e) => setNewExamDescription(e.target.value)}
@@ -239,7 +239,7 @@ export default function ExamDetails() {
 
               <label className="form-label mt-3">تاريخ الامتحان:</label>
               <input
-                type="date"
+                type="text"
                 className="form-control"
                 value={newExamDate}
                 onChange={(e) => setNewExamDate(e.target.value)}
@@ -247,7 +247,7 @@ export default function ExamDetails() {
 
               <label className="form-label mt-3">وقت الامتحان:</label>
               <input
-                type="time"
+                type="text"
                 className="form-control"
                 value={newExamTime}
                 onChange={(e) => setNewExamTime(e.target.value)}

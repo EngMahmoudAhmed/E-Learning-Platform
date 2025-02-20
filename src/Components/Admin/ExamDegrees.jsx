@@ -63,7 +63,7 @@ export default function ExamDegrees() {
       </Helmet>
 
       <section className="my-5 py-3">
-        <h5 className="fw-bold m-3">درجات الامتحانات</h5>
+        <h5 className="fw-bold m-3">درجات الامتحانات :</h5>
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -89,7 +89,7 @@ export default function ExamDegrees() {
                           <td>
                             <Link to={"/exam-degrees-details"}>
                               <button
-                                className="btn rounded-0"
+                                className="btn btn-sm rounded-0"
                                 onClick={() =>
                                   handleExamDetails(
                                     score.examCode,

@@ -37,7 +37,6 @@ export default function StudentGrades() {
   // Handle Exam Id
   function handleStudentCode(StudentCode) {
     setStudentCode(StudentCode);
-    console.log(studentCode);
     sessionStorage.setItem("StudentDegreesCode", StudentCode);
   }
 
@@ -52,6 +51,7 @@ export default function StudentGrades() {
       student.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Check if is loading
   if (isLoading) {
     return <Loading />;
   }

@@ -11,6 +11,7 @@ import StudentsOptions from "./Components/Quiz/StudentsOptions";
 import ExamLogin from "./Components/Quiz/ExamLogin";
 import GradesLogin from "./Components/Quiz/GradesLogin";
 import Grades from "./Components/Quiz/Grades";
+import GradeDetails from "./Components/Quiz/GradeDetails";
 
 // Admin
 import AdminLogin from "./Components/Admin/login";
@@ -57,6 +58,14 @@ export default function App() {
           element: (
             <GradesProtectedRoute>
               <Grades />
+            </GradesProtectedRoute>
+          ),
+        },
+        {
+          path: "/grades-details",
+          element: (
+            <GradesProtectedRoute>
+              <GradeDetails />
             </GradesProtectedRoute>
           ),
         },

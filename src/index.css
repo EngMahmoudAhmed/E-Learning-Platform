@@ -183,6 +183,10 @@ footer .logo {
   min-height: 50vh;
   position: relative;
 }
+.features,
+.features .col-md-3 {
+  border: 2px solid var(--main-color);
+}
 @media (min-width: 768px) and (max-width: 992px) {
   .features .row {
     flex-direction: column;
@@ -291,29 +295,14 @@ footer .logo {
     margin: 20px 0 !important;
   }
 }
-
-/* About */
-.about h3 {
-  position: relative;
-}
-.about h3::after {
-  content: "";
-  position: absolute;
-  bottom: -60%;
-  right: 50%;
-  transform: translate(50%);
-  background-color: var(--main-color);
-  width: 25%;
-  height: 3px;
-}
-
 /* Admin */
 .dashboard .card,
 .summaries .card {
   border: 2px solid var(--main-color);
   border-radius: 0;
 }
-.summaries h6 {
+.summaries h6,
+.dashboard h6 {
   border-bottom: 2px solid var(--main-color);
 }
 .login .col-md-6,
@@ -386,16 +375,41 @@ footer .logo {
   border-color: var(--main-color) !important;
   box-shadow: 0 0 0 0 !important;
 }
+table {
+  font-size: 1rem;
+}
 table th {
   background-color: var(--accent-color) !important;
   color: var(--third-color) !important;
+  text-align: center;
+  vertical-align: middle;
 }
 table td {
   border: 2px solid var(--main-color) !important;
   font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
 }
 table th {
   border: 2px solid var(--accent-color) !important;
+}
+@media (max-width: 992px) {
+  table {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 768px) {
+  table {
+    font-size: 0.6rem;
+  }
+  table th {
+    font-size: 0.5rem;
+  }
+}
+@media (max-width: 576px) {
+  table {
+    font-size: 0.6rem;
+  }
 }
 
 /* Quiz */
@@ -419,15 +433,15 @@ table th {
   border-left: 2px solid var(--main-color);
   border-bottom: 2px solid var(--main-color);
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
   .exam-header p {
     font-size: 13px;
   }
 }
 .exam-details .list-questions:not(:last-child) {
-  border-bottom: 2px solid var(--main-color); 
+  border-bottom: 2px solid var(--main-color);
 }
-.exam-details .card ,
-.exam-details .exam-details-questions{
-  border: 2px solid var(--main-color); 
+.exam-details .card,
+.exam-details .exam-details-questions {
+  border: 2px solid var(--main-color);
 }
