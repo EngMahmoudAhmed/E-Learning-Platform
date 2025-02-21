@@ -8,16 +8,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function AllExams() {
-  // Store Exam ID For Each Exam
   const { setExamId } = useContext(AuthContext);
 
-  // Loading state
   const [isLoading, setIsLoading] = useState(false);
-
-  // Exam state
   const [exams, setExams] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedGrade, setSelectedGrade] = useState("");
 
-  // Fetch API Data
   async function fetchAllExams() {
     try {
       setIsLoading(true);
@@ -32,13 +29,11 @@ export default function AllExams() {
     }
   }
 
-  // Handle Exam Id
   function handleExamId(ExamId) {
     setExamId(ExamId);
     sessionStorage.setItem("ExamId", ExamId);
   }
 
-  // Delete Exam
   async function deleteExam(id) {
     try {
       await api.delete(`/api/exam/delete-exam/${id}`);
@@ -54,7 +49,13 @@ export default function AllExams() {
     fetchAllExams();
   }, []);
 
-  // Check if is loading
+  // **فلترة الامتحانات بناءً على البحث والصف**
+  const filteredExams = exams.filter(
+    (exam) =>
+      exam.title.includes(searchTerm) &&
+      (selectedGrade === "" || exam.grade === selectedGrade)
+  );
+
   if (isLoading) {
     return <Loading />;
   }
@@ -67,10 +68,39 @@ export default function AllExams() {
 
       <section className="all-exams admins my-5 py-3">
         <h4 className="m-3 fw-bold">📚 جميع الامتحانات :</h4>
+
         <div className="container mt-4">
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="🔍 ابحث عن امتحان..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <div className="col-md-6">
+              <select
+                className="form-select"
+                value={selectedGrade}
+                onChange={(e) => setSelectedGrade(e.target.value)}
+              >
+                <option value="">تصفية حسب الصف</option>
+                {Array.from(new Set(exams.map((exam) => exam.grade))).map(
+                  (grade, index) => (
+                    <option key={index} value={grade}>
+                      {grade}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+          </div>
+
           <div className="row g-4">
-            {exams.length > 0 ? (
-              exams.map((exam, index) => (
+            {filteredExams.length > 0 ? (
+              filteredExams.map((exam, index) => (
                 <div className="col-lg-4 col-md-6" key={exam._id}>
                   <div
                     className="card p-2 shadow-sm rounded-3"
@@ -110,15 +140,13 @@ export default function AllExams() {
                       </li>
                     </ul>
 
-                    {/* Delete Button */}
                     <div className="d-flex justify-content-between">
                       <Link
                         to={"/exam-details"}
                         className="text-decoration-none"
                       >
                         <button className="btn btn-sm d-flex align-items-center justify-content-center gap-1 mt-2">
-                          تعديل الامتحان
-                          <FaEdit />
+                          تعديل الامتحان <FaEdit />
                         </button>
                       </Link>
                       <button
@@ -133,7 +161,7 @@ export default function AllExams() {
               ))
             ) : (
               <div className="col-12 text-center text-danger fw-bold">
-                <p>لا توجد امتحانات لعرضها.</p>
+                <p>لا توجد امتحانات مطابقة لبحثك.</p>
               </div>
             )}
           </div>

@@ -9,9 +9,6 @@ import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
 
 export default function AddStudent() {
-  // Navigate to Students list
-  const navigate = useNavigate();
-
   // loading State
   const [isLoading, setisLoading] = useState(false);
 
@@ -23,7 +20,6 @@ export default function AddStudent() {
       toast.success(`تم إضافة الطالب بنجاح`);
       setisLoading(false);
       console.log(data.type);
-      navigate("/students");
     } catch (error) {
       toast.error(`حدث خطأ اثناء إضافة الطالب!`);
       setisLoading(false);

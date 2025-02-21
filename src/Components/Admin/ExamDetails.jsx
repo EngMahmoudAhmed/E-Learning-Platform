@@ -22,7 +22,6 @@ export default function ExamDetails() {
   const [newExamDate, setNewExamDate] = useState("");
   const [newExamTime, setNewExamTime] = useState("");
   const [newExamDuration, setNewExamDuration] = useState("");
-  const [newExamTotalQuestions, setNewExamTotalQuestions] = useState("");
 
   // Get and check id
   useEffect(() => {
@@ -59,7 +58,6 @@ export default function ExamDetails() {
     setNewExamDate(exam.date);
     setNewExamTime(exam.time);
     setNewExamDuration(exam.duration);
-    setNewExamTotalQuestions(exam.totalQuestions);
   }
 
   // Update Exam
@@ -73,7 +71,7 @@ export default function ExamDetails() {
         date: newExamDate,
         time: newExamTime,
         duration: newExamDuration,
-        totalQuestions: newExamTotalQuestions,
+        questions: exam.questions,
       });
 
       // Update the state with the new exam data
@@ -84,16 +82,16 @@ export default function ExamDetails() {
         date: newExamDate,
         time: newExamTime,
         duration: newExamDuration,
-        totalQuestions: newExamTotalQuestions,
+        questions: prevExam.questions,
       }));
 
       toast.success("تم تعديل الامتحان بنجاح.");
     } catch (error) {
       console.error("Error updating exam:", error);
-      toast.error("حدثت مشكلة أثناء محاولة التعديل!");
+      toast.error("حدثت مشكلة أثناء محاولة التعديل تحقق من وقت الامتحان!");
     }
   }
-  
+
   // Check if is loading
   if (isLoading) {
     return <Loading />;
@@ -131,9 +129,6 @@ export default function ExamDetails() {
                   {exam.description}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">📚 الصف:</strong> {exam.grade}
-                </li>
-                <li className="list-group-item">
                   <strong className="text-muted">📅 التاريخ:</strong>{" "}
                   {exam.date}
                 </li>
@@ -147,10 +142,6 @@ export default function ExamDetails() {
                 <li className="list-group-item">
                   <strong className="text-muted">❓ عدد الأسئلة:</strong>{" "}
                   {exam.totalQuestions}
-                </li>
-                <li className="list-group-item">
-                  <strong className="text-muted">🔢 كود الامتحان:</strong>{" "}
-                  {exam.examCode}
                 </li>
               </ul>
 
@@ -203,12 +194,7 @@ export default function ExamDetails() {
       </section>
 
       {/* Update Exam Modal */}
-      <div
-        className="modal fade"
-        id="updateExamModal"
-        tabIndex="-1"
-        aria-hidden="true"
-      >
+      <div className="modal fade" id="updateExamModal" tabIndex="-1">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header d-flex justify-content-between">
@@ -261,14 +247,6 @@ export default function ExamDetails() {
                 onChange={(e) => setNewExamDuration(e.target.value)}
               />
 
-              <label className="form-label mt-3">عدد الأسئلة:</label>
-              <input
-                type="number"
-                className="form-control"
-                value={newExamTotalQuestions}
-                onChange={(e) => setNewExamTotalQuestions(e.target.value)}
-              />
-
               {/* Edit Exam Questions */}
               <div className="mt-4">
                 <h5 className="fw-bold">تعديل الأسئلة:</h5>
@@ -281,60 +259,76 @@ export default function ExamDetails() {
                       {qIndex + 1}. {question.question_title}
                     </h6>
 
-                    <label className="form-label mt-2">عنوان السؤال:</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={question.question_title}
-                      onChange={(e) => {
-                        const updatedQuestions = [...exam.questions];
-                        updatedQuestions[qIndex].question_title =
-                          e.target.value;
-                        setExam({ ...exam, questions: updatedQuestions });
-                      }}
-                    />
+                    {/* Edit Al Sub Questions */}
+                    {question.subQuestions.map((subQ, subIndex) => (
+                      <div key={subIndex} className="mt-3 p-2 border rounded">
+                        <label className="form-label mt-2 fw-bold">
+                          نص السؤال:
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control my-2"
+                          placeholder="أدخل نص السؤال"
+                          value={subQ.questionText || ""}
+                          onChange={(e) => {
+                            const updatedQuestions = [...exam.questions];
+                            updatedQuestions[qIndex].subQuestions[
+                              subIndex
+                            ].questionText = e.target.value;
+                            setExam({ ...exam, questions: updatedQuestions });
+                          }}
+                        />
 
-                    <label className="form-label mt-2">الاختيارات:</label>
-                    {question.subQuestions.map((subQ, sIndex) => (
-                      <div key={subQ._id} className="mt-2">
-                        <label className="form-label">
-                          اختيار {sIndex + 1}:
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={subQ.questionText}
-                          onChange={(e) => {
-                            const updatedSubQuestions = [
-                              ...question.subQuestions,
-                            ];
-                            updatedSubQuestions[sIndex].questionText =
-                              e.target.value;
-                            const updatedQuestions = [...exam.questions];
-                            updatedQuestions[qIndex].subQuestions =
-                              updatedSubQuestions;
-                            setExam({ ...exam, questions: updatedQuestions });
-                          }}
-                        />
-                        <label className="form-label mt-2">
-                          الإجابة الصحيحة:
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={subQ.correctAnswer}
-                          onChange={(e) => {
-                            const updatedSubQuestions = [
-                              ...question.subQuestions,
-                            ];
-                            updatedSubQuestions[sIndex].correctAnswer =
-                              e.target.value;
-                            const updatedQuestions = [...exam.questions];
-                            updatedQuestions[qIndex].subQuestions =
-                              updatedSubQuestions;
-                            setExam({ ...exam, questions: updatedQuestions });
-                          }}
-                        />
+                        {/* Edit Options */}
+                        <div className="my-3">
+                          <label className="fw-bold">الاختيارات :</label>
+                          <div className="row">
+                            {subQ.options.map((option, i) => (
+                              <div className="col-4" key={i}>
+                                <input
+                                  type="text"
+                                  className="form-control my-2"
+                                  placeholder={`اختيار ${i + 1}`}
+                                  value={option}
+                                  onChange={(e) => {
+                                    const updatedOptions = [...subQ.options];
+                                    updatedOptions[i] = e.target.value;
+
+                                    const updatedQuestions = [
+                                      ...exam.questions,
+                                    ];
+                                    updatedQuestions[qIndex].subQuestions[
+                                      subIndex
+                                    ].options = updatedOptions;
+
+                                    setExam({
+                                      ...exam,
+                                      questions: updatedQuestions,
+                                    });
+                                  }}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Edit Correct Answer */}
+                        <div className="my-3">
+                          <label className="fw-bold">الإجابة الصحيحة :</label>
+                          <input
+                            type="text"
+                            className="form-control my-2"
+                            placeholder="ادخل اجابة السؤال الصحيحة"
+                            value={subQ.correctAnswer || ""}
+                            onChange={(e) => {
+                              const updatedQuestions = [...exam.questions];
+                              updatedQuestions[qIndex].subQuestions[
+                                subIndex
+                              ].correctAnswer = e.target.value;
+                              setExam({ ...exam, questions: updatedQuestions });
+                            }}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>

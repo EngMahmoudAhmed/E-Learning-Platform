@@ -150,14 +150,14 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="col-md-4">
-                  <div className="col-md-4">
-                    <div className="card p-3 text-center">
-                      <h6 className="mb-3 pb-3 fw-bold">جميع الامتحانات</h6>
-                      <Link to="/all-exams" className="btn rounded-0 w-100">
-                        انتقل الى <FaArrowLeft className="ms-2" />
-                      </Link>
-                    </div>
+                  <div className="card p-3 text-center">
+                    <h6 className="mb-3 pb-3 fw-bold">جميع الامتحانات</h6>
+                    <Link to="/all-exams" className="btn rounded-0 w-100">
+                      انتقل الى <FaArrowLeft className="ms-2" />
+                    </Link>
                   </div>
+                </div>
+                <div className="col-md-4">
                   <div className="card p-3 text-center">
                     <h6 className="mb-3 pb-3 fw-bold">درجات الطلاب</h6>
                     <Link to="/student-grades" className="btn rounded-0 w-100">

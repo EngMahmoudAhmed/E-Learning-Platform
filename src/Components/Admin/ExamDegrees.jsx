@@ -24,8 +24,7 @@ export default function ExamDegrees() {
       toast.success("تم جلب درجات الامتحانات بنجاح.");
       setScores(data.data.scores);
     } catch (error) {
-      toast.error("حدثت مشكلة أثناء جلب درجات الامتحانات!");
-      console.error(error);
+      toast.error("لا يوجد درجات متاحه الان لهذا الطالب!");
     } finally {
       setIsLoading(false);
     }

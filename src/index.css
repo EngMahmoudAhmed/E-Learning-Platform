@@ -317,7 +317,9 @@ footer .logo {
 .add-exam input,
 .add-exam select,
 .admins .card,
-.students .card {
+.students .card,
+.all-exams input,
+.all-exams select {
   border-radius: 0;
   border: 2px solid var(--main-color);
 }

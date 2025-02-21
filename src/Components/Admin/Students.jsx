@@ -50,7 +50,6 @@ export default function Students() {
       );
       toast.success("تم حذف الطالب بنجاح.");
     } catch (error) {
-      console.error("Error deleting student:", error);
       toast.error("حدثت مشكلة أثناء محاولة حذف الطالب!");
     }
   }
