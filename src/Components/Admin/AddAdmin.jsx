@@ -31,9 +31,20 @@ export default function AddAdmin() {
   }
 
   // Validation Schema
+  const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
+  
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}$/;
+
   let validationSchema = Yup.object({
-    userName: Yup.string().required("رقم الهاتف مطلوب"),
-    password: Yup.string().required("كلمه المرور مطلوبة"),
+    userName: Yup.string()
+      .matches(phoneRegex, "رقم الهاتف غير صالح، يجب أن يكون مصريًا")
+      .required("رقم الهاتف مطلوب"),
+    password: Yup.string()
+      .matches(
+        passwordRegex,
+        "كلمة المرور يجب أن تحتوي على حرف كبير، حرف صغير، وحرف خاص، ولا تقل عن 6 أحرف"
+      )
+      .required("كلمه المرور مطلوبة"),
     role: Yup.string().required("الدور مطلوب"),
   });
 
@@ -130,7 +141,7 @@ export default function AddAdmin() {
                   <option value="" disabled hidden>
                     اختر الدور
                   </option>
-                  <option value="admin">مسؤول عام</option>
+                  <option value="admin">مسؤول ادارة</option>
                   <option value="user">مسؤول الطلاب</option>
                   <option value="exams">مسؤول امتحانات</option>
                 </select>

@@ -27,11 +27,16 @@ export default function AddStudent() {
   }
 
   // Validation Schema
+  const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
   let validationSchema = Yup.object({
     name: Yup.string().required("اسم الطالب مطلوب"),
     grade: Yup.string().required("الصف مطلوب"),
-    studentMobile: Yup.string().required("رقم الهاتف مطلوب"),
-    parentMobile: Yup.string().required("رقم هاتف ولي الأمر مطلوب"),
+    studentMobile: Yup.string()
+      .matches(phoneRegex, "رقم الهاتف غير صالح، يجب أن يكون مصريًا")
+      .required("رقم الهاتف مطلوب"),
+    parentMobile: Yup.string()
+      .matches(phoneRegex, "رقم الهاتف غير صالح، يجب أن يكون مصريًا")
+      .required("رقم هاتف ولي الأمر مطلوب"),
   });
 
   const formik = useFormik({

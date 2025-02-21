@@ -86,7 +86,7 @@ export default function AllExams() {
                 value={selectedGrade}
                 onChange={(e) => setSelectedGrade(e.target.value)}
               >
-                <option value="">تصفية حسب الصف</option>
+                <option value="">اختر الصف</option>
                 {Array.from(new Set(exams.map((exam) => exam.grade))).map(
                   (grade, index) => (
                     <option key={index} value={grade}>

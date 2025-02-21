@@ -94,7 +94,6 @@ export default function Quiz() {
       );
       toast.success("تم إرسال الإجابات بنجاح!");
       navigate("/grades-login");
-      console.log("Exam submitted successfully:", response.data);
     } catch (error) {
       toast.error("حدث خطأ أثناء إرسال الإجابات!");
       console.error(error);
@@ -193,9 +192,9 @@ export default function Quiz() {
           </div>
 
           {/* Submit Button */}
-          <div className="text-center mt-5">
+          <div className="text-center mt-3">
             <button
-              className="btn rounded-0 px-5 py-2 fw-bold"
+              className="btn rounded-0 px-5 py-3 shadow-sm fw-bold w-50"
               onClick={handleSubmitExam}
             >
               إرسال الإجابات

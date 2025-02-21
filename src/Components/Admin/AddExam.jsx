@@ -4,14 +4,10 @@ import Api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
 
 export default function AddExam() {
-  // Navigate to Exams
-  const navigate = useNavigate();
-
   // loading State
   const [isLoading, setisLoading] = useState(false);
 
@@ -67,7 +63,6 @@ export default function AddExam() {
       toast.success(`تم اضافة الامتحان بنجاح`);
       setisLoading(false);
       console.log(data.type);
-      navigate("/admin-dashboard");
     } catch (error) {
       toast.error(`حدث خطأ اثناء اضافة الامتحان! تاكد من وقت الامتحان!`);
       setisLoading(false);

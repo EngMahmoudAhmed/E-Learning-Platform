@@ -13,7 +13,7 @@ export default function GradeDetails() {
 
   // Fetch Api Data
   async function fetchExamDetails() {
-    const studentCode = sessionStorage.getItem("StudentDegreesCode");
+    const studentCode = sessionStorage.getItem("StudentDegreesDegreesCode");
     const examCode = sessionStorage.getItem("StudentDegreesExamCode");
 
     // Check if codes
@@ -63,9 +63,6 @@ export default function GradeDetails() {
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
                   📜 الوصف: {examDetails.exam.description}
-                </li>
-                <li className="list-group-item">
-                  📚 الصف: {examDetails.exam.grade}
                 </li>
                 <li className="list-group-item">
                   📅 التاريخ: {examDetails.exam.date}

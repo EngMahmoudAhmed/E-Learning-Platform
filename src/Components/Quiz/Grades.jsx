@@ -26,8 +26,6 @@ export default function Grades() {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/student-scores/${studentCode}`);
       toast.success("تم جلب درجات الامتحانات بنجاح.");
-      console.log(data);
-
       setScores(data.data.scores);
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب درجات الامتحانات!");

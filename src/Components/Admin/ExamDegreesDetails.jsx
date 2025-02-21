@@ -67,10 +67,6 @@ export default function ExamDegreesDetails() {
                   {examDetails.exam.description}
                 </li>
                 <li className="list-group-item">
-                  <strong className="text-muted">📚 الصف:</strong>{" "}
-                  {examDetails.exam.grade}
-                </li>
-                <li className="list-group-item">
                   <strong className="text-muted">📅 التاريخ:</strong>{" "}
                   {examDetails.exam.date}
                 </li>
