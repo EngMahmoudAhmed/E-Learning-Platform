@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Dashboard() {
+  // Admin Role From Context
   const { adminRole, setAdminRole } = useContext(AuthContext);
+  // Role State
   const [role, setRole] = useState(adminRole);
 
   useEffect(() => {

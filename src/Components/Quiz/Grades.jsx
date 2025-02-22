@@ -6,7 +6,7 @@ import api from "../../config/api";
 import { Link } from "react-router-dom";
 
 export default function Grades() {
-  // loading State
+  // Loading State
   const [isLoading, setIsLoading] = useState(false);
 
   // Data State
@@ -15,7 +15,7 @@ export default function Grades() {
   const [examCode, setExamCode] = useState("");
 
   // Fetch API Data
-  async function fetchStudentScores() {
+  async function submitGrade() {
     const studentCode = sessionStorage.getItem("GradesCode");
     if (!studentCode) {
       toast.error("كود الطالب غير موجود، يرجى تسجيل الدخول مرة أخرى.");
@@ -44,7 +44,7 @@ export default function Grades() {
   }
 
   useEffect(() => {
-    fetchStudentScores();
+    submitGrade();
   }, []);
 
   // Check if is loading

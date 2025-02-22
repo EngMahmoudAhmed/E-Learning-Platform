@@ -16,7 +16,7 @@ export default function ExamDetails() {
   // Exam State
   const [exam, setExam] = useState(null);
 
-  // For Update Modal
+  // Update Modal
   const [newExamTitle, setNewExamTitle] = useState("");
   const [newExamDescription, setNewExamDescription] = useState("");
   const [newExamDate, setNewExamDate] = useState("");
@@ -42,8 +42,6 @@ export default function ExamDetails() {
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب تفاصيل الامتحان!");
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 

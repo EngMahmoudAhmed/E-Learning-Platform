@@ -12,7 +12,7 @@ export default function GradesLogin() {
   // Navigate to Grades
   const navigate = useNavigate();
 
-  // loading State
+  // Loading State
   const [isLoading, setisLoading] = useState(false);
 
   // Fetch Api Data

@@ -28,9 +28,7 @@ export default function Admins() {
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب البيانات !");
       console.log(error);
-    } finally {
-      setisLoading(false);
-    }
+    } 
   }
 
   // Delete Admin

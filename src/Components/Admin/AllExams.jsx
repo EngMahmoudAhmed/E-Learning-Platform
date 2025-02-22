@@ -8,14 +8,21 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function AllExams() {
+  // Store Exam Id In Context
   const { setExamId } = useContext(AuthContext);
 
+  // Loading State
   const [isLoading, setIsLoading] = useState(false);
+
+  // Exam State
   const [exams, setExams] = useState([]);
+
+  // Search States
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrade, setSelectedGrade] = useState("");
 
-  async function fetchAllExams() {
+  // Fetch Api Data
+  async function submitAllExams() {
     try {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/get-all-exam`);
@@ -24,16 +31,16 @@ export default function AllExams() {
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب جميع الامتحانات!");
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 
+  // Handle Exam ID
   function handleExamId(ExamId) {
     setExamId(ExamId);
     sessionStorage.setItem("ExamId", ExamId);
   }
 
+  // Delete Exam
   async function deleteExam(id) {
     try {
       await api.delete(`/api/exam/delete-exam/${id}`);
@@ -46,22 +53,24 @@ export default function AllExams() {
   }
 
   useEffect(() => {
-    fetchAllExams();
+    submitAllExams();
   }, []);
 
-  // **فلترة الامتحانات بناءً على البحث والصف**
+  // Exams Search
   const filteredExams = exams.filter(
     (exam) =>
       exam.title.includes(searchTerm) &&
       (selectedGrade === "" || exam.grade === selectedGrade)
   );
 
+  // Check if is loading
   if (isLoading) {
     return <Loading />;
   }
 
   return (
     <>
+      {/* Helmet */}
       <Helmet>
         <title>جميع الامتحانات</title>
       </Helmet>

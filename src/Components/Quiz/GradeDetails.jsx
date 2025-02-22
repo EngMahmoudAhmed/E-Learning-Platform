@@ -12,7 +12,7 @@ export default function GradeDetails() {
   const [examDetails, setExamDetails] = useState(null);
 
   // Fetch Api Data
-  async function fetchExamDetails() {
+  async function submitExamDetails() {
     const studentCode = sessionStorage.getItem("StudentDegreesDegreesCode");
     const examCode = sessionStorage.getItem("StudentDegreesExamCode");
 
@@ -38,7 +38,7 @@ export default function GradeDetails() {
   }
 
   useEffect(() => {
-    fetchExamDetails();
+    submitExamDetails();
   }, []);
 
   // Check if is loading
@@ -48,6 +48,7 @@ export default function GradeDetails() {
 
   return (
     <>
+      {/* Helmet */}
       <Helmet>
         <title>تفاصيل الامتحان</title>
       </Helmet>

@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
 
 export default function AddStudent() {
-  // loading State
+  // Loading State
   const [isLoading, setisLoading] = useState(false);
 
   // Fetch Api Data

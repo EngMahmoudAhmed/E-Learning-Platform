@@ -36,8 +36,6 @@ export default function Students() {
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب بيانات الطلاب!");
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 
@@ -102,7 +100,7 @@ export default function Students() {
     return <Loading />;
   }
 
-  // Filter students by selected grade and search term
+  // students search
   const filteredStudents = students.filter(
     (student) =>
       (selectedGrade === "" || student.grade === selectedGrade) &&

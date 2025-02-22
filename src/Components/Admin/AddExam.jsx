@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
 
 export default function AddExam() {
-  // loading State
+  // Loading State
   const [isLoading, setisLoading] = useState(false);
 
   // Questions State
@@ -39,13 +39,14 @@ export default function AddExam() {
     setQuestions(newQuestions);
   };
 
-  // Handle changes in question or sub-question inputs
+  // Handle changes in question inputs
   const handleQuestionChange = (index, field, value) => {
     const newQuestions = [...questions];
     newQuestions[index][field] = value;
     setQuestions(newQuestions);
   };
 
+  // Handle changes in sub-question inputs
   const handleSubQuestionChange = (index, subIndex, field, value) => {
     const newQuestions = [...questions];
     newQuestions[index].subQuestions[subIndex][field] = value;

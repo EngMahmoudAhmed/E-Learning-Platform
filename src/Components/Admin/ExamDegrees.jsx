@@ -25,8 +25,6 @@ export default function ExamDegrees() {
       setScores(data.data.scores);
     } catch (error) {
       toast.error("لا يوجد درجات متاحه الان لهذا الطالب!");
-    } finally {
-      setIsLoading(false);
     }
   }
 

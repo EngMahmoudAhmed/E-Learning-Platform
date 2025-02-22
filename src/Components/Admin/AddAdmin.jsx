@@ -12,7 +12,7 @@ export default function AddAdmin() {
   // Navigate to Dashboard
   const navigate = useNavigate();
 
-  // loading State
+  // Loading State
   const [isLoading, setisLoading] = useState(false);
 
   // Fetch Api Data
@@ -32,7 +32,6 @@ export default function AddAdmin() {
 
   // Validation Schema
   const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
-  
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}$/;
 
   let validationSchema = Yup.object({

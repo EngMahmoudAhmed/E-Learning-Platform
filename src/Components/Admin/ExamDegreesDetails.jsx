@@ -32,8 +32,6 @@ export default function ExamDegreesDetails() {
     } catch (error) {
       toast.error("حدث خطأ أثناء جلب تفاصيل الامتحان.");
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 

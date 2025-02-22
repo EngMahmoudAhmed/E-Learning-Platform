@@ -29,8 +29,6 @@ export default function StudentGrades() {
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب بيانات الطلاب!");
       console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 
