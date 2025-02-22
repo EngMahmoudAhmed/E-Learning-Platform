@@ -38,6 +38,12 @@ export default function AddExam() {
     newQuestions[index].subQuestions.splice(subIndex, 1);
     setQuestions(newQuestions);
   };
+  // Handle removing a main question
+  const handleRemoveQuestion = (index) => {
+    const newQuestions = [...questions];
+    newQuestions.splice(index, 1);
+    setQuestions(newQuestions);
+  };
 
   // Handle changes in question inputs
   const handleQuestionChange = (index, field, value) => {
@@ -379,36 +385,44 @@ export default function AddExam() {
                         </div>
                       </div>
                     ))}
+                    <div className="d-flex gap-3 mt-4">
+                      <button
+                        type="button"
+                        className="btn rounded-0"
+                        onClick={() =>
+                          setQuestions([
+                            ...questions,
+                            {
+                              question_title: "",
+                              subQuestions: [
+                                {
+                                  questionText: "",
+                                  correctAnswer: "",
+                                  options: ["", "", ""],
+                                },
+                              ],
+                            },
+                          ])
+                        }
+                      >
+                        إضافة سؤال رئيسي
+                      </button>
+                      <button
+                        type="button"
+                        className="btn rounded-0"
+                        onClick={() => handleRemoveQuestion(index)}
+                      >
+                        حذف السؤال الرئيسي
+                      </button>
+                    </div>
                   </div>
                 ))}
-                <button
-                  type="button"
-                  className="btn rounded-0"
-                  onClick={() =>
-                    setQuestions([
-                      ...questions,
-                      {
-                        question_title: "",
-                        subQuestions: [
-                          {
-                            questionText: "",
-                            correctAnswer: "",
-                            options: ["", "", ""],
-                          },
-                        ],
-                      },
-                    ])
-                  }
-                >
-                  إضافة سؤال رئيسي
-                </button>
               </div>
             </div>
 
             <button
               type="submit"
               className="btn rounded-0 d-flex justify-content-center w-100"
-              // disabled={!(formik.isValid && formik.dirty)}
             >
               {isLoading ? (
                 <Bars

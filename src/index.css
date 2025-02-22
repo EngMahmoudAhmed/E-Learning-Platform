@@ -381,6 +381,9 @@ table th {
   .exam-header p {
     font-size: 13px;
   }
+  .btn-sm {
+    font-size: 10px !important;
+  }
 }
 .exam-details .list-questions:not(:last-child) {
   border-bottom: 2px solid var(--main-color);

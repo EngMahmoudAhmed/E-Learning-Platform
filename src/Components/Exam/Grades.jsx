@@ -84,7 +84,9 @@ export default function Grades() {
                           <td>{score.examTitle}</td>
                           <td>{score.date}</td>
                           <td>{score.time}</td>
-                          <td>{score.score}</td>
+                          <td>
+                            {score.score} من {score.degree}
+                          </td>
                           <td>
                             <Link to={"/grades-details"}>
                               <button

@@ -25,8 +25,15 @@ export default function GradesLogin() {
       setisLoading(false);
       navigate("/grades");
     } catch (error) {
-      toast.error(`حدث خطأ أثناء تسجيل الدخول!`);
       setisLoading(false);
+      if (
+        error.response &&
+        error.response.data.message.includes("هذا الطالب")
+      ) {
+        toast.warning("الكود ليس صحيحا او الطالب غير موجود بالفعل!");
+      } else {
+        toast.error("حدث خطأ أثناء تسجيل الدخول!");
+      }
     }
   }
 

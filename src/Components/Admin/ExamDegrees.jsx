@@ -83,7 +83,10 @@ export default function ExamDegrees() {
                           <td>{index + 1}</td>
                           <td>{score.examCode}</td>
                           <td>{score.examTitle}</td>
-                          <td>{score.score}</td>
+                          <td>
+                            {" "}
+                            {score.score} من {score.degree}
+                          </td>
                           <td>
                             <Link to={"/exam-degrees-details"}>
                               <button
