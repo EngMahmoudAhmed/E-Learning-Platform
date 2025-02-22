@@ -50,8 +50,10 @@ export default function Quiz() {
 
   // Timer Logic
   useEffect(() => {
-    if (timeLeft.minutes === 0 && timeLeft.seconds === 0) return;
-
+    if (timeLeft.minutes === 0 && timeLeft.seconds === 0) {
+      handleSubmitExam();
+      return;
+    }
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime.seconds > 0) {
@@ -80,12 +82,6 @@ export default function Quiz() {
 
   // Submit Exam
   async function handleSubmitExam() {
-    // Check If Student Don't Sent Any Answer
-    if (answers.length === 0) {
-      toast.error("يرجى اختيار إجابات قبل الإرسال.");
-      return;
-    }
-
     try {
       setIsLoading(true);
       const response = await api.post(
@@ -93,11 +89,9 @@ export default function Quiz() {
         { answers }
       );
       toast.success("تم إرسال الإجابات بنجاح!");
+      setIsLoading(false);
       navigate("/grades-login");
     } catch (error) {
-      toast.error("حدث خطأ أثناء إرسال الإجابات!");
-      console.error(error);
-    } finally {
       setIsLoading(false);
     }
   }

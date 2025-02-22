@@ -88,7 +88,6 @@ export default function Students() {
       toast.success("تم تعديل بيانات الطالب بنجاح.");
       setSelectedStudent(null);
     } catch (error) {
-      console.error("Error updating student:", error);
       toast.error("حدثت مشكلة أثناء محاولة التعديل!");
     }
   }

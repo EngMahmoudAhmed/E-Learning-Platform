@@ -39,9 +39,10 @@ export default function ExamDetails() {
       let { data } = await api.get(`/api/exam/get-exam/${examId}`);
       toast.success("تم جلب تفاصيل الامتحان بنجاح.");
       setExam(data.data);
+      setIsLoading(false);
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب تفاصيل الامتحان!");
-      console.error(error);
+      setIsLoading(false);
     }
   }
 

@@ -41,7 +41,6 @@ export default function Admins() {
       );
       toast.success("تم حذف المسؤول بنجاح.");
     } catch (error) {
-      console.error("Error deleting admin:", error);
       toast.error("حدثت مشكلة أثناء محاولة حذف المسؤول!");
     }
   }
@@ -74,7 +73,6 @@ export default function Admins() {
       toast.success("تم تعديل المسؤول بنجاح.");
       setSelectedAdmin(null);
     } catch (error) {
-      console.error("Error updating admin:", error);
       toast.error("حدثت مشكلة أثناء محاولة التعديل!");
     }
   }

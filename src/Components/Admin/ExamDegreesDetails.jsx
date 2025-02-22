@@ -12,7 +12,7 @@ export default function ExamDegreesDetails() {
   const [examDetails, setExamDetails] = useState(null);
 
   // Fetch Api Data
-  async function fetchExamDetails() {
+  async function submitExamDetails() {
     const studentCode = sessionStorage.getItem("StudentDegreesCode");
     const examCode = sessionStorage.getItem("StudentExamCode");
 
@@ -29,14 +29,15 @@ export default function ExamDegreesDetails() {
       );
       setExamDetails(data.data);
       toast.success("تم جلب تفاصيل الامتحان بنجاح.");
+      setIsLoading(false);
     } catch (error) {
       toast.error("حدث خطأ أثناء جلب تفاصيل الامتحان.");
-      console.error(error);
+      setIsLoading(false);
     }
   }
 
   useEffect(() => {
-    fetchExamDetails();
+    submitExamDetails();
   }, []);
 
   // Check if is loading

@@ -15,7 +15,7 @@ export default function StudentsOptions() {
           داخل تمتحن ولا هتشوف درجات الامتحان !
         </h5>
         <div className="container mt-4">
-          <div className="row justify-content-center">
+          <div className="row justify-content-center gap-2">
             <div className="col-md-4">
               <div className="card p-3 text-center">
                 <h6 className="mb-3 pb-3 fw-bold">جاهز للامتحان يا بطل !</h6>

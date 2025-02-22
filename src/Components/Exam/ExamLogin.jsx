@@ -20,14 +20,20 @@ export default function ExamLogin() {
     try {
       setisLoading(true);
       let { data } = await Api.post(`/api/exam/login-to-exam`, values);
-      toast.success(`تم تسجيل الدخول بنجاح`);
       sessionStorage.setItem("StudentCode", data.data.studentCode);
       sessionStorage.setItem("ExamCode", data.data.examCode);
       setisLoading(false);
       navigate("/exam");
     } catch (error) {
-      toast.error(`حدث خطأ أثناء تسجيل الدخول!`);
       setisLoading(false);
+      if (
+        error.response &&
+        error.response.data.message.includes("معاد الامتحان")
+      ) {
+        toast.warning("لم يبدأ الامتحان بعد تأكد من وقت الامتحان!");
+      } else {
+        toast.error("حدث خطأ أثناء تسجيل الدخول!");
+      }
     }
   }
 

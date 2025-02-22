@@ -27,6 +27,7 @@ export default function AllExams() {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/get-all-exam`);
       setExams(data.data);
+      toast.success(`تم جلب جميع الامتحانات!`);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -87,8 +88,8 @@ export default function AllExams() {
         <h4 className="m-3 fw-bold">📚 جميع الامتحانات :</h4>
 
         <div className="container mt-4">
-          <div className="row mb-3 gap-4 justify-content-center">
-            <div className="col-md-5">
+          <div className="d-flex mb-3 gap-3 justify-content-center">
+            <div className="col-md-6">
               <input
                 type="text"
                 className="form-control"
@@ -97,7 +98,7 @@ export default function AllExams() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="col-md-5">
+            <div className="col-md-6">
               <select
                 className="form-select"
                 value={selectedGrade}
