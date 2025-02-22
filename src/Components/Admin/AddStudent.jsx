@@ -80,7 +80,7 @@ export default function AddStudent() {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control mb-3"
                   id="name"
                   placeholder="أدخل اسم الطالب"
                   value={formik.values.name}
@@ -130,7 +130,7 @@ export default function AddStudent() {
                   </optgroup>
                 </select>
                 {formik.errors.grade && formik.touched.grade ? (
-                  <div className="alert alert-danger p-2 my-2 rounded-0">
+                  <div className="alert alert-danger p-2 my-3 rounded-0">
                     {formik.errors.grade}
                   </div>
                 ) : (
@@ -147,7 +147,7 @@ export default function AddStudent() {
                 </label>
                 <input
                   type="tel"
-                  className="form-control"
+                  className="form-control mb-3"
                   id="studentMobile"
                   placeholder="أدخل رقم هاتف الطالب"
                   value={formik.values.studentMobile}
@@ -156,7 +156,7 @@ export default function AddStudent() {
                   style={{ textAlign: "right", direction: "rtl" }}
                 />
                 {formik.errors.studentMobile && formik.touched.studentMobile ? (
-                  <div className="alert alert-danger p-2 my-2 rounded-0">
+                  <div className="alert alert-danger p-2 my-3 rounded-0">
                     {formik.errors.studentMobile}
                   </div>
                 ) : (
@@ -180,7 +180,7 @@ export default function AddStudent() {
                   style={{ textAlign: "right", direction: "rtl" }}
                 />
                 {formik.errors.parentMobile && formik.touched.parentMobile ? (
-                  <div className="alert alert-danger p-2 my-2 rounded-0">
+                  <div className="alert alert-danger p-2 my-3 rounded-0">
                     {formik.errors.parentMobile}
                   </div>
                 ) : (
