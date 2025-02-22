@@ -307,6 +307,7 @@ nav {
   }
 }
 .modal input,
+.modal select,
 .modal button,
 .modal button:hover {
   border-radius: 0;

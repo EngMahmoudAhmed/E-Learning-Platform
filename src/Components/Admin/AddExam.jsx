@@ -116,7 +116,7 @@ export default function AddExam() {
         <div className="container">
           <form onSubmit={formik.handleSubmit}>
             <div className="row mb-3">
-              <div className="col-md-4">
+              <div className="col-md-4 my-2">
                 {/* Exam Title */}
                 <label htmlFor="title" className="form-label fw-bold">
                   عنوان الامتحان :
@@ -138,7 +138,7 @@ export default function AddExam() {
                 )}
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-4 my-2">
                 {/* Exam Description */}
                 <label htmlFor="description" className="form-label fw-bold">
                   وصف الامتحان :
@@ -160,7 +160,7 @@ export default function AddExam() {
                 )}
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-4 my-2">
                 {/* Exam Date */}
                 <label htmlFor="date" className="form-label fw-bold">
                   تاريخ الامتحان :
@@ -183,7 +183,7 @@ export default function AddExam() {
             </div>
 
             <div className="row mb-3">
-              <div className="col-md-4">
+              <div className="col-md-4 my-2">
                 {/* Exam Time */}
                 <label htmlFor="time" className="form-label fw-bold">
                   وقت الامتحان :
@@ -193,7 +193,7 @@ export default function AddExam() {
                   className="form-control"
                   id="time"
                   name="time"
-                  placeholder="الساعه بالتوقيت العامى [ 18:15 ]"
+                  placeholder="الساعه بالتوقيت العالمى [ 18:15 ]"
                   value={formik.values.time}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -205,7 +205,7 @@ export default function AddExam() {
                 )}
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-4 my-2">
                 {/* Exam Duration */}
                 <label htmlFor="duration" className="form-label fw-bold">
                   مدة الامتحان :
@@ -227,7 +227,7 @@ export default function AddExam() {
                 )}
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-4 my-2">
                 {/* Exam Grade */}
                 <label htmlFor="grade" className="form-label fw-bold">
                   الصف :
@@ -350,10 +350,8 @@ export default function AddExam() {
                           <label htmlFor="q-title" className="fw-bold">
                             الإجابة الصحيحة :
                           </label>
-                          <input
-                            type="text"
-                            className="form-control my-2"
-                            placeholder="ادخل اجابة السؤال الصحيحة"
+                          <select
+                            className="form-select my-2"
                             value={subQuestion.correctAnswer}
                             onChange={(e) =>
                               handleSubQuestionChange(
@@ -363,8 +361,18 @@ export default function AddExam() {
                                 e.target.value
                               )
                             }
-                          />
+                          >
+                            <option value="" disabled hidden>
+                              اختر الإجابة الصحيحة
+                            </option>
+                            {subQuestion.options.map((option, i) => (
+                              <option key={i} value={option}>
+                                {option}
+                              </option>
+                            ))}
+                          </select>
                         </div>
+
                         <div className="d-flex justify-content-end">
                           <button
                             type="button"

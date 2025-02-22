@@ -314,10 +314,8 @@ export default function ExamDetails() {
                         {/* Edit Correct Answer */}
                         <div className="my-3">
                           <label className="fw-bold">الإجابة الصحيحة :</label>
-                          <input
-                            type="text"
-                            className="form-control my-2"
-                            placeholder="ادخل اجابة السؤال الصحيحة"
+                          <select
+                            className="form-select my-2"
                             value={subQ.correctAnswer || ""}
                             onChange={(e) => {
                               const updatedQuestions = [...exam.questions];
@@ -326,7 +324,16 @@ export default function ExamDetails() {
                               ].correctAnswer = e.target.value;
                               setExam({ ...exam, questions: updatedQuestions });
                             }}
-                          />
+                          >
+                            <option value="" disabled hidden>
+                              اختر الإجابة الصحيحة
+                            </option>
+                            {subQ.options.map((option, i) => (
+                              <option key={i} value={option}>
+                                {option}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                     ))}

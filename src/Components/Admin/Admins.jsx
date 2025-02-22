@@ -185,12 +185,18 @@ export default function Admins() {
               />
 
               <label className="form-label mt-3">دور المسؤول:</label>
-              <input
-                type="text"
-                className="form-control"
+              <select
+                className="form-select"
                 value={newRole}
                 onChange={(e) => setNewRole(e.target.value)}
-              />
+              >
+                <option value="" disabled hidden>
+                  اختر الدور
+                </option>
+                <option value="admin">مسؤول إدارة</option>
+                <option value="user">مسؤول الطلاب</option>
+                <option value="exams">مسؤول امتحانات</option>
+              </select>
             </div>
 
             <div className="modal-footer">

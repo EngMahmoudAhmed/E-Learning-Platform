@@ -19,12 +19,26 @@ export default function Students() {
   const [students, setStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrade, setSelectedGrade] = useState("");
+  const [newGrade, setNewGrade] = useState("");
 
   // Student Data for Update
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [newName, setNewName] = useState("");
   const [newStudentMobile, setNewStudentMobile] = useState("");
   const [newParentMobile, setNewParentMobile] = useState("");
+
+  // Grades Convert
+  const gradeLabels = {
+    G4: "الصف الرابع الابتدائي",
+    G5: "الصف الخامس الابتدائي",
+    G6: "الصف السادس الابتدائي",
+    G7: "الصف الأول الإعدادي",
+    G8: "الصف الثاني الإعدادي",
+    G9: "الصف الثالث الإعدادي",
+    G10: "الصف الأول الثانوي",
+    G11: "الصف الثاني الثانوي",
+    G12: "الصف الثالث الثانوي",
+  };
 
   // Fetch API Data
   async function displayStudents() {
@@ -59,6 +73,7 @@ export default function Students() {
     setNewName(student.name);
     setNewStudentMobile(student.studentMobile);
     setNewParentMobile(student.parentMobile);
+    setNewGrade("");
   }
 
   // Update Student
@@ -70,6 +85,7 @@ export default function Students() {
         name: newName,
         studentMobile: newStudentMobile,
         parentMobile: newParentMobile,
+        grade: newGrade,
       });
 
       setStudents((prevStudents) =>
@@ -80,6 +96,7 @@ export default function Students() {
                 name: newName,
                 studentMobile: newStudentMobile,
                 parentMobile: newParentMobile,
+                grade: newGrade,
               }
             : student
         )
@@ -181,7 +198,7 @@ export default function Students() {
                       <p className="h6 fw-bold">
                         الصف:
                         <strong className="me-1 fw-medium">
-                          {student.grade}
+                          {gradeLabels[student.grade] || student.grade}
                         </strong>
                       </p>
                       <p className="h6 fw-bold my-4">
@@ -255,6 +272,32 @@ export default function Students() {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
               />
+
+              <label className="form-label mt-3">الصف</label>
+              <select
+                className="form-select"
+                value={newGrade}
+                onChange={(e) => setNewGrade(e.target.value)}
+              >
+                <option value="" disabled hidden>
+                  اختر الصف
+                </option>
+                <optgroup label="المرحلة الابتدائية">
+                  <option value="G4">الصف الرابع الابتدائي</option>
+                  <option value="G5">الصف الخامس الابتدائي</option>
+                  <option value="G6">الصف السادس الابتدائي</option>
+                </optgroup>
+                <optgroup label="المرحلة الإعدادية">
+                  <option value="G7">الصف الأول الإعدادي</option>
+                  <option value="G8">الصف الثاني الإعدادي</option>
+                  <option value="G9">الصف الثالث الإعدادي</option>
+                </optgroup>
+                <optgroup label="المرحلة الثانوية">
+                  <option value="G10">الصف الأول الثانوي</option>
+                  <option value="G11">الصف الثاني الثانوي</option>
+                  <option value="G12">الصف الثالث الثانوي</option>
+                </optgroup>
+              </select>
 
               <label className="form-label mt-3">رقم الطالب</label>
               <input
