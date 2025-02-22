@@ -21,8 +21,15 @@ export default function AddStudent() {
       setisLoading(false);
       console.log(data.type);
     } catch (error) {
-      toast.error(`حدث خطأ اثناء إضافة الطالب!`);
       setisLoading(false);
+      if (
+        error.response &&
+        error.response.data.message.includes("E11000 duplicate key error")
+      ) {
+        toast.warning("رقم الهاتف مستخدم بالفعل! الرجاء استخدام رقم آخر.");
+      } else {
+        toast.error("حدث خطأ أثناء إضافة الطالب!");
+      }
     }
   }
 

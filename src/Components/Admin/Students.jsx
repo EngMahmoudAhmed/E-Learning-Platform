@@ -33,9 +33,10 @@ export default function Students() {
       let { data } = await api.get("/api/user/all-students");
       toast.success("تم جلب بيانات الطلاب بنجاح.");
       setStudents(data.data);
+      setIsLoading(false);
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب بيانات الطلاب!");
-      console.error(error);
+      setIsLoading(false);
     }
   }
 

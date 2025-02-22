@@ -5,13 +5,13 @@ import Layout from "./Components/Layout/Layout";
 // User
 import Home from "./Components/Home/Home";
 import About from "./Components/About/About";
-import Exam from "./Components/Quiz/Exam";
+import Exam from "./Components/Exam/Exam";
 import Summaries from "./Components/Summaries/Summaries";
-import StudentsOptions from "./Components/Quiz/StudentsOptions";
-import ExamLogin from "./Components/Quiz/ExamLogin";
-import GradesLogin from "./Components/Quiz/GradesLogin";
-import Grades from "./Components/Quiz/Grades";
-import GradeDetails from "./Components/Quiz/GradeDetails";
+import StudentsOptions from "./Components/Exam/StudentsOptions";
+import ExamLogin from "./Components/Exam/ExamLogin";
+import GradesLogin from "./Components/Exam/GradesLogin";
+import Grades from "./Components/Exam/Grades";
+import GradeDetails from "./Components/Exam/GradeDetails";
 
 // Admin
 import AdminLogin from "./Components/Admin/login";

@@ -26,11 +26,18 @@ export default function AllExams() {
     try {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/get-all-exam`);
-      toast.success("تم جلب جميع الامتحانات بنجاح.");
       setExams(data.data);
+      setIsLoading(false);
     } catch (error) {
-      toast.error("حدثت مشكلة أثناء جلب جميع الامتحانات!");
-      console.error(error);
+      setIsLoading(false);
+      if (
+        error.response &&
+        error.response.data.message === "لا يوجد امتحانات"
+      ) {
+        toast.info("لا يوجد امتحانات متاحة حاليًا.");
+      } else {
+        toast.error("حدثت مشكلة أثناء جلب جميع الامتحانات!");
+      }
     }
   }
 
@@ -46,9 +53,10 @@ export default function AllExams() {
       await api.delete(`/api/exam/delete-exam/${id}`);
       toast.success("تم حذف الامتحان بنجاح.");
       setExams((prevExams) => prevExams.filter((exam) => exam._id !== id));
+      setIsLoading(false);
     } catch (error) {
       toast.error("حدثت مشكلة أثناء حذف الامتحان!");
-      console.error(error);
+      setIsLoading(false);
     }
   }
 
@@ -79,8 +87,8 @@ export default function AllExams() {
         <h4 className="m-3 fw-bold">📚 جميع الامتحانات :</h4>
 
         <div className="container mt-4">
-          <div className="row mb-3">
-            <div className="col-md-6">
+          <div className="row mb-3 gap-4 justify-content-center">
+            <div className="col-md-5">
               <input
                 type="text"
                 className="form-control"
@@ -89,7 +97,7 @@ export default function AllExams() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-5">
               <select
                 className="form-select"
                 value={selectedGrade}
@@ -169,8 +177,8 @@ export default function AllExams() {
                 </div>
               ))
             ) : (
-              <div className="col-12 text-center text-danger fw-bold">
-                <p>لا توجد امتحانات مطابقة لبحثك.</p>
+              <div className="col-12 text-center text-danger fw-bold py-2">
+                <p>لا توجد امتحانات متاحة حاليًا.</p>
               </div>
             )}
           </div>

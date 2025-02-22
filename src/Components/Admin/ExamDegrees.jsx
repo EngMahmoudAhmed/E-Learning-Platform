@@ -23,8 +23,9 @@ export default function ExamDegrees() {
       );
       toast.success("تم جلب درجات الامتحانات بنجاح.");
       setScores(data.data.scores);
+      setIsLoading(false);
     } catch (error) {
-      toast.error("لا يوجد درجات متاحه الان لهذا الطالب!");
+      setIsLoading(false);
     }
   }
 

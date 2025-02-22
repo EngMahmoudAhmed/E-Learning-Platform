@@ -25,10 +25,11 @@ export default function Admins() {
       let { data } = await api.get(`/api/admin/all-admin`);
       toast.success("تم جلب البيانات بنجاح.");
       setAdmins(data.data);
+      setisLoading(false);
     } catch (error) {
       toast.error("حدثت مشكلة أثناء جلب البيانات !");
-      console.log(error);
-    } 
+      setisLoading(false);
+    }
   }
 
   // Delete Admin

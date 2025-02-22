@@ -29,7 +29,7 @@ export default function Dashboard() {
         <div className="container my-5 py-2">
           <h3 className="text-center fw-bold mb-3 pb-3">لوحة التحكم المسؤول</h3>
 
-          {/* عرض جميع الأقسام إذا كان الدور "super_admin" */}
+          {/* Display all sections if the role is "super_admin" */}
           {adminRole === "super_admin" && (
             <>
               {/* قسم الطلاب */}
@@ -114,7 +114,7 @@ export default function Dashboard() {
             </>
           )}
 
-          {/* عرض الأقسام بناءً على الدور المحدد */}
+          {/* Display sections based on role */}
           {adminRole === "admin" && (
             <div className="mb-5">
               <h4 className="fw-bold mb-4">الإدارة :</h4>

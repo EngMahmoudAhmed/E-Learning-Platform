@@ -21,12 +21,19 @@ export default function AddAdmin() {
       setisLoading(true);
       let { data } = await Api.post(`/api/admin/add-admin`, values);
       toast.success(`تم اضافة المسؤول بنجاح`);
-      setisLoading(false);
       console.log(data.type);
+      setisLoading(false);
       navigate("/admins");
     } catch (error) {
-      toast.error(`حدث خطأ اثناء اضافة المسؤول !`);
       setisLoading(false);
+      if (
+        error.response &&
+        error.response.data.message === "هذا المستخدم موجود بالفعل"
+      ) {
+        toast.warning("المستخدم موجود بالفعل!");
+      } else {
+        toast.error("حدث خطأ أثناء إضافة المسؤول!");
+      }
     }
   }
 
