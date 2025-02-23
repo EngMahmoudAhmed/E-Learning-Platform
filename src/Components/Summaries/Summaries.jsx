@@ -15,7 +15,7 @@ export default function Summaries() {
         <div className="container">
           {/* قسم الابتدائية */}
           <div className="mb-5">
-            <h4 className="fw-bold mb-4">المرحلة الابتدائية :</h4>
+            <h5 className="fw-bold mb-4">المرحلة الابتدائية :</h5>
             <div className="row g-4">
               {/* الصف الرابع الابتدائى */}
               <div className="col-md-4">
@@ -55,7 +55,7 @@ export default function Summaries() {
 
           {/* قسم الاعدادية */}
           <div className="mb-5">
-            <h4 className="fw-bold mb-4">المرحلة الاعدادية :</h4>
+            <h5 className="fw-bold mb-4">المرحلة الاعدادية :</h5>
             <div className="row g-4">
               {/* الصف الثانى الاعدادى  */}
               <div className="col-md-4">

@@ -19,7 +19,6 @@ export default function Students() {
   const [students, setStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGrade, setSelectedGrade] = useState("");
-  const [newGrade, setNewGrade] = useState("");
 
   // Student Data for Update
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -73,7 +72,6 @@ export default function Students() {
     setNewName(student.name);
     setNewStudentMobile(student.studentMobile);
     setNewParentMobile(student.parentMobile);
-    setNewGrade("");
   }
 
   // Update Student
@@ -85,7 +83,6 @@ export default function Students() {
         name: newName,
         studentMobile: newStudentMobile,
         parentMobile: newParentMobile,
-        grade: newGrade,
       });
 
       setStudents((prevStudents) =>
@@ -96,7 +93,6 @@ export default function Students() {
                 name: newName,
                 studentMobile: newStudentMobile,
                 parentMobile: newParentMobile,
-                grade: newGrade,
               }
             : student
         )
@@ -169,7 +165,7 @@ export default function Students() {
           <div className="row">
             {filteredStudents.length > 0 ? (
               filteredStudents.map((student, index) => (
-                <div className="col-md-4 mb-4" key={student._id}>
+                <div className="col-lg-4 mb-4" key={student._id}>
                   <div className="card p-4 shadow-md">
                     <span>{index + 1}</span>
 
@@ -272,32 +268,6 @@ export default function Students() {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
               />
-
-              <label className="form-label mt-3">الصف</label>
-              <select
-                className="form-select"
-                value={newGrade}
-                onChange={(e) => setNewGrade(e.target.value)}
-              >
-                <option value="" disabled hidden>
-                  اختر الصف
-                </option>
-                <optgroup label="المرحلة الابتدائية">
-                  <option value="G4">الصف الرابع الابتدائي</option>
-                  <option value="G5">الصف الخامس الابتدائي</option>
-                  <option value="G6">الصف السادس الابتدائي</option>
-                </optgroup>
-                <optgroup label="المرحلة الإعدادية">
-                  <option value="G7">الصف الأول الإعدادي</option>
-                  <option value="G8">الصف الثاني الإعدادي</option>
-                  <option value="G9">الصف الثالث الإعدادي</option>
-                </optgroup>
-                <optgroup label="المرحلة الثانوية">
-                  <option value="G10">الصف الأول الثانوي</option>
-                  <option value="G11">الصف الثاني الثانوي</option>
-                  <option value="G12">الصف الثالث الثانوي</option>
-                </optgroup>
-              </select>
 
               <label className="form-label mt-3">رقم الطالب</label>
               <input

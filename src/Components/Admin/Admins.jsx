@@ -99,7 +99,7 @@ export default function Admins() {
           <div className="row">
             {admins.length > 0 ? (
               admins.map((admin, index) => (
-                <div className="col-md-4 mb-4" key={admin._id}>
+                <div className="col-lg-4 mb-4" key={admin._id}>
                   <div className="card p-4 shadow-md">
                     <span>{index + 1}</span>
 

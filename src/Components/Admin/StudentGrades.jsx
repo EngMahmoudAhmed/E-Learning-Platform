@@ -101,7 +101,7 @@ export default function StudentGrades() {
             {filteredStudents.length > 0 ? (
               filteredStudents.map((student, index) => (
                 <div
-                  className="col-md-4 mb-4"
+                  className="col-lg-4 mb-4"
                   key={student._id}
                   onClick={() => handleStudentCode(student.studentCode)}
                 >

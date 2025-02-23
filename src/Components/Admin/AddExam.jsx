@@ -286,6 +286,7 @@ export default function AddExam() {
                         name="q-title"
                         className="form-control mb-3 mt-2"
                         placeholder="أكمل - ما النتائج - بما تفسر - الخ"
+                        required
                         value={question.question_title}
                         onChange={(e) =>
                           handleQuestionChange(
@@ -304,6 +305,7 @@ export default function AddExam() {
                         <input
                           type="text"
                           className="form-control my-2"
+                          required
                           placeholder="أدخل نص السؤال"
                           value={subQuestion.questionText}
                           onChange={(e) =>
@@ -326,6 +328,7 @@ export default function AddExam() {
                                 <input
                                   type="text"
                                   className="form-control my-2"
+                                  required
                                   placeholder={`اختيار ${i + 1}`}
                                   value={option}
                                   onChange={(e) =>
@@ -353,6 +356,7 @@ export default function AddExam() {
                           <select
                             className="form-select my-2"
                             value={subQuestion.correctAnswer}
+                            required
                             onChange={(e) =>
                               handleSubQuestionChange(
                                 index,
@@ -431,6 +435,7 @@ export default function AddExam() {
             <button
               type="submit"
               className="btn rounded-0 d-flex justify-content-center w-100"
+              disabled={!(formik.isValid && formik.dirty)}
             >
               {isLoading ? (
                 <Bars
