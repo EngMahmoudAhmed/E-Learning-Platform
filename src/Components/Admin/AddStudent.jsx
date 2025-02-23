@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import Api from "../../config/api";
+import api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
@@ -15,7 +15,7 @@ export default function AddStudent() {
   async function submitStudent(values) {
     try {
       setisLoading(true);
-      let { data } = await Api.post(`/api/user/add-student`, values);
+      let { data } = await api.post(`/api/user/add-student`, values);
       toast.success(`تم إضافة الطالب بنجاح`);
       setisLoading(false);
       console.log(data.type);

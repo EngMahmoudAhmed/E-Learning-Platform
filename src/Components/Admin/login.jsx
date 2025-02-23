@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import Api from "../../config/api";
+import api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
@@ -19,7 +19,7 @@ export default function Login() {
   async function submitLogin(values) {
     try {
       setisLoading(true);
-      let { data } = await Api.post(`/api/admin/login`, values);
+      let { data } = await api.post(`/api/admin/login`, values);
       toast.success(`تم تسجبل الدخول بنجاح`);
       sessionStorage.setItem("AdminLogin", data.data.admin);
       sessionStorage.setItem("AdminRole", data.data.role);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import Api from "../../config/api";
+import api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
@@ -19,7 +19,7 @@ export default function AddAdmin() {
   async function submitAdmin(values) {
     try {
       setisLoading(true);
-      let { data } = await Api.post(`/api/admin/add-admin`, values);
+      let { data } = await api.post(`/api/admin/add-admin`, values);
       toast.success(`تم اضافة المسؤول بنجاح`);
       console.log(data.type);
       setisLoading(false);

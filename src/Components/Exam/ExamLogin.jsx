@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import Api from "../../config/api";
+import api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
@@ -19,7 +19,7 @@ export default function ExamLogin() {
   async function submitLogin(values) {
     try {
       setisLoading(true);
-      let { data } = await Api.post(`/api/exam/login-to-exam`, values);
+      let { data } = await api.post(`/api/exam/login-to-exam`, values);
       sessionStorage.setItem("StudentCode", data.data.studentCode);
       sessionStorage.setItem("ExamCode", data.data.examCode);
       setisLoading(false);
