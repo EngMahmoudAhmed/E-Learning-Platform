@@ -78,6 +78,16 @@ export default function Students() {
   async function updateStudent() {
     if (!selectedStudent) return;
 
+    const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
+    if (!phoneRegex.test(newStudentMobile)) {
+      toast.error("رقم الطالب غير صالح، يجب أن يكون مصريًا.");
+      return;
+    }
+    if (!phoneRegex.test(newParentMobile)) {
+      toast.error("رقم ولي الأمر غير صالح، يجب أن يكون مصريًا.");
+      return;
+    }
+
     try {
       await api.put(`/api/user/update-student/${selectedStudent._id}`, {
         name: newName,

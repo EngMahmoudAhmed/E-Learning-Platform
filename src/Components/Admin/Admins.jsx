@@ -56,6 +56,12 @@ export default function Admins() {
   async function updateAdmin() {
     if (!selectedAdmin) return;
 
+    const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
+    if (!phoneRegex.test(newUserName)) {
+      toast.error("رقم الهاتف غير صالح، يجب أن يكون رقم هاتف مصرى صالح.");
+      return;
+    }
+
     try {
       await api.patch(`/api/admin/update/${selectedAdmin._id}`, {
         userName: newUserName,
