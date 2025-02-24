@@ -83,6 +83,7 @@ nav {
 }
 .nav-item {
   width: fit-content;
+  margin: 0 5px;
 }
 .nav-link.active {
   background-color: var(--main-color) !important;
@@ -236,7 +237,7 @@ nav {
     margin: 20px 0 !important;
   }
 }
-.summaries h6 ,
+.summaries h6,
 .summaries button {
   font-size: 14px;
 }

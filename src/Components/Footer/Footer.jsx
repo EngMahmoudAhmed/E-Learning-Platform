@@ -1,6 +1,13 @@
 import React from "react";
 import Logo from "../../assets/LogoF.webp";
-import { FaYoutube, FaFacebook, FaWhatsapp } from "react-icons/fa";
+import {
+  FaYoutube,
+  FaFacebook,
+  FaWhatsapp,
+  FaUsers,
+  FaTelegram,
+  FaEnvelope,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -24,49 +31,71 @@ export default function Footer() {
                 <p className="fw-bold">يمكنك متابعتنا عن طريق : </p>
 
                 <div className="d-flex gap-4">
-                  <Link
-                    to="https://youtube.com"
+                  <a
+                    href="https://www.youtube.com/@mahmoudelazony-mr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-icon d-flex justify-content-center align-items-center"
                   >
                     <FaYoutube size={30} />
-                  </Link>
-                  <Link
-                    to="https://facebook.com"
+                  </a>
+                  <a
+                    href="https://www.facebook.com/share/15DMAdHRQw/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-icon d-flex justify-content-center align-items-center"
                   >
                     <FaFacebook size={30} />
-                  </Link>
-                  <Link
-                    to="https://wa.me/+201234567890"
+                  </a>
+                  <a
+                    href="https://wa.me/+201011638721"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-icon d-flex justify-content-center align-items-center"
                   >
                     <FaWhatsapp size={30} />
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </footer>
-      {/* <div className="Info py-3">
-        <div className="text-center form-link">
-          <strong>{"<Developed By>"}</strong>
-          <Link to="/mohamed-fawzzi" className="glass-effect mx-2">
-            Mohamed Fawzzi
-          </Link>
-          <strong className="fw-bold fs-5">,</strong>{" "}
-          <Link to="/ahmed-hassan" className="glass-effect mx-2">
-            Ahmed Hassan
-          </Link>
-          <strong>{"<All Copy Rights Reserved @2024>"}</strong>
+        <div className="Info py-3">
+          <div className="text-center form-link">
+            <strong>{"<Developed By>"}</strong>
+            <span className="glass-effect mx-2">
+              WEBCORE Team <FaUsers size={22} className="primary-color" />
+            </span>
+            <strong className="fw-bold fs-5">,</strong>
+            <a
+              href="https://wa.me/+01021580334"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="glass-effect mx-2"
+            >
+              <FaWhatsapp size={20} />
+            </a>
+            <strong>-</strong>
+            <a
+              href="https://t.me/Elshirbini"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="glass-effect mx-2"
+            >
+              <FaTelegram size={20} />
+            </a>
+            <strong>-</strong>
+            <a
+              href="mailto:w3b.core.team@gmail.com"
+              className="glass-effect mx-2"
+            >
+              {" "}
+              <FaEnvelope size={20} />
+            </a>
+            <strong>{"<All Copy Rights Reserved @2025>"}</strong>
+          </div>
         </div>
-      </div> */}
+      </footer>
     </>
   );
 }

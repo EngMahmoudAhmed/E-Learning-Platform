@@ -2,6 +2,7 @@ import React from "react";
 import { CgSoftwareDownload } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
 import { NavLink, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -26,9 +27,14 @@ export default function Navbar() {
   const isStudentLoggedIn = sessionStorage.getItem("GradesCode");
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+    <motion.nav
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3, delay: 0.1 }}
+      className="navbar navbar-expand-sm navbar-light bg-light fixed-top shadow-sm"
+    >
       <div className="container-fluid">
-        <NavLink className="navbar-brand fw-bold">م/ محمود العزونى</NavLink>
+        <span className="navbar-brand fw-bold">م/ محمود العزونى</span>
         <button
           className="navbar-toggler d-lg-none"
           type="button"
@@ -107,6 +113,6 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

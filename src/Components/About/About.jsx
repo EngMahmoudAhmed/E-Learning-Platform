@@ -11,34 +11,34 @@ export default function About() {
       </Helmet>
 
       <section className="mt-5 py-4 about">
-        <h4 className="text-center mb-5 mt-2 fw-bold main-color">
-          " عن الاستاذ محمود ابراهيم العزوني "
+        <h4 className="text-center mb-3 mt-2 fw-bold">
+          عن الاستاذ محمود ابراهيم العزوني
         </h4>
         <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="title"></div>
-              <div className="d-flex justify-content-center align-items-center">
-                <img
-                  src={Hero}
-                  alt="Mr/Mahmoud"
-                  className="hero shadow-lg rounded-circle"
-                />
-              </div>
-              <div className="my-5 py-5">
+          <div className="row align-items-center p-4 g-4">
+            <div className="col-md-6 text-center">
+              <img
+                src={Hero}
+                alt="Mr/Mahmoud"
+                className="hero"
+                style={{ width: "400px", height: "370px" }}
+              />
+            </div>
+            <div className="col-md-6">
+              <div className="my-3">
                 <p className="fw-bold">
-                  درس فى كليه التربيه بجامعه المنصوره و حصل على ليسانس الاداب و
-                  التربيه في ماده الدراسات الاجتماعيه عام 2022 بتقدير عام جيد
-                  جدا .
+                  درس في كلية التربية بجامعة المنصورة وحصل على ليسانس الآداب
+                  والتربية في مادة الدراسات الاجتماعية عام 2022 بتقدير عام جيد
+                  جدًا.
+                </p>
+                <p className="fw-bold py-4">
+                  ثم تخصص في تدريس مادة الدراسات الاجتماعية للصفوف الابتدائية
+                  والإعدادية، ومادة التاريخ والجغرافيا للصفوف الثانوية العامة.
                 </p>
                 <p className="fw-bold">
-                  ثم تخصص في تدريس ماده الدراسات الاجتماعيه للصفوف الابتدائية و
-                  الاعداديه و ماده التاريخ و الجغرافيا للصفوف الثانويه العامه .
-                </p>
-                <p className="fw-bold">
-                  يمتلك خبره سبع سنوات في تدريسها متخصص في اعداد المراجعات
-                  النهائية و ليله الامتحان و الامتحانات الشامله و رفع دون
-                  المستوى للمستوى المطلوب .
+                  يمتلك خبرة سبع سنوات في تدريسها، متخصص في إعداد المراجعات
+                  النهائية، وليلة الامتحان، والامتحانات الشاملة، ورفع دون
+                  المستوى للمستوى المطلوب.
                 </p>
               </div>
             </div>

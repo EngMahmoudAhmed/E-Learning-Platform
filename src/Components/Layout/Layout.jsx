@@ -7,8 +7,7 @@ export default function Layout() {
   return (
     <div className="App">
       <Navbar />
-      <Outlet />
-      {/* <Loading></Loading> */}
+        <Outlet />
       <Footer />
     </div>
   );

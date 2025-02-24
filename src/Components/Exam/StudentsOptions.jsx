@@ -14,7 +14,7 @@ export default function StudentsOptions() {
         <h5 className="fw-bold mt-2 text-center">
           داخل تمتحن ولا هتشوف درجات الامتحان !
         </h5>
-        <div className="container mt-4">
+        <div className="container mt-5">
           <div className="row justify-content-center gap-2">
             <div className="col-md-4">
               <div className="card p-3 text-center">
