@@ -5,7 +5,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function Navbar() {
+  // Navigate
   const navigate = useNavigate();
+
+  // Nav Links
+  const navLinks = [
+    { path: "/", label: "الرئيسية" },
+    { path: "/about", label: "عن الأستاذ محمود العزونى" },
+    { path: "/students-options", label: "اختبارات المنصة" },
+  ];
 
   // Admin Logout
   function handleAdminLogout() {
@@ -31,7 +39,7 @@ export default function Navbar() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: 0.1 }}
-      className="navbar navbar-expand-sm navbar-light bg-light fixed-top shadow-sm"
+      className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"
     >
       <div className="container-fluid">
         <span className="navbar-brand fw-bold">م/ محمود العزونى</span>
@@ -49,35 +57,34 @@ export default function Navbar() {
 
         <div className="collapse navbar-collapse" id="collapsibleNavId">
           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
-            <li className="nav-item">
-              <NavLink className="nav-link" activeclassname="active">
-                الرئيسية
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                activeclassname="active"
-                to="/about"
+            {navLinks.map((link, index) => (
+              <motion.li
+                key={index}
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.2 }}
+                className="nav-item"
               >
-                عن الأستاذ محمود العزونى
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                activeclassname="active"
-                to="/students-options"
-              >
-                اختبارات المنصة
-              </NavLink>
-            </li>
+                <NavLink
+                  className="nav-link"
+                  activeclassname="active"
+                  to={link.path}
+                >
+                  {link.label}
+                </NavLink>
+              </motion.li>
+            ))}
           </ul>
         </div>
 
         <div className="collapse navbar-collapse" id="collapsibleNavId">
           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
-            <li className="nav-item">
+            <motion.li
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: 3 * 0.2 }}
+              className="nav-item"
+            >
               <NavLink
                 className="nav-link ms-2"
                 activeclassname="active"
@@ -85,7 +92,7 @@ export default function Navbar() {
               >
                 ملخصات نصية <CgSoftwareDownload size={25} />
               </NavLink>
-            </li>
+            </motion.li>
 
             {/* Show Admin Logout Button if Admin is Logged In */}
             {isAdminLoggedIn && (

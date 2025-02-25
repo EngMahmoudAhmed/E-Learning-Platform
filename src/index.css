@@ -3,6 +3,7 @@
 body {
   scroll-behavior: smooth;
   font-family: "Alexandria", sans-serif !important;
+  overflow-x: hidden;
 }
 :root {
   --main-color: #a88759;
@@ -241,6 +242,22 @@ nav {
 .summaries button {
   font-size: 14px;
 }
+@media screen and (max-width: 768px) {
+  .summaries h5 {
+    font-size: 18px !important;
+  }
+}
+
+/* About */
+@media screen and (max-width: 768px) {
+  .about h5 {
+    font-size: 18px !important;
+  }
+  .about p {
+    font-size: 14px !important;
+  }
+}
+
 /* Admin */
 .dashboard .card,
 .summaries .card {

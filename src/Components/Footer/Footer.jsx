@@ -8,7 +8,8 @@ import {
   FaTelegram,
   FaEnvelope,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FadeLeft, FadeUp, FadeRight } from "../../constants/animation";
 
 export default function Footer() {
   return (
@@ -16,48 +17,67 @@ export default function Footer() {
       <footer>
         <div className="container">
           <div className="row">
-            <div className="col-md-6 d-flex justify-content-center align-items-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={FadeLeft(1 * 0.1)}
+              className="col-md-6 d-flex justify-content-center align-items-center"
+            >
               <img src={Logo} className="logo" alt="Logo" />
-            </div>
+            </motion.div>
 
-            <div className="col-md-6 align-content-center content">
-              <h4 className="fw-bold">منصة م/ محمود العزونى التعليمية</h4>
-              <p className="text-white py-3">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={FadeRight(1 * 0.1)}
+              className="col-md-6 align-content-center content"
+            >
+              <motion.h4 variants={FadeUp(0.1)} className="fw-bold">
+                منصة م/ محمود العزونى التعليمية
+              </motion.h4>
+              <motion.p variants={FadeUp(0.3)} className="text-white py-3">
                 في منصتنا التعليمية، نحن نقدم لك كل ما تحتاجه لتعلم مهارات جديدة
                 واكتساب المعرفة بشكل فعال وممتع. نحن هنا لمساعدتك في كل خطوة.
-              </p>
+              </motion.p>
 
               <div className="d-flex flex-column align-items-start my-4 social">
-                <p className="fw-bold">يمكنك متابعتنا عن طريق : </p>
+                <motion.p variants={FadeUp(0.5)} className="fw-bold">
+                  يمكنك متابعتنا عن طريق :{" "}
+                </motion.p>
 
                 <div className="d-flex gap-4">
-                  <a
+                  <motion.a
+                    variants={FadeRight(0.7)}
                     href="https://www.youtube.com/@mahmoudelazony-mr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-icon d-flex justify-content-center align-items-center"
                   >
                     <FaYoutube size={30} />
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
+                    variants={FadeRight(0.8)}
                     href="https://www.facebook.com/share/15DMAdHRQw/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-icon d-flex justify-content-center align-items-center"
                   >
                     <FaFacebook size={30} />
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
+                    variants={FadeRight(0.9)}
                     href="https://wa.me/+201011638721"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-icon d-flex justify-content-center align-items-center"
                   >
                     <FaWhatsapp size={30} />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="Info py-3">

@@ -2,148 +2,67 @@ import React from "react";
 import G4 from "../../assets/Pri(1).webp";
 import G5 from "../../assets/Pri(2).webp";
 import G6 from "../../assets/Pri(3).webp";
+import { motion } from "framer-motion";
+import { FadeLeft, FadeUp, FadeRight } from "../../constants/animation";
+
+const academicStages = [
+  {
+    title: "المرحلة الابتدائية :",
+    grades: [
+      { name: "الصف الرابع الابتدائي", img: G4 },
+      { name: "الصف الخامس الابتدائي", img: G4 },
+      { name: "الصف السادس الابتدائي", img: G4 },
+    ],
+  },
+  {
+    title: "المرحلة الإعدادية :",
+    grades: [
+      { name: "الصف الأول الإعدادي", img: G5 },
+      { name: "الصف الثاني الإعدادي", img: G5 },
+      { name: "الصف الثالث الإعدادي", img: G5 },
+    ],
+  },
+  {
+    title: "المرحلة الثانوية :",
+    grades: [
+      { name: "الصف الأول الثانوي", img: G6 },
+      { name: "الصف الثاني الثانوي", img: G6 },
+      { name: "الصف الثالث الثانوي", img: G6 },
+    ],
+  },
+];
 
 export default function AcademicYears() {
   return (
-    <>
-      <section className="my-5 academic">
-        <h3 className="text-center fw-bold">السنوات الدراسية</h3>
-
-        {/* Primary stage */}
-        <div className="container pb-5 border-2">
+    <section className="my-5 academic">
+      <h3 className="text-center fw-bold">السنوات الدراسية</h3>
+      {academicStages.map((stage, index) => (
+        <div key={index} className="container pb-5 border-2">
           <div className="row">
-            <h4 className="my-4 fw-bold">المرحلة الابتدائية :</h4>
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G4}
-                  alt="الصف الرابع الابتدائي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف الرابع الابتدائي</p>
+            <h4 className="my-4 fw-bold">{stage.title}</h4>
+            {stage.grades.map((grade, idx) => (
+              <motion.div
+                variants={FadeUp(idx * 0.3)}
+                initial="hidden"
+                whileInView={"visible"}
+                key={idx}
+                className="col-md-4"
+              >
+                <div className="academic-card">
+                  <img
+                    src={grade.img}
+                    alt={grade.name}
+                    className="academic-img"
+                  />
+                  <div className="academic-inner">
+                    <p className="fw-bold pt-2">{grade.name}</p>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G4}
-                  alt="الصف الخامس الابتدائي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف الخامس الابتدائي</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G4}
-                  alt="الصف السادس الابتدائي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف السادس الابتدائي</p>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
-
-        {/* Preparatory stage */}
-        <div className="container pb-5 border-2">
-          <div className="row">
-            <h4 className="my-4 fw-bold">المرحلة الإعدادية :</h4>
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G5}
-                  alt="الصف الأول الإعدادي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف الأول الإعدادي</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G5}
-                  alt="الصف الثاني الإعدادي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف الثاني الإعدادي</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G5}
-                  alt="الصف الثالث الإعدادي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف الثالث الإعدادي</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Secondary stage */}
-        <div className="container pb-5 border-2">
-          <div className="row">
-            <h4 className="my-4 fw-bold">المرحلة الثانوية :</h4>
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G6}
-                  alt="الصف الأول الثانوي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف الأول الثانوي</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G6}
-                  alt="الصف الثاني الثانوي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف الثاني الثانوي</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="academic-card">
-                <img
-                  src={G6}
-                  alt="الصف الثالث الثانوي"
-                  className="academic-img"
-                />
-                <div className="academic-inner">
-                  <p className="fw-bold pt-2">الصف الثالث الثانوي</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+      ))}
+    </section>
   );
 }
