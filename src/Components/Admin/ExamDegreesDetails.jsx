@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import Loading from "../Loading/Loading";
 import api from "../../config/api";
 import { toast } from "react-toastify";
+import { IoArrowUndo } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function ExamDegreesDetails() {
   // Loading State
@@ -53,8 +55,16 @@ export default function ExamDegreesDetails() {
       </Helmet>
 
       <section className="exam-details my-5 py-3">
-        <h5 className="fw-bold m-3">تفاصيل الامتحان :</h5>
         <div className="container">
+          <div className="d-flex justify-content-between align-items-center my-3">
+            <h5 className="fw-bold dash-header mt-2">تفاصيل الامتحان :</h5>
+            <Link to={"/exam-degrees"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى درجات الطالب المحدد{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           {examDetails ? (
             <div className="card p-3 shadow-sm rounded-3 mt-4">
               <div className="card-header text-white fw-bold main-bg">

@@ -10,6 +10,8 @@ import {
 import api from "../../config/api";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function Students() {
   // Loading state
@@ -138,8 +140,16 @@ export default function Students() {
       </Helmet>
 
       <section className="students my-5 py-3">
-        <h5 className="m-4 fw-bold">🎓 جميع الطلاب :</h5>
-        <div className="container mt-4">
+        <div className="container mt-3">
+          <div className="d-flex justify-content-between">
+            <h5 className="mt-2 fw-bold dash-header">🎓 جميع الطلاب :</h5>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <div className="d-flex gap-3 my-4">
             {/* Search Input */}
             <div className="input-group w-50">

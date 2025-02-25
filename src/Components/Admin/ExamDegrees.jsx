@@ -4,6 +4,7 @@ import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import api from "../../config/api";
 import { Link } from "react-router-dom";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function ExamDegrees() {
   // Loading State
@@ -61,8 +62,16 @@ export default function ExamDegrees() {
       </Helmet>
 
       <section className="my-5 py-3">
-        <h5 className="fw-bold m-3">درجات الامتحانات :</h5>
         <div className="container">
+          <div className="d-flex justify-content-between align-items-center mt-2 mb-3">
+            <h5 className="fw-bold dash-header mt-3">درجات الامتحانات :</h5>
+            <Link to={"/student-grades"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى درجات جميع الطلاب{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <div className="row">
             <div className="col-md-12">
               <table className="table table-bordered text-center">

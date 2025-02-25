@@ -5,6 +5,8 @@ import { FaUserShield, FaPhone, FaEdit, FaTrashAlt } from "react-icons/fa";
 import api from "../../config/api";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function Admins() {
   // Loading State
@@ -100,8 +102,16 @@ export default function Admins() {
       </Helmet>
 
       <section className="admins my-5 py-3">
-        <h5 className="m-3 fw-bold">📌 جميع المسؤولين :</h5>
-        <div className="container mt-4">
+        <div className="container mt-3">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h5 className="mt-2 fw-bold dash-header">📌 جميع المسؤولين :</h5>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <div className="row">
             {admins.length > 0 ? (
               admins.map((admin, index) => (

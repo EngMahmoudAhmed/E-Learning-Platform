@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import { IoArrowUndo } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function AddStudent() {
   // Loading State
@@ -69,8 +71,16 @@ export default function AddStudent() {
       </Helmet>
 
       <section className="my-5 py-5 add-student">
-        <div className="container">
-          <h4 className="fw-bold mb-4">إضافة طالب جديد :</h4>
+        <div className="container mb-3">
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h4 className="fw-bold mb-2 dash-header">إضافة طالب جديد :</h4>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="row mb-3">
               {/* اسم الطالب */}

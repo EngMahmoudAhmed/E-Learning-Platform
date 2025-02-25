@@ -6,8 +6,13 @@ import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import { Link, useNavigate } from "react-router-dom";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function AddExam() {
+  // Navigate to Dashboard
+  const navigate = useNavigate();
+
   // Loading State
   const [isLoading, setisLoading] = useState(false);
 
@@ -70,6 +75,7 @@ export default function AddExam() {
       toast.success(`تم اضافة الامتحان بنجاح`);
       setisLoading(false);
       console.log(data.type);
+      navigate("/admin-dashboard");
     } catch (error) {
       toast.error(`حدث خطأ اثناء اضافة الامتحان! تاكد من وقت الامتحان!`);
       setisLoading(false);
@@ -112,8 +118,16 @@ export default function AddExam() {
       </Helmet>
 
       <section className="add-exam my-5 py-3">
-        <h5 className="fw-bold m-4">اضافة امتحان :</h5>
         <div className="container">
+          <div className="d-flex justify-content-between align-items-center py-3">
+            <h4 className="fw-bold mb-2 dash-header">إضافة امتحان :</h4>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="row mb-3">
               <div className="col-md-4 my-2">

@@ -6,6 +6,7 @@ import api from "../../config/api";
 import Loading from "../Loading/Loading";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function AllExams() {
   // Store Exam Id In Context
@@ -85,9 +86,16 @@ export default function AllExams() {
       </Helmet>
 
       <section className="all-exams admins my-5 py-3">
-        <h4 className="m-3 fw-bold">📚 جميع الامتحانات :</h4>
-
-        <div className="container mt-4">
+        <div className="container">
+          <div className="d-flex justify-content-between align-items-center mb-3 mt-2">
+            <h4 className="fw-bold dash-header mt-3">📚 جميع الامتحانات :</h4>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <div className="d-flex mb-3 gap-3 justify-content-center">
             <div className="col-md-6">
               <input

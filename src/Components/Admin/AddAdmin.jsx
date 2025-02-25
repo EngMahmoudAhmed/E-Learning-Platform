@@ -4,9 +4,10 @@ import api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function AddAdmin() {
   // Navigate to Dashboard
@@ -76,9 +77,17 @@ export default function AddAdmin() {
         <title>اضافة مسؤول</title>
       </Helmet>
 
-      <section className="my-5 py-5 add-admin">
-        <div className="container">
-          <h4 className="fw-bold mb-4">إضافة مسؤول جديد :</h4>
+      <section className="my-5 py-4 add-admin">
+        <div className="container mt-3">
+          <div className="d-flex justify-content-between align-items-center my-3">
+            <h4 className="fw-bold dash-header">إضافة مسؤؤل جديد :</h4>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="row mb-3">
               {/* رقم الهاتف */}
@@ -87,7 +96,7 @@ export default function AddAdmin() {
                   رقم الهاتف :
                 </label>
                 <input
-                  className="form-control"
+                  className="form-control mb-3"
                   placeholder="أدخل رقم الهاتف"
                   style={{ textAlign: "right", direction: "rtl" }}
                   id="userName"

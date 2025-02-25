@@ -6,6 +6,7 @@ import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function StudentGrades() {
   // Store Exam ID For Each Exam
@@ -63,8 +64,16 @@ export default function StudentGrades() {
       </Helmet>
 
       <section className="students my-5 py-3">
-        <h5 className="m-4 fw-bold">🎓درجات جميع الطلاب :</h5>
-        <div className="container mt-4">
+        <div className="container mt-2">
+          <div className="d-flex justify-content-between align-items-center mt-3">
+            <h5 className="fw-bold dash-header mt-3">🎓درجات جميع الطلاب :</h5>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <div className="d-flex gap-3 my-4">
             {/* Search Input */}
             <div className="input-group w-50">

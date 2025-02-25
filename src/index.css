@@ -326,6 +326,12 @@ nav {
   .students .btn {
     font-weight: 600;
   }
+  .redirect-link button {
+    font-size: 12px !important;
+  }
+  .dash-header {
+    font-size: 18px !important;
+  }
 }
 .modal input,
 .modal select,
@@ -463,6 +469,9 @@ footer .logo {
   }
   footer .social {
     align-items: center !important;
+  }
+  .Info {
+    font-size: 10px;
   }
 }
 @media screen and (max-width: 567px) {
