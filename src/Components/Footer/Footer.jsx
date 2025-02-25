@@ -80,7 +80,12 @@ export default function Footer() {
             </motion.div>
           </div>
         </div>
-        <div className="Info py-3">
+        <motion.div
+          variants={FadeUp(0.3)}
+          initial="hidden"
+          animate="visible"
+          className="Info py-3"
+        >
           <div className="text-center form-link">
             <strong>{"<Developed By>"}</strong>
             <span className="glass-effect mx-2">
@@ -114,7 +119,7 @@ export default function Footer() {
             </a>
             <strong>{"<All Copy Rights Reserved @2025>"}</strong>
           </div>
-        </div>
+        </motion.div>
       </footer>
     </>
   );
