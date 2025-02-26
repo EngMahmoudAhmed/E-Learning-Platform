@@ -161,7 +161,7 @@ export default function Admins() {
 
                       {/* Delete Button */}
                       <button
-                        className="btn d-flex align-items-center gap-1 rounded-0"
+                        className="btn bg-danger d-flex align-items-center gap-1 rounded-0"
                         onClick={() => deleteAdmin(admin._id)}
                       >
                         حذف <FaTrashAlt />

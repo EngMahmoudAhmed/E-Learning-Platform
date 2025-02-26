@@ -246,7 +246,7 @@ export default function Students() {
                       </button>
                       {/* Delete Button */}
                       <button
-                        className="btn d-flex align-items-center gap-1 rounded-0"
+                        className="btn bg-danger d-flex align-items-center gap-1 rounded-0"
                         onClick={() => deleteStudent(student._id)}
                       >
                         حذف <FaTrashAlt />

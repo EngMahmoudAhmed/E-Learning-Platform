@@ -149,10 +149,10 @@ export default function AllExams() {
                     <div className="card-header d-flex align-items-center justify-content-between text-white fw-bold">
                       <p className="mt-3">امتحان #{index + 1} </p>
                       <button
-                        className="btn btn-sm"
+                        className="btn btn-sm bg-success"
                         onClick={() => resetValidStudents(exam._id)}
                       >
-                        إضافة المتأخرين
+                        إضافة الطلاب المتأخرين
                       </button>
                     </div>
                     <ul className="list-group list-group-flush mt-2">
@@ -196,7 +196,7 @@ export default function AllExams() {
                         </button>
                       </Link>
                       <button
-                        className="btn btn-sm d-flex align-items-center justify-content-center gap-1 mt-2"
+                        className="btn btn-sm bg-danger d-flex align-items-center justify-content-center gap-1 mt-2"
                         onClick={() => deleteExam(exam._id)}
                       >
                         حذف <FaTrashAlt />

@@ -27,27 +27,27 @@ export default function ExamLogin() {
     } catch (error) {
       setisLoading(false);
 
+      // check messages
       if (error.response) {
         const errorMessage = error.response.data.message;
-        const statusCode = error.response.statusCode;
-
         if (errorMessage.includes("معاد الامتحان")) {
           toast.warning("لم يبدأ الامتحان بعد، تأكد من وقت الامتحان!");
-        } else if (statusCode === 404) {
-          toast.error("هذا الامتحان غير موجود أو ليس مسموحًا لك بدخوله.");
-        } else if (statusCode === 403) {
-          if (
-            errorMessage.includes("ليس لديك القدره لإعاده الامتحان مره اخري")
-          ) {
-            toast.warning("لا يمكنك إعادة الامتحان مرة أخرى!");
-          } else if (errorMessage.includes("انتهي الامتحان")) {
-            toast.error("لقد انتهى الامتحان بالفعل!");
-          }
+        } else if (errorMessage.includes("انتهي الامتحان")) {
+          toast.error("انتهى وقت الامتحان، لا يمكنك الدخول!");
+        } else if (
+          errorMessage.includes("ليس لديك القدره لإعاده الامتحان مره اخري")
+        ) {
+          toast.warning("لا يمكنك إعادة الامتحان مرة أخرى!");
+        } else if (
+          errorMessage.includes("هذا الامتحان غير موجود") ||
+          errorMessage.includes("ليس مسموح لك بأن تدخل هذا الامتحان")
+        ) {
+          toast.error("هذا الامتحان غير موجود أو ليس مسموحًا لك بدخوله!");
         } else {
-          toast.error("حدث خطأ أثناء تسجيل الدخول!");
+          toast.error("حدث خطأ أثناء تسجيل الدخول، يرجى المحاولة لاحقًا!");
         }
       } else {
-        toast.error("حدث خطأ أثناء الاتصال بالخادم!");
+        toast.error("حدث خطأ أثناء الاتصال بالخادم، تأكد من اتصالك بالإنترنت!");
       }
     }
   }
