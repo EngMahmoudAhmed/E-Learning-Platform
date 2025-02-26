@@ -51,22 +51,47 @@ export default function Quiz() {
     try {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/take-exam`);
-      setExamData(data.data);
+
+      // Get shuffled from localStorage
+      let storedExam = localStorage.getItem("student_exam");
+
+      // Shuffle Exam
+      if (storedExam) {
+        setExamData(JSON.parse(storedExam));
+      } else {
+        const shuffledQuestions = data.data.exam.questions
+          .map((q) => ({
+            ...q,
+            subQuestions: [...q.subQuestions].sort(() => Math.random() - 0.5),
+          }))
+          .sort(() => Math.random() - 0.5);
+
+        const shuffledExam = {
+          ...data.data,
+          exam: { ...data.data.exam, questions: shuffledQuestions },
+        };
+
+        setExamData(shuffledExam);
+
+        // Save shuffle in localStorage
+        localStorage.setItem("student_exam", JSON.stringify(shuffledExam));
+      }
 
       // Timer
       setTimeLeft({
         minutes: data.data.remainingTime.minutes || 0,
         seconds: data.data.remainingTime.seconds || 0,
       });
+
       toast.success("تم تحميل الامتحان بنجاح.");
-      setIsLoading(false);
     } catch (error) {
       toast.error("حدثت مشكلة أثناء تحميل الامتحان!");
+    } finally {
       setIsLoading(false);
     }
   }
 
-  // Fetch Data
+  // Display Data
   useEffect(() => {
     fetchExam();
   }, []);
@@ -143,6 +168,8 @@ export default function Quiz() {
       console.log(response.type);
       toast.success("تم إرسال الإجابات بنجاح!");
       localStorage.removeItem("savedAnswers");
+      localStorage.removeItem("student_exam");
+      localStorage.removeItem("currentQuestionIndex");
       navigate("/grades-login");
     } catch (error) {
       toast.error("حدثت مشكلة أثناء إرسال الإجابات!");
