@@ -9,10 +9,11 @@ export default function AuthProvider({ children }) {
   const [adminRole, setAdminRole] = useState(
     sessionStorage.getItem("AdminRole")
   );
+  const [adminToken, setAdminToken] = useState("");
 
   // Exam Id
   const [examId, setExamId] = useState(null);
-  
+
   // Student Id
   const [studentCode, setStudentCode] = useState(null);
 
@@ -36,6 +37,8 @@ export default function AuthProvider({ children }) {
         setExamId,
         studentCode,
         setStudentCode,
+        adminToken,
+        setAdminToken,
       }}
     >
       {children}
