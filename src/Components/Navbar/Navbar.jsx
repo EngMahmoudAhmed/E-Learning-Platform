@@ -22,17 +22,8 @@ export default function Navbar() {
     navigate("/admin-login");
   }
 
-  // Student Logout
-  function handleStudentLogout() {
-    sessionStorage.removeItem("GradesCode");
-    navigate("/grades-login");
-  }
-
   // Check if AdminLogin exists in sessionStorage
   const isAdminLoggedIn = sessionStorage.getItem("AdminLogin");
-
-  // Check if GradesCode exists in sessionStorage
-  const isStudentLoggedIn = sessionStorage.getItem("GradesCode");
 
   return (
     <motion.nav
@@ -100,18 +91,6 @@ export default function Navbar() {
                 <button
                   className="nav-link main-bg text-white ms-2"
                   onClick={handleAdminLogout}
-                >
-                  تسجيل الخروج <TbLogout2 size={25} />
-                </button>
-              </li>
-            )}
-
-            {/* Show Student Logout Button if Student is Logged In */}
-            {isStudentLoggedIn && (
-              <li className="nav-item">
-                <button
-                  className="nav-link main-bg text-white"
-                  onClick={handleStudentLogout}
                 >
                   تسجيل الخروج <TbLogout2 size={25} />
                 </button>

@@ -36,6 +36,12 @@ export default function Admins() {
 
   // Delete Admin
   async function deleteAdmin(adminId) {
+    const isConfirmed = window.confirm(
+      "هل أنت متأكد من أنك تريد حذف هذا المسؤول؟"
+    );
+
+    if (!isConfirmed) return;
+
     try {
       await api.delete(`/api/admin/${adminId}`);
       setAdmins((prevAdmins) =>

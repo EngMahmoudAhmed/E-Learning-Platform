@@ -51,6 +51,10 @@ export default function AllExams() {
 
   // Delete Exam
   async function deleteExam(id) {
+    const isConfirmed = window.confirm(
+      "هل أنت متأكد أنك تريد حذف هذا الامتحان؟"
+    );
+    if (!isConfirmed) return;
     try {
       await api.delete(`/api/exam/delete-exam/${id}`);
       toast.success("تم حذف الامتحان بنجاح.");

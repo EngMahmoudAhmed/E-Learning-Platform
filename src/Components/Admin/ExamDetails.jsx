@@ -5,6 +5,8 @@ import api from "../../config/api";
 import Loading from "../Loading/Loading";
 import { AuthContext } from "../../context/AuthContext";
 import { FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function ExamDetails() {
   // Store Exam ID in context
@@ -104,19 +106,27 @@ export default function ExamDetails() {
       </Helmet>
 
       <section className="exam-details my-5 py-4">
-        <div className="d-flex justify-content-between">
-          <h5 className="fw-bold m-2 pe-3">📚 تفاصيل الامتحان :</h5>
-          <button
-            className="btn d-flex align-items-center justify-content-center gap-1 mt-2 ms-5 rounded-0"
-            data-bs-toggle="modal"
-            data-bs-target="#updateExamModal"
-            onClick={openUpdateModal}
-          >
-            تعديل الامتحان
-            <FaEdit />
-          </button>
-        </div>
         <div className="container">
+          <div className="d-flex justify-content-center mt-2 mb-3">
+            <Link to={"/all-exams"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى جميع الامتحانات
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
+          <div className="d-flex justify-content-between align-items-center">
+            <h5 className="fw-bold mt-4 dash-header">📚 تفاصيل الامتحان :</h5>
+            <button
+              className="btn d-flex align-items-center justify-content-center gap-1 mt-2 rounded-0"
+              data-bs-toggle="modal"
+              data-bs-target="#updateExamModal"
+              onClick={openUpdateModal}
+            >
+              تعديل الامتحان
+              <FaEdit />
+            </button>
+          </div>
           {exam ? (
             <div className="card p-3 shadow-sm rounded-3 mt-4">
               <div className="card-header text-white fw-bold main-bg">

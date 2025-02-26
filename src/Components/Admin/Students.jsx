@@ -57,6 +57,8 @@ export default function Students() {
 
   // Delete Student
   async function deleteStudent(studentId) {
+    const isConfirmed = window.confirm("هل أنت متأكد أنك تريد حذف هذا الطالب؟");
+    if (!isConfirmed) return;
     try {
       await api.delete(`/api/user/delete-student/${studentId}`);
       setStudents((prevStudents) =>
