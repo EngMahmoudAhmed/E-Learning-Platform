@@ -66,6 +66,16 @@ export default function AllExams() {
     }
   }
 
+  // Valid Student
+  async function resetValidStudents(id) {
+    try {
+      await api.patch(`/api/exam/reset-valid-students/${id}`);
+      toast.success("تمت إضافة الطلاب المتأخرين بنجاح.");
+    } catch (error) {
+      toast.error("حدثت مشكلة أثناء إضافة الطلاب المتأخرين!");
+    }
+  }
+
   useEffect(() => {
     submitAllExams();
   }, []);
@@ -136,10 +146,16 @@ export default function AllExams() {
                     className="card p-2 shadow-sm rounded-3"
                     onClick={() => handleExamId(exam._id)}
                   >
-                    <div className="card-header text-white fw-bold">
-                      امتحان #{index + 1}
+                    <div className="card-header d-flex align-items-center justify-content-between text-white fw-bold">
+                      <p className="mt-3">امتحان #{index + 1} </p>
+                      <button
+                        className="btn btn-sm"
+                        onClick={() => resetValidStudents(exam._id)}
+                      >
+                        إضافة المتأخرين
+                      </button>
                     </div>
-                    <ul className="list-group list-group-flush">
+                    <ul className="list-group list-group-flush mt-2">
                       <li className="list-group-item">
                         <strong className="text-muted">📌 العنوان:</strong>{" "}
                         {exam.title}

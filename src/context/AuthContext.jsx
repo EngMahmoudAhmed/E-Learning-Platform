@@ -12,6 +12,7 @@ export default function AuthProvider({ children }) {
 
   // Exam Id
   const [examId, setExamId] = useState(null);
+  
   // Student Id
   const [studentCode, setStudentCode] = useState(null);
 

@@ -15,7 +15,7 @@ export default function ExamLogin() {
   // Loading State
   const [isLoading, setisLoading] = useState(false);
 
-  // Fetch Api Data
+  // Fetch API Data
   async function submitLogin(values) {
     try {
       setisLoading(true);
@@ -26,13 +26,28 @@ export default function ExamLogin() {
       navigate("/exam");
     } catch (error) {
       setisLoading(false);
-      if (
-        error.response &&
-        error.response.data.message.includes("معاد الامتحان")
-      ) {
-        toast.warning("لم يبدأ الامتحان بعد تأكد من وقت الامتحان!");
+
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        const statusCode = error.response.statusCode;
+
+        if (errorMessage.includes("معاد الامتحان")) {
+          toast.warning("لم يبدأ الامتحان بعد، تأكد من وقت الامتحان!");
+        } else if (statusCode === 404) {
+          toast.error("هذا الامتحان غير موجود أو ليس مسموحًا لك بدخوله.");
+        } else if (statusCode === 403) {
+          if (
+            errorMessage.includes("ليس لديك القدره لإعاده الامتحان مره اخري")
+          ) {
+            toast.warning("لا يمكنك إعادة الامتحان مرة أخرى!");
+          } else if (errorMessage.includes("انتهي الامتحان")) {
+            toast.error("لقد انتهى الامتحان بالفعل!");
+          }
+        } else {
+          toast.error("حدث خطأ أثناء تسجيل الدخول!");
+        }
       } else {
-        toast.error("حدث خطأ أثناء تسجيل الدخول!");
+        toast.error("حدث خطأ أثناء الاتصال بالخادم!");
       }
     }
   }
