@@ -3,9 +3,8 @@ import { Helmet } from "react-helmet";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import api from "../../config/api";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-import { FaArrowCircleRight, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default function Quiz() {
   // Navigate to Grades
@@ -33,6 +32,19 @@ export default function Quiz() {
       setAnswers(savedAnswers);
     }
   }, []);
+
+  // Get question index in local storage
+  useEffect(() => {
+    const savedIndex = localStorage.getItem("currentQuestionIndex");
+    if (savedIndex !== null) {
+      setCurrentQuestionIndex(Number(savedIndex));
+    }
+  }, []);
+
+  // Save question index in local storage
+  useEffect(() => {
+    localStorage.setItem("currentQuestionIndex", currentQuestionIndex);
+  }, [currentQuestionIndex]);
 
   // Fetch Exam Data
   async function fetchExam() {
@@ -130,6 +142,7 @@ export default function Quiz() {
       );
       console.log(response.type);
       toast.success("تم إرسال الإجابات بنجاح!");
+      localStorage.removeItem("savedAnswers");
       navigate("/grades-login");
     } catch (error) {
       toast.error("حدثت مشكلة أثناء إرسال الإجابات!");
