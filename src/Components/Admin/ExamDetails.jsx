@@ -89,7 +89,26 @@ export default function ExamDetails() {
       toast.success("تم تعديل الامتحان بنجاح.");
     } catch (error) {
       console.error("Error updating exam:", error);
-      toast.error("حدثت مشكلة أثناء محاولة التعديل تحقق من وقت الامتحان!");
+
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+
+        if (errorMessage.includes("هذا الوقت من الماضي اجعله في المستقبل")) {
+          toast.error("وقت الامتحان غير صحيح، الرجاء تحديد وقت في المستقبل!");
+        } else if (
+          errorMessage.includes(
+            "exams_table validation failed: questions.1.subQuestions.2.questionText"
+          )
+        ) {
+          toast.error("لا يمكن تعديل الامتحان وبه خانات فارغة!");
+        } else {
+          toast.error(
+            "حدثت مشكلة أثناء محاولة التعديل، تحقق من الاسألة المعدلة!"
+          );
+        }
+      } else {
+        toast.error("حدث خطأ أثناء الاتصال بالخادم، تأكد من اتصالك بالإنترنت!");
+      }
     }
   }
 

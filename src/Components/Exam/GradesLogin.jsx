@@ -68,10 +68,11 @@ export default function GradesLogin() {
         <div className="container my-5 py-5">
           <div className="row justify-content-center p-3 my-4">
             <motion.div
-                          variants={FadeUp(0.3)}
-                          initial="hidden"
-                          animate="visible"
-            className="col-md-6 p-4 shadow-sm">
+              variants={FadeUp(0.3)}
+              initial="hidden"
+              animate="visible"
+              className="col-md-6 p-4 shadow-sm"
+            >
               <h3 className="text-center mb-4">تسجيل الدخول للدرجات</h3>
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">

@@ -47,15 +47,15 @@ export default function Quiz() {
   }, [currentQuestionIndex]);
 
   // Fetch Exam Data
+  // Fetch Exam Data
   async function fetchExam() {
     try {
       setIsLoading(true);
       let { data } = await api.get(`/api/exam/take-exam`);
 
-      // Get shuffled from localStorage
+      // Check if shuffled exam exists
       let storedExam = localStorage.getItem("student_exam");
 
-      // Shuffle Exam
       if (storedExam) {
         setExamData(JSON.parse(storedExam));
       } else {
@@ -73,11 +73,15 @@ export default function Quiz() {
 
         setExamData(shuffledExam);
 
-        // Save shuffle in localStorage
+        // Save shuffled exam in localStorage
         localStorage.setItem("student_exam", JSON.stringify(shuffledExam));
+
+        // **Reset question index to 0 after shuffle**
+        localStorage.setItem("currentQuestionIndex", 0);
+        setCurrentQuestionIndex(0);
       }
 
-      // Timer
+      // Set Timer
       setTimeLeft({
         minutes: data.data.remainingTime.minutes || 0,
         seconds: data.data.remainingTime.seconds || 0,
@@ -290,7 +294,7 @@ export default function Quiz() {
                   setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
                 }
               >
-                التالي السؤال
+                السؤال التالي
                 <FaArrowLeft size={20} className="mx-1" />
               </button>
             ) : (

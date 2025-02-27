@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import api from "../../config/api";
 import { useFormik } from "formik";
@@ -19,6 +19,13 @@ export default function Login() {
   // Loading State
   const [isLoading, setisLoading] = useState(false);
 
+  // ✅ منع الرجوع إلى صفحة تسجيل الدخول إذا كان المستخدم مسجلًا دخوله
+  useEffect(() => {
+    if (sessionStorage.getItem("AdminLogin")) {
+      navigate("/admin-dashboard", { replace: true });
+    }
+  }, [navigate]);
+
   // Fetch Api Data
   async function submitLogin(values) {
     try {
@@ -31,7 +38,9 @@ export default function Login() {
       sessionStorage.setItem("AdminTokenExpire", expiryTime);
       setAdminToken(expiryTime);
       setisLoading(false);
-      navigate("/admin-dashboard");
+
+      // ✅ استخدام replace: true لمنع الرجوع إلى صفحة تسجيل الدخول بعد التنقل
+      navigate("/admin-dashboard", { replace: true });
     } catch (error) {
       toast.error(`حدث خطأ أثناء تسجيل الدخول!`);
       setisLoading(false);
@@ -40,14 +49,12 @@ export default function Login() {
 
   //Validation Schema
   const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
-
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}$/;
 
   let validationSchema = Yup.object({
     userName: Yup.string()
       .matches(phoneRegex, "رقم الهاتف غير صالح، يجب أن يكون مصريًا")
       .required("رقم الهاتف مطلوب"),
-
     password: Yup.string()
       .matches(
         passwordRegex,

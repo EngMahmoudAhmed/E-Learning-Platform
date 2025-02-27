@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CgSoftwareDownload } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
@@ -63,7 +63,9 @@ export default function Navbar() {
       className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"
     >
       <div className="container-fluid">
-        <span className="navbar-brand fw-bold">م/ محمود العزونى</span>
+        <Link to={"/"} className="navbar-brand fw-bold">
+          م/ محمود العزونى
+        </Link>
         <button
           className="navbar-toggler d-lg-none"
           type="button"
