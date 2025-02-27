@@ -7,6 +7,8 @@ import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { IoArrowUndo } from "react-icons/io5";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function Admins() {
   // Loading State
@@ -36,21 +38,32 @@ export default function Admins() {
 
   // Delete Admin
   async function deleteAdmin(adminId) {
-    const isConfirmed = window.confirm(
-      "هل أنت متأكد من أنك تريد حذف هذا المسؤول؟"
-    );
-
-    if (!isConfirmed) return;
-
-    try {
-      await api.delete(`/api/admin/${adminId}`);
-      setAdmins((prevAdmins) =>
-        prevAdmins.filter((admin) => admin._id !== adminId)
-      );
-      toast.success("تم حذف المسؤول بنجاح.");
-    } catch (error) {
-      toast.error("حدثت مشكلة أثناء محاولة حذف المسؤول!");
-    }
+    confirmAlert({
+      title: "تأكيد الحذف",
+      message: "هل أنت متأكد من أنك تريد حذف هذا المسؤول؟",
+      buttons: [
+        {
+          label: "نعم",
+          className: "confirm-delete-btn",
+          onClick: async () => {
+            try {
+              await api.delete(`/api/admin/${adminId}`);
+              setAdmins((prevAdmins) =>
+                prevAdmins.filter((admin) => admin._id !== adminId)
+              );
+              toast.success("تم حذف المسؤول بنجاح.");
+            } catch (error) {
+              toast.error("حدثت مشكلة أثناء محاولة حذف المسؤول!");
+            }
+          },
+        },
+        {
+          label: "إلغاء",
+          className: "confirm-cancel-btn",
+          onClick: () => console.log("تم الإلغاء"),
+        },
+      ],
+    });
   }
 
   // Open Update Modal

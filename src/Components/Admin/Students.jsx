@@ -12,6 +12,8 @@ import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { IoArrowUndo } from "react-icons/io5";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function Students() {
   // Loading state
@@ -57,17 +59,32 @@ export default function Students() {
 
   // Delete Student
   async function deleteStudent(studentId) {
-    const isConfirmed = window.confirm("هل أنت متأكد أنك تريد حذف هذا الطالب؟");
-    if (!isConfirmed) return;
-    try {
-      await api.delete(`/api/user/delete-student/${studentId}`);
-      setStudents((prevStudents) =>
-        prevStudents.filter((student) => student._id !== studentId)
-      );
-      toast.success("تم حذف الطالب بنجاح.");
-    } catch (error) {
-      toast.error("حدثت مشكلة أثناء محاولة حذف الطالب!");
-    }
+    confirmAlert({
+      title: "تأكيد الحذف",
+      message: "هل أنت متأكد أنك تريد حذف هذا الطالب؟",
+      buttons: [
+        {
+          label: "نعم",
+          className: "confirm-delete-btn",
+          onClick: async () => {
+            try {
+              await api.delete(`/api/user/delete-student/${studentId}`);
+              setStudents((prevStudents) =>
+                prevStudents.filter((student) => student._id !== studentId)
+              );
+              toast.success("تم حذف الطالب بنجاح.");
+            } catch (error) {
+              toast.error("حدثت مشكلة أثناء محاولة حذف الطالب!");
+            }
+          },
+        },
+        {
+          label: "إلغاء",
+          className: "confirm-cancel-btn", // إضافة كلاس مخصص
+          onClick: () => console.log("تم الإلغاء"),
+        },
+      ],
+    });
   }
 
   // Open Update Modal

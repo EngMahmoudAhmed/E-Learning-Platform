@@ -1,12 +1,39 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CgSoftwareDownload } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   // Navigate
   const navigate = useNavigate();
+
+  const { adminToken, setAdminToken } = useContext(AuthContext);
+  const [remainingTime, setRemainingTime] = useState(null);
+
+  useEffect(() => {
+    if (!adminToken) return;
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const timeLeft = adminToken - now;
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        handleAdminLogout();
+        toast.warning(`انتهى وقت الجلسة سجل الدخول من جديد!`);
+      } else {
+        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        setRemainingTime({ hours, minutes, seconds });
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [adminToken]);
 
   // Nav Links
   const navLinks = [
@@ -19,6 +46,9 @@ export default function Navbar() {
   function handleAdminLogout() {
     sessionStorage.removeItem("AdminLogin");
     sessionStorage.removeItem("AdminRole");
+    sessionStorage.removeItem("AdminTokenExpire");
+    toast.success(`تم تسجيل الخروج بنجاح !`);
+    setAdminToken(null);
     navigate("/admin-login");
   }
 

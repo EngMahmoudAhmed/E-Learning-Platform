@@ -7,6 +7,8 @@ import { Bars } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import { motion } from "framer-motion";
+import { FadeUp } from "../../constants/animation";
 
 export default function GradesLogin() {
   // Navigate to Grades
@@ -65,7 +67,11 @@ export default function GradesLogin() {
       <section className="login">
         <div className="container my-5 py-5">
           <div className="row justify-content-center p-3 my-4">
-            <div className="col-md-6 p-4 shadow-sm">
+            <motion.div
+                          variants={FadeUp(0.3)}
+                          initial="hidden"
+                          animate="visible"
+            className="col-md-6 p-4 shadow-sm">
               <h3 className="text-center mb-4">تسجيل الدخول للدرجات</h3>
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
@@ -108,7 +114,7 @@ export default function GradesLogin() {
                   )}
                 </button>
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

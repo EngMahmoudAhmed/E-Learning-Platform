@@ -9,8 +9,10 @@ export default function AuthProvider({ children }) {
   const [adminRole, setAdminRole] = useState(
     sessionStorage.getItem("AdminRole")
   );
-  const [adminToken, setAdminToken] = useState("");
 
+  const [adminToken, setAdminToken] = useState(
+    sessionStorage.getItem("AdminTokenExpire")
+  );
   // Exam Id
   const [examId, setExamId] = useState(null);
 
@@ -21,9 +23,11 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const storedAdminId = sessionStorage.getItem("OneAdmin");
     const storedAdminRole = sessionStorage.getItem("AdminRole");
+    const storedAdminToken = sessionStorage.getItem("AdminTokenExpire");
 
     if (storedAdminId !== isAdminId) setisAdminId(storedAdminId);
     if (storedAdminRole !== adminRole) setAdminRole(storedAdminRole);
+    if (storedAdminToken !== adminToken) setAdminToken(storedAdminToken);
   }, []);
 
   return (

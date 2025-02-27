@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import api from "../../config/api";
 import { useFormik } from "formik";
@@ -7,10 +7,14 @@ import { Bars } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
   // Navigate to Dashboard
   const navigate = useNavigate();
+
+  // Save token expire
+  const { setAdminToken } = useContext(AuthContext);
 
   // Loading State
   const [isLoading, setisLoading] = useState(false);
@@ -20,20 +24,23 @@ export default function Login() {
     try {
       setisLoading(true);
       let { data } = await api.post(`/api/admin/login`, values);
-      toast.success(`تم تسجبل الدخول بنجاح`);
+      toast.success(`تم تسجيل الدخول بنجاح`);
       sessionStorage.setItem("AdminLogin", data.data.admin);
       sessionStorage.setItem("AdminRole", data.data.role);
+      const expiryTime = new Date().getTime() + 0.2 * 60 * 1000;
+      sessionStorage.setItem("AdminTokenExpire", expiryTime);
+      setAdminToken(expiryTime);
       setisLoading(false);
       navigate("/admin-dashboard");
     } catch (error) {
-      toast.error(`حدث خطأ اثناء تسجيل الدخول!`);
+      toast.error(`حدث خطأ أثناء تسجيل الدخول!`);
       setisLoading(false);
     }
   }
 
   //Validation Schema
   const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
-  
+
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}$/;
 
   let validationSchema = Yup.object({

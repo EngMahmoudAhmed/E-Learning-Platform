@@ -7,6 +7,8 @@ import Loading from "../Loading/Loading";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { IoArrowUndo } from "react-icons/io5";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function AllExams() {
   // Store Exam Id In Context
@@ -51,19 +53,34 @@ export default function AllExams() {
 
   // Delete Exam
   async function deleteExam(id) {
-    const isConfirmed = window.confirm(
-      "هل أنت متأكد أنك تريد حذف هذا الامتحان؟"
-    );
-    if (!isConfirmed) return;
-    try {
-      await api.delete(`/api/exam/delete-exam/${id}`);
-      toast.success("تم حذف الامتحان بنجاح.");
-      setExams((prevExams) => prevExams.filter((exam) => exam._id !== id));
-      setIsLoading(false);
-    } catch (error) {
-      toast.error("حدثت مشكلة أثناء حذف الامتحان!");
-      setIsLoading(false);
-    }
+    confirmAlert({
+      title: "تأكيد الحذف",
+      message: "هل أنت متأكد أنك تريد حذف هذا الامتحان؟",
+      buttons: [
+        {
+          label: "نعم",
+          className: "confirm-delete-btn",
+          onClick: async () => {
+            try {
+              await api.delete(`/api/exam/delete-exam/${id}`);
+              toast.success("تم حذف الامتحان بنجاح.");
+              setExams((prevExams) =>
+                prevExams.filter((exam) => exam._id !== id)
+              );
+              setIsLoading(false);
+            } catch (error) {
+              toast.error("حدثت مشكلة أثناء حذف الامتحان!");
+              setIsLoading(false);
+            }
+          },
+        },
+        {
+          label: "إلغاء",
+          className: "confirm-cancel-btn",
+          onClick: () => console.log("تم الإلغاء"),
+        },
+      ],
+    });
   }
 
   // Valid Student
