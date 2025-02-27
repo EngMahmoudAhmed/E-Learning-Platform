@@ -27,7 +27,7 @@ export default function Login() {
       toast.success(`تم تسجيل الدخول بنجاح`);
       sessionStorage.setItem("AdminLogin", data.data.admin);
       sessionStorage.setItem("AdminRole", data.data.role);
-      const expiryTime = new Date().getTime() + 0.2 * 60 * 1000;
+      const expiryTime = new Date().getTime() + 2 * 60 * 60 * 1000;
       sessionStorage.setItem("AdminTokenExpire", expiryTime);
       setAdminToken(expiryTime);
       setisLoading(false);
