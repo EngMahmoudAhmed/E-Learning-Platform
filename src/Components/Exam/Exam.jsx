@@ -47,7 +47,6 @@ export default function Quiz() {
   }, [currentQuestionIndex]);
 
   // Fetch Exam Data
-  // Fetch Exam Data
   async function fetchExam() {
     try {
       setIsLoading(true);
@@ -76,7 +75,7 @@ export default function Quiz() {
         // Save shuffled exam in localStorage
         localStorage.setItem("student_exam", JSON.stringify(shuffledExam));
 
-        // **Reset question index to 0 after shuffle**
+        // Reset question index to 0 after shuffle
         localStorage.setItem("currentQuestionIndex", 0);
         setCurrentQuestionIndex(0);
       }
@@ -94,7 +93,6 @@ export default function Quiz() {
       setIsLoading(false);
     }
   }
-
   // Display Data
   useEffect(() => {
     fetchExam();
@@ -294,7 +292,7 @@ export default function Quiz() {
                   setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
                 }
               >
-                السؤال التالي
+                التالي السؤال
                 <FaArrowLeft size={20} className="mx-1" />
               </button>
             ) : (

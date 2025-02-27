@@ -33,14 +33,14 @@ export default function Home() {
 
             <div className="col-md-6">
               <div className="py-5 mt-3 text-center">
-                <motion.h1
+                <motion.h3
                   variants={FadeUp(0.5)}
                   initial="hidden"
                   animate="visible"
                   className="fw-bolder grey-color main-head"
                 >
-                  م/محمود العزونى
-                </motion.h1>
+                  م/محمود ابراهيم العزونى
+                </motion.h3>
                 <motion.p
                   variants={FadeUp(0.7)}
                   initial="hidden"

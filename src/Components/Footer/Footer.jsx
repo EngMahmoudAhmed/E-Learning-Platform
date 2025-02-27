@@ -35,7 +35,7 @@ export default function Footer() {
               className="col-md-6 align-content-center content"
             >
               <motion.h4 variants={FadeUp(0.1)} className="fw-bold">
-                منصة م/ محمود العزونى التعليمية
+                منصة م/ محمود ابراهيم العزونى التعليمية
               </motion.h4>
               <motion.p variants={FadeUp(0.3)} className="text-white py-3">
                 في منصتنا التعليمية، نحن نقدم لك كل ما تحتاجه لتعلم مهارات جديدة
