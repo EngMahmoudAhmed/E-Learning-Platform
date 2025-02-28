@@ -25,7 +25,9 @@ export default function ExamLogin() {
       sessionStorage.setItem("StudentCode", data.data.studentCode);
       sessionStorage.setItem("ExamCode", data.data.examCode);
       setisLoading(false);
+      // Prevent Default
       navigate("/exam");
+      // navigate("/exam", { replace: true });
     } catch (error) {
       setisLoading(false);
 

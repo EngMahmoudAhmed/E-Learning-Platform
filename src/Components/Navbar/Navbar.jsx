@@ -39,7 +39,7 @@ export default function Navbar() {
   const navLinks = [
     { path: "/", label: "الرئيسية" },
     { path: "/about", label: "عن الأستاذ محمود العزونى" },
-    { path: "/students-options", label: "اختبارات المنصة" },
+    { path: "/students-options", label: "امتحانات الطلاب" },
   ];
 
   // Admin Logout

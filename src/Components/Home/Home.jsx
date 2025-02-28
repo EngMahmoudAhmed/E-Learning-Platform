@@ -17,7 +17,7 @@ export default function Home() {
       </Helmet>
 
       {/* Hero */}
-      <section className="py-3 position-relative">
+      <section className="py-3">
         <div className="container my-5 py-4">
           <div className="row pt-5">
             <div className="col-md-6 d-flex justify-content-center align-items-center">

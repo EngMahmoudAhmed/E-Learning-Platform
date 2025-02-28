@@ -19,13 +19,6 @@ export default function Login() {
   // Loading State
   const [isLoading, setisLoading] = useState(false);
 
-  // ✅ منع الرجوع إلى صفحة تسجيل الدخول إذا كان المستخدم مسجلًا دخوله
-  useEffect(() => {
-    if (sessionStorage.getItem("AdminLogin")) {
-      navigate("/admin-dashboard", { replace: true });
-    }
-  }, [navigate]);
-
   // Fetch Api Data
   async function submitLogin(values) {
     try {
@@ -38,8 +31,7 @@ export default function Login() {
       sessionStorage.setItem("AdminTokenExpire", expiryTime);
       setAdminToken(expiryTime);
       setisLoading(false);
-
-      // ✅ استخدام replace: true لمنع الرجوع إلى صفحة تسجيل الدخول بعد التنقل
+      // Prevent Default
       navigate("/admin-dashboard", { replace: true });
     } catch (error) {
       toast.error(`حدث خطأ أثناء تسجيل الدخول!`);

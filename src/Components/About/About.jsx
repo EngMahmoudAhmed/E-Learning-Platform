@@ -3,6 +3,7 @@ import Hero from "../../assets/p4.webp";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { FadeLeft, FadeUp, FadeRight } from "../../constants/animation";
+import bg from "../../assets/pyramids.webp";
 
 export default function About() {
   const paragraphs = [
@@ -19,6 +20,14 @@ export default function About() {
       </Helmet>
 
       <section className="mt-5 py-4 about">
+        <motion.img
+          variants={FadeUp(0.8)}
+          initial="hidden"
+          animate="visible"
+          src={bg}
+          alt="pyramids"
+          className="pyramids"
+        />
         <motion.h5
           variants={FadeUp(0.1)}
           initial="hidden"

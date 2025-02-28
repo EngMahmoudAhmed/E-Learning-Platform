@@ -167,12 +167,13 @@ export default function Quiz() {
         `/api/exam/submit-exam/?studentCode=${examData.studentCode}&examCode=${examData.examCode}`,
         { answers }
       );
-      console.log(response.type);
+      console.log(response.data.type);
       toast.success("تم إرسال الإجابات بنجاح!");
       localStorage.removeItem("savedAnswers");
       localStorage.removeItem("student_exam");
       localStorage.removeItem("currentQuestionIndex");
-      navigate("/grades-login");
+      // Prevent Default
+      navigate("/grades-login", { replace: true });
     } catch (error) {
       toast.error("حدثت مشكلة أثناء إرسال الإجابات!");
       console.error(error);
