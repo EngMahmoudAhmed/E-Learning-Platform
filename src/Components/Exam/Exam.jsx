@@ -50,9 +50,9 @@ export default function Quiz() {
   async function fetchExam() {
     try {
       setIsLoading(true);
+
       let { data } = await api.get(`/api/exam/take-exam`);
 
-      // Check if shuffled exam exists
       let storedExam = localStorage.getItem("student_exam");
 
       if (storedExam) {
@@ -74,13 +74,10 @@ export default function Quiz() {
 
         // Save shuffled exam in localStorage
         localStorage.setItem("student_exam", JSON.stringify(shuffledExam));
-
-        // Reset question index to 0 after shuffle
         localStorage.setItem("currentQuestionIndex", 0);
         setCurrentQuestionIndex(0);
       }
 
-      // Set Timer
       setTimeLeft({
         minutes: data.data.remainingTime.minutes || 0,
         seconds: data.data.remainingTime.seconds || 0,
@@ -93,6 +90,7 @@ export default function Quiz() {
       setIsLoading(false);
     }
   }
+
   // Display Data
   useEffect(() => {
     fetchExam();
@@ -105,7 +103,6 @@ export default function Quiz() {
       return;
     }
 
-    // Timer Logic
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime.seconds > 0) {
@@ -122,34 +119,13 @@ export default function Quiz() {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  // Handle Answer Selection
-  const handleAnswerChange = (questionId, answer) => {
-    setAnswers((prevAnswers) => {
-      const existingAnswerIndex = prevAnswers.findIndex(
-        (ans) => ans.questionId === questionId
-      );
-
-      let updatedAnswers;
-      if (existingAnswerIndex !== -1) {
-        updatedAnswers = [...prevAnswers];
-        updatedAnswers[existingAnswerIndex] = { questionId, answer };
-      } else {
-        updatedAnswers = [...prevAnswers, { questionId, answer }];
-      }
-      localStorage.setItem("savedAnswers", JSON.stringify(updatedAnswers));
-      return updatedAnswers;
-    });
-  };
-
   // Submit Exam
   async function handleSubmitExam() {
-    // Handle call submit
     if (!examData || !examData.exam) {
       console.log(`Wait`);
       return;
     }
 
-    // Check if student answer all questions
     const unansweredQuestions = examData.exam.questions.flatMap((q) =>
       q.subQuestions.filter(
         (subQ) => !answers.some((ans) => ans.questionId === subQ._id)
@@ -169,10 +145,12 @@ export default function Quiz() {
       );
       console.log(response.data.type);
       toast.success("تم إرسال الإجابات بنجاح!");
+
       localStorage.removeItem("savedAnswers");
       localStorage.removeItem("student_exam");
       localStorage.removeItem("currentQuestionIndex");
-      // Prevent Default
+      localStorage.removeItem("inProgressExam");
+
       navigate("/grades-login", { replace: true });
     } catch (error) {
       toast.error("حدثت مشكلة أثناء إرسال الإجابات!");

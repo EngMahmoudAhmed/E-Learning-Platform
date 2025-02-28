@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import api from "../../config/api";
 import { useFormik } from "formik";
@@ -10,6 +10,11 @@ import Loading from "../Loading/Loading";
 import { IoArrowUndo } from "react-icons/io5";
 
 export default function AddAdmin() {
+  // Scroll to Upper
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Navigate to Dashboard
   const navigate = useNavigate();
 
