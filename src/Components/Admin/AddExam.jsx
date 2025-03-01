@@ -304,7 +304,7 @@ export default function AddExam() {
                         type="text"
                         name="q-title"
                         className="form-control mb-3 mt-2"
-                        placeholder="أكمل - ما النتائج - بما تفسر - الخ"
+                        placeholder="أكمل - اختر - ما النتائج - الخ"
                         required
                         value={question.question_title}
                         onChange={(e) =>

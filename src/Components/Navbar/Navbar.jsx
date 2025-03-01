@@ -64,7 +64,7 @@ export default function Navbar() {
     >
       <div className="container-fluid">
         <Link to={"/"} className="navbar-brand fw-bold">
-          م/ محمود العزونى
+          م/ محمود ابراهيم العزونى
         </Link>
         <button
           className="navbar-toggler d-lg-none"
