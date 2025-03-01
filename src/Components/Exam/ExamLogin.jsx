@@ -25,9 +25,7 @@ export default function ExamLogin() {
       sessionStorage.setItem("StudentCode", data.data.studentCode);
       sessionStorage.setItem("ExamCode", data.data.examCode);
       setisLoading(false);
-      // Prevent Default
       navigate("/exam");
-      // navigate("/exam", { replace: true });
     } catch (error) {
       setisLoading(false);
 
@@ -47,14 +45,6 @@ export default function ExamLogin() {
           errorMessage.includes("ليس مسموح لك بأن تدخل هذا الامتحان")
         ) {
           toast.error("هذا الامتحان غير موجود أو ليس مسموحًا لك بدخوله!");
-        } else if (
-          errorMessage.includes(
-            "ليس لديك الحق بعاده تسجيل الدخول لنفس الامتحان"
-          )
-        ) {
-          toast.error(
-            "لا يمكنك إعادة تسجيل الدخول لهذا الامتحان بعد الخروج دون تأكيد الإجابات!"
-          );
         } else {
           toast.error("حدث خطأ أثناء تسجيل الدخول، يرجى المحاولة لاحقًا!");
         }
