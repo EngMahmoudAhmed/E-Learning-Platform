@@ -3,7 +3,7 @@ import G4 from "../../assets/Pri(1).webp";
 import G5 from "../../assets/Pri(2).webp";
 import G6 from "../../assets/Pri(3).webp";
 import { motion } from "framer-motion";
-import { FadeLeft, FadeUp, FadeRight } from "../../constants/animation";
+import { FadeUp } from "../../constants/animation";
 
 const academicStages = [
   {

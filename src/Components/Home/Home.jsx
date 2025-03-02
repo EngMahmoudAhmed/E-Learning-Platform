@@ -7,6 +7,7 @@ import AcademicYears from "./AcademicYears";
 import { motion } from "framer-motion";
 import { FadeLeft, FadeUp } from "../../constants/animation";
 import { FadeRight } from "../../constants/animation";
+import ExamVideo from "./ExamVideo";
 
 export default function Home() {
   return (
@@ -65,6 +66,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ExamVideo */}
+      <ExamVideo />
 
       {/* Features */}
       <Features />
