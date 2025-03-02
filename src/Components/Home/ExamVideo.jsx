@@ -11,6 +11,7 @@ export default function ExamVideo() {
           <div className="row">
             <div className="com-md-12">
               <iframe
+                className="exam-video"
                 width="100%"
                 height="700"
                 src="https://www.youtube.com/embed/OCEzB45LYwQ?si=SA1WjHpul07aPrrX"

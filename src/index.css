@@ -119,6 +119,25 @@ nav {
   }
 }
 
+.exam-video {
+  height: 700px;
+}
+@media (max-width: 992px) {
+  .exam-video {
+    height: 500px;
+  }
+}
+@media (max-width: 768px) {
+  .exam-video {
+    height: 350px;
+  }
+}
+@media (max-width: 576px) {
+  .exam-video {
+    height: 250px;
+  }
+}
+
 .features {
   background-image: url(./assets/oldBg.webp);
   background-position: center;
@@ -169,6 +188,7 @@ nav {
   object-position: top;
   z-index: 999;
 }
+
 .history h1 {
   color: #ffad00;
   font-size: 60px;
@@ -184,6 +204,7 @@ nav {
     font-weight: bold;
   }
 }
+
 .academic h3 {
   color: var(--main-color);
   font-size: 30px;
@@ -239,6 +260,7 @@ nav {
     margin: 20px 0 !important;
   }
 }
+
 .summaries h6,
 .summaries button {
   font-size: 14px;
@@ -500,7 +522,8 @@ footer .logo {
     height: 400px;
   }
 }
-/* محاذاة النص لليمين */
+
+/* Alert */
 .react-confirm-alert-body {
   direction: rtl;
   text-align: right !important;
