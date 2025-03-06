@@ -87,9 +87,9 @@ export default function Footer() {
           className="Info py-3"
         >
           <div className="text-center form-link">
-            <strong>{"<Developed By>"}</strong>
+            <strong>Developed By</strong>
             <span className="glass-effect mx-2">
-              WEBCORE Team <FaUsers size={22} className="primary-color" />
+              WebCore Team <FaUsers size={22} className="primary-color" />
             </span>
             <strong className="fw-bold fs-5">,</strong>
             <a
@@ -117,7 +117,6 @@ export default function Footer() {
               {" "}
               <FaEnvelope size={20} />
             </a>
-            <strong>{"<All Copy Rights Reserved @2025>"}</strong>
           </div>
         </motion.div>
       </footer>

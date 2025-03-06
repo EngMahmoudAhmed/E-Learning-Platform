@@ -37,6 +37,9 @@ const ExamDegreesDetails = React.lazy(() =>
   import("./Components/Admin/ExamDegreesDetails")
 );
 
+// Not Found
+const NotFound = React.lazy(() => import("./Components/NotFound/NotFound"));
+
 // Protected Routes
 import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRoute";
 import ExamProtectedRoute from "./Components/ProtectedRoutes/ExamProtectedRoute";
@@ -246,6 +249,10 @@ export default function App() {
               </AdminProtectedRoute>
             </Suspense>
           ),
+        },
+        {
+          path: "*",
+          element: <NotFound />,
         },
       ],
     },

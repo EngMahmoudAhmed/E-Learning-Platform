@@ -484,6 +484,7 @@ footer .logo {
 .Info {
   background-color: #292524 !important;
   color: var(--third-color);
+  direction: ltr;
 }
 .glass-effect {
   display: inline-block;
@@ -508,7 +509,7 @@ footer .logo {
     align-items: center !important;
   }
   .Info {
-    font-size: 10px;
+    font-size: 13px;
   }
 }
 @media screen and (max-width: 567px) {
@@ -546,4 +547,24 @@ footer .logo {
   padding: 5px 35px !important;
   font-size: 14px;
   font-weight: bold;
+}
+
+/* Not Found */
+.error-image {
+  width: 500px;
+  height: 300px;
+  filter: sepia(1) saturate(0.6) hue-rotate(0deg);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+.not-found .fa-magnifying-glass {
+  right: -70px;
+  top: 25px;
+  height: 50px;
+  width: 180px;
+  font-size: 20px;
+  color: var(--main-color);
+}
+.not-found .back a {
+  color: var(--main-color);
 }
