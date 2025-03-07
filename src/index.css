@@ -509,7 +509,10 @@ footer .logo {
     align-items: center !important;
   }
   .Info {
-    font-size: 13px;
+    font-size: 9px;
+  }
+  .Info .icons {
+    width: 13px;
   }
 }
 @media screen and (max-width: 567px) {

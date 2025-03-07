@@ -98,7 +98,7 @@ export default function Footer() {
               target="_blank"
               className="glass-effect mx-2"
             >
-              <FaWhatsapp size={20} />
+              <FaWhatsapp size={20} className="icons" />
             </a>
             <strong>-</strong>
             <a
@@ -107,7 +107,7 @@ export default function Footer() {
               target="_blank"
               className="glass-effect mx-2"
             >
-              <FaTelegram size={20} />
+              <FaTelegram size={20} className="icons" />
             </a>
             <strong>-</strong>
             <a
@@ -115,7 +115,7 @@ export default function Footer() {
               className="glass-effect mx-2"
             >
               {" "}
-              <FaEnvelope size={20} />
+              <FaEnvelope size={20} className="icons" />
             </a>
           </div>
         </motion.div>
