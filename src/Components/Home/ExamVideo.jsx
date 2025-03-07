@@ -9,17 +9,17 @@ export default function ExamVideo() {
         </h3>
         <div className="container my-5">
           <div className="row">
-            <div className="com-md-12">
+            <div className="col-md-12">
               <iframe
                 className="exam-video"
                 width="100%"
                 height="700"
                 src="https://www.youtube.com/embed/OCEzB45LYwQ?si=SA1WjHpul07aPrrX"
                 title="YouTube video player"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
               ></iframe>
             </div>
           </div>

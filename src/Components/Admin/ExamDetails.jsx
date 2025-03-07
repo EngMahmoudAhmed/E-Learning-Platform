@@ -88,13 +88,15 @@ export default function ExamDetails() {
 
       toast.success("تم تعديل الامتحان بنجاح.");
     } catch (error) {
-      console.error("Error updating exam:", error);
-
       if (error.response) {
         const errorMessage = error.response.data.message;
 
         if (errorMessage.includes("هذا الوقت من الماضي اجعله في المستقبل")) {
           toast.error("وقت الامتحان غير صحيح، الرجاء تحديد وقت في المستقبل!");
+        } else if (
+          errorMessage.includes("لا يمكنك تعديل الامتحان بعد بدايته")
+        ) {
+          toast.error("عذرًا، لا يمكنك تعديل الامتحان بعد بدايته!");
         } else if (
           errorMessage.includes(
             "exams_table validation failed: questions.1.subQuestions.2.questionText"
@@ -103,7 +105,7 @@ export default function ExamDetails() {
           toast.error("لا يمكن تعديل الامتحان وبه خانات فارغة!");
         } else {
           toast.error(
-            "حدثت مشكلة أثناء محاولة التعديل، تحقق من الاسألة المعدلة!"
+            "حدثت مشكلة أثناء محاولة التعديل، تحقق من الأسئلة المعدلة!"
           );
         }
       } else {

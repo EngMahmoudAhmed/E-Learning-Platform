@@ -149,18 +149,6 @@ export default function Quiz() {
       return;
     }
 
-    // Check if student answer all questions
-    const unansweredQuestions = examData.exam.questions.flatMap((q) =>
-      q.subQuestions.filter(
-        (subQ) => !answers.some((ans) => ans.questionId === subQ._id)
-      )
-    );
-
-    if (unansweredQuestions.length > 0) {
-      toast.warning("يجب الإجابة على جميع الأسئلة قبل إرسال الامتحان!");
-      return;
-    }
-
     try {
       setIsLoading(true);
       const response = await api.post(
