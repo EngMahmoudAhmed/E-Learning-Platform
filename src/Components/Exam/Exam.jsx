@@ -149,12 +149,17 @@ export default function Quiz() {
       return;
     }
 
+    // Get Student and exam code
+    const StudentCode = sessionStorage.getItem("StudentCode");
+    const ExamCode = sessionStorage.getItem("ExamCode");
+
     try {
       setIsLoading(true);
       const response = await api.post(
-        `/api/exam/submit-exam/?studentCode=${examData.studentCode}&examCode=${examData.examCode}`,
+        `/api/exam/submit-exam/?studentCode=${StudentCode}&examCode=${ExamCode}`,
         { answers }
       );
+
       console.log(response.data.type);
       toast.success("تم إرسال الإجابات بنجاح!");
       localStorage.removeItem("savedAnswers");
