@@ -34,7 +34,17 @@ export default function Login() {
       // Prevent Default
       navigate("/admin-dashboard", { replace: true });
     } catch (error) {
-      toast.error(`حدث خطأ أثناء تسجيل الدخول!`);
+      let errorMessage = "حدث خطأ أثناء تسجيل الدخول!";
+      if (error.response?.data?.message) {
+        if (error.response.data.message.includes("كلمه السر خاطئه")) {
+          errorMessage = "كلمة السر غير صحيحة!";
+        } else if (error.response.data.message.includes("غير موجود")) {
+          errorMessage = "هذا المسؤول غير موجود!";
+        } else {
+          errorMessage = error.response.data.message;
+        }
+      }
+      toast.error(errorMessage);
       setisLoading(false);
     }
   }
