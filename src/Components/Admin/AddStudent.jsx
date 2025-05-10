@@ -1,41 +1,50 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import Api from "../../config/api"; 
+import api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import { IoArrowUndo } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function AddStudent() {
-  // Navigate to Students list
-  const navigate = useNavigate();
-
-  // loading State
+  // Loading State
   const [isLoading, setisLoading] = useState(false);
 
   // Fetch Api Data
   async function submitStudent(values) {
     try {
       setisLoading(true);
-      let { data } = await Api.post(`/api/user/add-student`, values);
+      let { data } = await api.post(`/api/user/add-student`, values);
       toast.success(`تم إضافة الطالب بنجاح`);
       setisLoading(false);
       console.log(data.type);
-      navigate("/students");
     } catch (error) {
-      toast.error(`حدث خطأ اثناء إضافة الطالب!`);
       setisLoading(false);
+      if (
+        error.response &&
+        error.response.data.message.includes("E11000 duplicate key error")
+      ) {
+        toast.warning("رقم الهاتف مستخدم بالفعل! الرجاء استخدام رقم آخر.");
+      } else {
+        toast.error("حدث خطأ أثناء إضافة الطالب!");
+      }
     }
   }
 
   // Validation Schema
+  const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
   let validationSchema = Yup.object({
     name: Yup.string().required("اسم الطالب مطلوب"),
     grade: Yup.string().required("الصف مطلوب"),
-    studentMobile: Yup.string().required("رقم الهاتف مطلوب"),
-    parentMobile: Yup.string().required("رقم هاتف ولي الأمر مطلوب"),
+    studentMobile: Yup.string()
+      .matches(phoneRegex, "رقم الهاتف غير صالح، يجب أن يكون مصريًا")
+      .required("رقم الهاتف مطلوب"),
+    parentMobile: Yup.string()
+      .matches(phoneRegex, "رقم الهاتف غير صالح، يجب أن يكون مصريًا")
+      .required("رقم هاتف ولي الأمر مطلوب"),
   });
 
   const formik = useFormik({
@@ -62,8 +71,16 @@ export default function AddStudent() {
       </Helmet>
 
       <section className="my-5 py-5 add-student">
-        <div className="container">
-          <h4 className="fw-bold mb-4">إضافة طالب جديد :</h4>
+        <div className="container mb-3">
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h4 className="fw-bold mb-2 dash-header">إضافة طالب جديد :</h4>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="row mb-3">
               {/* اسم الطالب */}
@@ -73,7 +90,7 @@ export default function AddStudent() {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control mb-3"
                   id="name"
                   placeholder="أدخل اسم الطالب"
                   value={formik.values.name}
@@ -123,7 +140,7 @@ export default function AddStudent() {
                   </optgroup>
                 </select>
                 {formik.errors.grade && formik.touched.grade ? (
-                  <div className="alert alert-danger p-2 my-2 rounded-0">
+                  <div className="alert alert-danger p-2 my-3 rounded-0">
                     {formik.errors.grade}
                   </div>
                 ) : (
@@ -140,7 +157,7 @@ export default function AddStudent() {
                 </label>
                 <input
                   type="tel"
-                  className="form-control"
+                  className="form-control mb-3"
                   id="studentMobile"
                   placeholder="أدخل رقم هاتف الطالب"
                   value={formik.values.studentMobile}
@@ -149,7 +166,7 @@ export default function AddStudent() {
                   style={{ textAlign: "right", direction: "rtl" }}
                 />
                 {formik.errors.studentMobile && formik.touched.studentMobile ? (
-                  <div className="alert alert-danger p-2 my-2 rounded-0">
+                  <div className="alert alert-danger p-2 my-3 rounded-0">
                     {formik.errors.studentMobile}
                   </div>
                 ) : (
@@ -173,7 +190,7 @@ export default function AddStudent() {
                   style={{ textAlign: "right", direction: "rtl" }}
                 />
                 {formik.errors.parentMobile && formik.touched.parentMobile ? (
-                  <div className="alert alert-danger p-2 my-2 rounded-0">
+                  <div className="alert alert-danger p-2 my-3 rounded-0">
                     {formik.errors.parentMobile}
                   </div>
                 ) : (

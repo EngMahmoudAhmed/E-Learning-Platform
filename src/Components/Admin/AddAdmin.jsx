@@ -1,39 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import Api from "../../config/api";
+import api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import { IoArrowUndo } from "react-icons/io5";
 
 export default function AddAdmin() {
+  // Scroll to Upper
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Navigate to Dashboard
   const navigate = useNavigate();
 
-  // loading State
+  // Loading State
   const [isLoading, setisLoading] = useState(false);
 
   // Fetch Api Data
   async function submitAdmin(values) {
     try {
       setisLoading(true);
-      let { data } = await Api.post(`/api/admin/add-admin`, values);
+      let { data } = await api.post(`/api/admin/add-admin`, values);
       toast.success(`تم اضافة المسؤول بنجاح`);
-      setisLoading(false);
       console.log(data.type);
+      setisLoading(false);
       navigate("/admins");
     } catch (error) {
-      toast.error(`حدث خطأ اثناء اضافة المسؤول !`);
       setisLoading(false);
+      if (
+        error.response &&
+        error.response.data.message === "هذا المستخدم موجود بالفعل"
+      ) {
+        toast.warning("المستخدم موجود بالفعل!");
+      } else {
+        toast.error("حدث خطأ أثناء إضافة المسؤول!");
+      }
     }
   }
 
   // Validation Schema
+  const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}$/;
+
   let validationSchema = Yup.object({
-    userName: Yup.string().required("رقم الهاتف مطلوب"),
-    password: Yup.string().required("كلمه المرور مطلوبة"),
+    userName: Yup.string()
+      .matches(phoneRegex, "رقم الهاتف غير صالح، يجب أن يكون مصريًا")
+      .required("رقم الهاتف مطلوب"),
+    password: Yup.string()
+      .matches(
+        passwordRegex,
+        "كلمة المرور يجب أن تحتوي على حرف كبير، حرف صغير، وحرف خاص، ولا تقل عن 6 أحرف"
+      )
+      .required("كلمه المرور مطلوبة"),
     role: Yup.string().required("الدور مطلوب"),
   });
 
@@ -59,9 +82,17 @@ export default function AddAdmin() {
         <title>اضافة مسؤول</title>
       </Helmet>
 
-      <section className="my-5 py-5 add-admin">
-        <div className="container">
-          <h4 className="fw-bold mb-4">إضافة مسؤول جديد :</h4>
+      <section className="my-5 py-4 add-admin">
+        <div className="container mt-3">
+          <div className="d-flex justify-content-between align-items-center my-3">
+            <h4 className="fw-bold dash-header">إضافة مسؤؤل جديد :</h4>
+            <Link to={"/admin-dashboard"} className="redirect-link">
+              <button className="btn px-4 rounded-0 fs-6">
+                الرجوع الى لوحه التحكم{" "}
+                <IoArrowUndo size={18} className="mx-2" />
+              </button>
+            </Link>
+          </div>
           <form onSubmit={formik.handleSubmit}>
             <div className="row mb-3">
               {/* رقم الهاتف */}
@@ -70,7 +101,7 @@ export default function AddAdmin() {
                   رقم الهاتف :
                 </label>
                 <input
-                  className="form-control"
+                  className="form-control mb-3"
                   placeholder="أدخل رقم الهاتف"
                   style={{ textAlign: "right", direction: "rtl" }}
                   id="userName"
@@ -130,7 +161,7 @@ export default function AddAdmin() {
                   <option value="" disabled hidden>
                     اختر الدور
                   </option>
-                  <option value="admin">مسؤول عام</option>
+                  <option value="admin">مسؤول ادارة</option>
                   <option value="user">مسؤول الطلاب</option>
                   <option value="exams">مسؤول امتحانات</option>
                 </select>

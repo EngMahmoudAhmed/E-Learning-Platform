@@ -1,40 +1,68 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import Api from "../../config/api";
+import api from "../../config/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Bars } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
   // Navigate to Dashboard
   const navigate = useNavigate();
 
-  // loading State
+  // Save token expire
+  const { setAdminToken } = useContext(AuthContext);
+
+  // Loading State
   const [isLoading, setisLoading] = useState(false);
 
   // Fetch Api Data
   async function submitLogin(values) {
     try {
       setisLoading(true);
-      let { data } = await Api.post(`/api/admin/login`, values);
-      toast.success(`تم تسجبل الدخول بنجاح`);
+      let { data } = await api.post(`/api/admin/login`, values);
+      toast.success(`تم تسجيل الدخول بنجاح`);
       sessionStorage.setItem("AdminLogin", data.data.admin);
       sessionStorage.setItem("AdminRole", data.data.role);
+      const expiryTime = new Date().getTime() + 2 * 60 * 60 * 1000;
+      sessionStorage.setItem("AdminTokenExpire", expiryTime);
+      setAdminToken(expiryTime);
       setisLoading(false);
-      navigate("/admin-dashboard");
+      // Prevent Default
+      navigate("/admin-dashboard", { replace: true });
     } catch (error) {
-      toast.error(`حدث خطأ اثناء تسجيل الدخول!`);
+      let errorMessage = "حدث خطأ أثناء تسجيل الدخول!";
+      if (error.response?.data?.message) {
+        if (error.response.data.message.includes("كلمه السر خاطئه")) {
+          errorMessage = "كلمة السر غير صحيحة!";
+        } else if (error.response.data.message.includes("غير موجود")) {
+          errorMessage = "هذا المسؤول غير موجود!";
+        } else {
+          errorMessage = error.response.data.message;
+        }
+      }
+      toast.error(errorMessage);
       setisLoading(false);
     }
   }
 
   //Validation Schema
+  const phoneRegex = /^(010|011|012|015)[0-9]{8}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}$/;
+
   let validationSchema = Yup.object({
-    userName: Yup.string().required("رقم الهاتف مطلوب"),
-    password: Yup.string().required("كلمه المرور مطلوبة"),
+    userName: Yup.string()
+      .matches(phoneRegex, "رقم الهاتف غير صالح، يجب أن يكون مصريًا")
+      .required("رقم الهاتف مطلوب"),
+    password: Yup.string()
+      .matches(
+        passwordRegex,
+        "كلمة المرور يجب أن تحتوي على حرف كبير، حرف صغير، وحرف خاص، ولا تقل عن 6 أحرف"
+      )
+      .required("كلمة المرور مطلوبة"),
   });
 
   const formik = useFormik({
